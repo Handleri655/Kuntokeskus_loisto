@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fi" className={`${display.variable} ${body.variable} h-full`}>
-      <body className="min-h-full flex flex-col text-[17px] antialiased md:text-[18px]">
+      <body className="min-h-full flex flex-col text-[16.5px] antialiased md:text-[17px]">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

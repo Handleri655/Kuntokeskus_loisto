@@ -17,8 +17,8 @@ export default function SolariumPage() {
         eyebrow="Solarium"
         title="Tervetuloa nauttimaan solariumista"
         lead="Toimii magneettikortilla / ajanvarauksella. Henkilökohtainen. Ikäraja 18 vuotta. 1 kerta 9 € · 10× 69 €."
-        image="/images/solarium.jpg"
-        imageAlt="Solarium"
+        image="/images/hero-solarium.jpg"
+        imageAlt="Lämmin auringonvalo"
       />
 
       <section className="section-pad">
@@ -46,7 +46,7 @@ export default function SolariumPage() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
               <Image
                 src="/images/solarium.jpg"
-                alt="Solariumlaite"
+                alt="Rentouttava hyvinvointi"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

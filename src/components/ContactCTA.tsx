@@ -15,9 +15,7 @@ export function ContactCTA({
       <div className="panel panel-dark container-page px-6 py-12 md:px-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-[1.3fr_0.9fr] md:items-end">
           <div>
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-accent-bright">
-              Yhteys
-            </p>
+            <p className="eyebrow text-accent-bright">Yhteys</p>
             <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
               {title}
             </h2>
@@ -27,10 +25,7 @@ export function ContactCTA({
             <a href={site.phoneHref} className="btn-accent text-center">
               Soita {site.phone}
             </a>
-            <a
-              href={site.emailHref}
-              className="btn-ghost text-center"
-            >
+            <a href={site.emailHref} className="btn-ghost text-center">
               Lähetä sähköposti
             </a>
             <Link

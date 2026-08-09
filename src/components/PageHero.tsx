@@ -29,9 +29,7 @@ export function PageHero({
       <div className="grain absolute inset-0" />
       <div className="container-page relative flex min-h-[62vh] flex-col justify-end pb-12 pt-28 md:min-h-[70vh] md:pb-16">
         {eyebrow ? (
-          <p className="animate-rise text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-accent-bright">
-            {eyebrow}
-          </p>
+          <p className="eyebrow animate-rise text-accent-bright">{eyebrow}</p>
         ) : null}
         <h1 className="animate-rise-delay-1 font-display mt-4 max-w-4xl text-[clamp(2.6rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-tight">
           {title}

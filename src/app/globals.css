@@ -41,6 +41,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
 
@@ -90,7 +91,7 @@ body {
 
 @media (min-width: 768px) {
   .data-table {
-    font-size: 1.15rem;
+    font-size: 1.12rem;
   }
 
   .data-table th {
@@ -150,6 +151,13 @@ body {
 .container-narrow {
   width: min(720px, calc(100% - 2rem));
   margin-inline: auto;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 .panel {
@@ -257,8 +265,8 @@ body {
   border-radius: 999px;
   background: var(--ink);
   color: white;
-  padding: 0.9rem 1.5rem;
-  font-size: 0.9rem;
+  padding: 0.95rem 1.55rem;
+  font-size: 0.95rem;
   font-weight: 600;
   transition: background 0.25s ease, transform 0.25s ease;
 }
@@ -274,8 +282,8 @@ body {
   border-radius: 999px;
   background: var(--accent);
   color: white;
-  padding: 0.9rem 1.5rem;
-  font-size: 0.9rem;
+  padding: 0.95rem 1.55rem;
+  font-size: 0.95rem;
   font-weight: 600;
   transition: background 0.25s ease;
 }
@@ -292,14 +300,18 @@ body {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   color: white;
-  padding: 0.9rem 1.5rem;
-  font-size: 0.9rem;
+  padding: 0.95rem 1.55rem;
+  font-size: 0.95rem;
   font-weight: 600;
   transition: background 0.25s ease;
 }
 
 .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.prose-loisto {
+  font-size: 1.05rem;
 }
 
 .prose-loisto p {
@@ -310,7 +322,7 @@ body {
 
 .prose-loisto ul {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.7rem;
   margin: 1.25rem 0;
   padding: 0;
   list-style: none;
@@ -321,6 +333,7 @@ body {
   padding-left: 1.35rem;
   color: var(--ink-soft);
   line-height: 1.55;
+  font-size: 1.05rem;
 }
 
 .prose-loisto li::before {

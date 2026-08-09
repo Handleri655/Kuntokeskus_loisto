@@ -26,7 +26,7 @@ export default async function HomePage() {
         <div className="hero-veil absolute inset-0" />
         <div className="grain absolute inset-0" />
         <div className="container-page relative flex min-h-[100svh] flex-col justify-end pb-14 pt-32 md:pb-20">
-          <p className="animate-rise text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-accent-bright">
+          <p className="eyebrow animate-rise text-accent-bright">
             Hollola · {site.founded}
           </p>
           <h1 className="animate-rise-delay-1 font-display mt-5 max-w-5xl text-[clamp(3.8rem,12vw,8rem)] font-semibold leading-[0.9] tracking-tight">
@@ -68,9 +68,7 @@ export default async function HomePage() {
       <section className="section-pad">
         <div className="container-page">
           <Reveal>
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-accent">
-              Palvelut
-            </p>
+            <p className="eyebrow text-accent">Palvelut</p>
             <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
               Treeniä, joka tuntuu
             </h2>
@@ -121,9 +119,7 @@ export default async function HomePage() {
         <div className="hero-veil absolute inset-0" />
         <div className="container-page relative flex min-h-[70vh] flex-col justify-end pb-14 pt-28 md:min-h-[75vh] md:pb-20">
           <Reveal>
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-accent-bright">
-              Ryhmäliikunta
-            </p>
+            <p className="eyebrow text-accent-bright">Ryhmäliikunta</p>
             <h2 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
               16 tuntia viikossa
             </h2>
@@ -146,9 +142,7 @@ export default async function HomePage() {
       <section className="section-pad bg-white">
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-end">
           <Reveal>
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-accent">
-              Tarjoukset
-            </p>
+            <p className="eyebrow text-accent">Tarjoukset</p>
             <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
               Hollolan
               <br />

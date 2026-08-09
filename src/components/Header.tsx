@@ -37,14 +37,14 @@ export function Header() {
           className="group leading-tight"
           onClick={() => setOpen(false)}
         >
-          <div className="font-display text-[1.15rem] font-semibold tracking-tight md:text-[1.35rem]">
+          <div className="font-display text-[1.2rem] font-semibold tracking-tight md:text-[1.4rem]">
             Kuntokeskus{" "}
             <span className={scrolled || open ? "text-accent" : "text-accent-bright"}>
               Loisto
             </span>
           </div>
           <div
-            className={`text-[0.65rem] uppercase tracking-[0.2em] ${
+            className={`text-[0.68rem] uppercase tracking-[0.2em] ${
               scrolled || open ? "text-muted" : "text-white/65"
             }`}
           >

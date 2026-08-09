@@ -26,9 +26,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
-            Sivut
-          </h2>
+          <h2 className="eyebrow text-white/45">Sivut</h2>
           <ul className="mt-4 grid gap-2 text-sm text-white/80">
             {[...nav, ...moreNav.slice(0, 4)].map((item) => (
               <li key={item.href}>
@@ -41,9 +39,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
-            Yhteystiedot
-          </h2>
+          <h2 className="eyebrow text-white/45">Yhteystiedot</h2>
           <ul className="mt-4 space-y-3 text-sm text-white/80">
             <li>
               <a href={site.mapsUrl} className="transition hover:text-white">
