@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { SiteShell } from "@/components/SiteShell";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -35,9 +34,7 @@ export default function RootLayout({
   return (
     <html lang="fi" className={`${display.variable} ${body.variable} h-full`}>
       <body className="min-h-full flex flex-col text-[16.5px] antialiased md:text-[17px]">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );
