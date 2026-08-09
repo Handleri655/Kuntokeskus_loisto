@@ -18,7 +18,7 @@ export default function SolariumPage() {
         title="Tervetuloa nauttimaan solariumista"
         lead="Toimii magneettikortilla / ajanvarauksella. Henkilökohtainen. Ikäraja 18 vuotta. 1 kerta 9 € · 10× 69 €."
         image="/images/hero-solarium.jpg"
-        imageAlt="Lämmin auringonvalo"
+        imageAlt="Aurinkoinen ranta"
       />
 
       <section className="section-pad">
