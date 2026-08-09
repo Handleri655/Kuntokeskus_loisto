@@ -37,15 +37,18 @@ export function Header() {
           className="group leading-tight"
           onClick={() => setOpen(false)}
         >
-          <div className="font-display text-[1.2rem] font-semibold tracking-tight md:text-[1.45rem]">
-            Kuntokeskus Loisto
+          <div className="font-display text-[1.15rem] font-semibold tracking-tight md:text-[1.35rem]">
+            Kuntokeskus{" "}
+            <span className={scrolled || open ? "text-accent" : "text-accent-bright"}>
+              Loisto
+            </span>
           </div>
           <div
-            className={`text-[0.68rem] uppercase tracking-[0.18em] ${
-              scrolled || open ? "text-muted" : "text-white/70"
+            className={`text-[0.65rem] uppercase tracking-[0.2em] ${
+              scrolled || open ? "text-muted" : "text-white/65"
             }`}
           >
-            Hollola · vuodesta 1992
+            Hollola
           </div>
         </Link>
 

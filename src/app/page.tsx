@@ -7,6 +7,8 @@ import { services, site } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
+const featured = services.slice(0, 4);
+
 export default async function HomePage() {
   const prices = await getPrices();
 
@@ -18,36 +20,29 @@ export default async function HomePage() {
           alt="Kuntosaliharjoittelua Kuntokeskus Loistossa"
           fill
           priority
-          className="animate-drift object-cover"
+          className="animate-drift object-cover object-center"
           sizes="100vw"
         />
         <div className="hero-veil absolute inset-0" />
         <div className="grain absolute inset-0" />
-        <div className="container-page relative flex min-h-[100svh] flex-col justify-end pb-16 pt-36 md:pb-24">
-          <p className="animate-rise text-xs font-semibold uppercase tracking-[0.24em] text-accent-bright">
-            Hollola · vuodesta {site.founded}
+        <div className="container-page relative flex min-h-[100svh] flex-col justify-end pb-14 pt-32 md:pb-20">
+          <p className="animate-rise text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-accent-bright">
+            Hollola · {site.founded}
           </p>
-          <h1 className="animate-rise-delay-1 font-display mt-4 max-w-5xl text-[clamp(3.4rem,10vw,7.5rem)] font-semibold leading-[0.92] tracking-tight">
+          <h1 className="animate-rise-delay-1 font-display mt-5 max-w-5xl text-[clamp(3.8rem,12vw,8rem)] font-semibold leading-[0.9] tracking-tight">
             Kuntokeskus
             <br />
-            Loisto
+            <span className="text-accent-bright">Loisto</span>
           </h1>
-          <p className="animate-rise-delay-2 mt-6 max-w-xl text-lg leading-relaxed text-white/80 md:text-xl">
-            Kuntosali, ryhmäliikunta ja hyvinvointi – hauskaa treeniä
-            kaikenikäisille. Avainkortilla salille joka päivä klo{" "}
+          <p className="animate-rise-delay-2 mt-6 max-w-md text-base leading-relaxed text-white/75 md:text-lg">
+            Treeniä ja hyvinvointia kaikenikäisille. Avainkortilla sali{" "}
             {site.keycardHours}.
           </p>
           <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/ryhmaliikunta"
-              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-white/90"
-            >
-              Ryhmäliikunta 17.8. →
+            <Link href="/tarjoukset" className="btn-accent">
+              Katso tarjoukset
             </Link>
-            <a
-              href={site.phoneHref}
-              className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
+            <a href={site.phoneHref} className="btn-ghost">
               Soita {site.phone}
             </a>
           </div>
@@ -55,26 +50,16 @@ export default async function HomePage() {
       </section>
 
       <section className="border-b border-[var(--line)] bg-white">
-        <div className="container-page grid gap-6 py-6 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[var(--line)]">
+        <div className="container-page grid gap-5 py-7 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[var(--line)] md:py-8">
           {[
-            {
-              label: "Edenred · E-passi · Smartum",
-              text: "Liikunta & hyvinvointi",
-            },
-            {
-              label: `Avainkortilla ${site.keycardHours}`,
-              text: "Kuntosali joka päivä",
-            },
-            {
-              label: "Ei liittymismaksuja",
-              text: "Hollolan edullisimmat treenit",
-            },
-          ].map((item) => (
-            <div key={item.label} className="md:px-8">
-              <div className="font-display text-lg font-semibold tracking-tight">
-                {item.label}
-              </div>
-              <p className="mt-1 text-sm text-muted">{item.text}</p>
+            "Edenred · E-passi · Smartum",
+            `Avainkortilla ${site.keycardHours}`,
+            "Ei liittymismaksuja",
+          ].map((label) => (
+            <div key={label} className="md:px-8">
+              <p className="font-display text-lg font-semibold tracking-tight md:text-xl">
+                {label}
+              </p>
             </div>
           ))}
         </div>
@@ -83,186 +68,117 @@ export default async function HomePage() {
       <section className="section-pad">
         <div className="container-page">
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              Tsekkaa
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-accent">
+              Palvelut
             </p>
-            <h2 className="font-display mt-3 max-w-3xl text-3xl font-semibold tracking-tight md:text-5xl">
-              Treenejä, jotka tekevät mieli tehdä uudestaan
+            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
+              Treeniä, joka tuntuu
             </h2>
-            <p className="mt-4 max-w-2xl text-muted leading-relaxed">
-              Aerial Bungee, Cross Training, Kangoo, PT, äänimaljarentoutus ja
-              paljon muuta – sama sisältö, uudet premium-sivut.
-            </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {services.map((service, i) => (
-              <Reveal key={service.href} delay={i * 0.05}>
-                <Link href={service.href} className="service-tile group">
+          <div className="mt-10 border-t border-[var(--line)]">
+            {featured.map((service, i) => (
+              <Reveal key={service.href} delay={i * 0.04}>
+                <Link href={service.href} className="service-row group">
+                  <span className="service-index">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <div>
-                    <div className="service-index">
-                      {String(i + 1).padStart(2, "0")}
-                    </div>
-                    <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight">
+                    <h3 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
                       {service.title}
                     </h3>
-                    <p className="mt-3 text-[0.95rem] leading-relaxed text-muted">
+                    <p className="mt-2 max-w-xl text-muted leading-relaxed">
                       {service.text}
                     </p>
                   </div>
                   <span className="text-sm font-semibold text-accent transition group-hover:translate-x-1">
-                    Lue lisää →
+                    Avaa →
                   </span>
                 </Link>
               </Reveal>
             ))}
           </div>
+
+          <Reveal>
+            <Link
+              href="/ryhmaliikunta"
+              className="mt-8 inline-flex text-sm font-semibold text-ink underline decoration-[var(--line)] underline-offset-4 transition hover:decoration-accent"
+            >
+              Katso koko ryhmäliikuntaohjelma
+            </Link>
+          </Reveal>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink text-white">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/group-fitness.jpg"
-            alt="Ryhmäliikuntaa"
-            fill
-            className="object-cover opacity-35"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,14,18,0.92),rgba(12,14,18,0.55))]" />
-        </div>
-        <div className="container-page relative section-pad grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <section className="relative min-h-[70vh] overflow-hidden bg-ink text-white md:min-h-[75vh]">
+        <Image
+          src="/images/group-fitness.jpg"
+          alt="Ryhmäliikuntaa"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div className="hero-veil absolute inset-0" />
+        <div className="container-page relative flex min-h-[70vh] flex-col justify-end pb-14 pt-28 md:min-h-[75vh] md:pb-20">
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-bright">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-accent-bright">
               Ryhmäliikunta
             </p>
-            <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
-              Uusi ohjelma 17.8.26 alkaen – 16 h / vko
+            <h2 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
+              16 tuntia viikossa
             </h2>
-            <p className="mt-4 max-w-xl text-white/75 leading-relaxed">
-              Aerial Bungee, Kangoo Jumps, Hatha- & voima­jooga, Cross Training,
-              äänimalja, Lavis, Pump Up, Step-RVP-HIIT ja paljon muuta.
-              Kesäohjelma voimassa 16.8.26 asti.
+            <p className="mt-4 max-w-lg text-white/75 leading-relaxed">
+              Aerial Bungee, Kangoo, jooga, Cross Training ja tutut jumpat.
+              Varaa edellisenä iltana klo 20 mennessä.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/ryhmaliikunta"
-                className="inline-flex rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink"
-              >
-                Syksyn ohjelma
+              <Link href="/ryhmaliikunta" className="btn-accent">
+                Viikko-ohjelma
               </Link>
-              <Link
-                href="/ryhmaliikunta/kesa"
-                className="inline-flex rounded-full border border-white/25 px-6 py-3.5 text-sm font-semibold text-white"
-              >
-                Kesä 16.8. asti
+              <Link href="/ryhmaliikunta/kesa" className="btn-ghost">
+                Kesäohjelma
               </Link>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="panel panel-dark panel-pad backdrop-blur-md">
-              <p className="text-sm text-white/60">Varaus & peruutus</p>
-              <p className="mt-2 font-display text-2xl font-semibold tracking-tight">
-                Edellisenä iltana klo 20 mennessä
-              </p>
-              <p className="mt-4 text-white/75 leading-relaxed">
-                Lähetä nimi & sähköposti tekstiviestillä numeroon {site.phone} –
-                saat varauslinkin jumpille.
-              </p>
-              <p className="mt-6 text-sm text-white/55">
-                Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen
-              </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section-pad">
-        <div className="container-page grid gap-10 lg:grid-cols-2 lg:items-center">
+      <section className="section-pad bg-white">
+        <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-end">
           <Reveal>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] md:aspect-[5/4]">
-              <Image
-                src="/images/hierontatuoli.jpg"
-                alt="Hierontatuoli Kuntokeskus Loistossa"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              Hierontatuoli & solarium
-            </p>
-            <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
-              Palautumista treenien rinnalle
-            </h2>
-            <p className="mt-4 text-muted leading-relaxed">
-              Uusi laadukas hierontatuoli ja solarium magneettikortilla /
-              ajanvarauksella. Hyvinvointipalveluissa myös hieronta,
-              kuivakuppaus, kuumakivihieronta, fysioterapia ja Footbalance.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/solarium"
-                className="inline-flex rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white"
-              >
-                Solarium
-              </Link>
-              <Link
-                href="/hyvinvointi"
-                className="inline-flex rounded-full border border-[var(--line)] px-6 py-3.5 text-sm font-semibold text-ink"
-              >
-                Hyvinvointi
-              </Link>
-            </div>
-            <p className="mt-6 text-sm text-muted">
-              Superedulliset hoitosarjat + lisäetu 51–100 €{" "}
-              <span className="text-ink">(lisäetu voimassa 10.8.26 asti)</span>
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="border-y border-[var(--line)] bg-white section-pad">
-        <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-accent">
               Tarjoukset
             </p>
-            <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
-              Hollolan halvimmat treenit
+            <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
+              Hollolan
+              <br />
+              halvimmat treenit
             </h2>
-            <p className="mt-4 text-muted leading-relaxed">
-              Tutustumistreenit, vuoden superetu alk.{" "}
-              {prices.headline.highlightKuntosali}, PT-edut ja hoitosarjat.
-              Fitness sisältää kuntosalin 4–24, jumpata, Aerial Bungee ja Cross
-              Trainingin.
+            <p className="mt-4 max-w-md text-muted leading-relaxed">
+              Superetu alk. {prices.headline.highlightKuntosali}. Fitness
+              sisältää salin, jumpata, Aerial Bungeen ja Cross Trainingin.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/tarjoukset"
-                className="inline-flex rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-accent-bright"
-              >
+              <Link href="/tarjoukset" className="btn-accent">
                 Katso tarjoukset
               </Link>
               <Link
                 href="/hinnat"
-                className="inline-flex rounded-full border border-[var(--line)] px-6 py-3.5 text-sm font-semibold text-ink"
+                className="inline-flex items-center justify-center rounded-full border border-[var(--line)] px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-mist"
               >
-                Koko hinnasto
+                Hinnasto
               </Link>
             </div>
           </Reveal>
           <Reveal delay={0.08}>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               {prices.homeHighlights.map((card) => (
                 <div key={card.title} className="price-tile">
                   <p className="text-sm text-muted">{card.title}</p>
-                  <p className="font-display mt-2 text-3xl font-semibold tracking-tight">
+                  <p className="font-display mt-3 text-3xl font-semibold tracking-tight">
                     {card.price}
                   </p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.16em] text-muted">
+                  <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-muted">
                     {card.note}
                   </p>
                 </div>
@@ -272,7 +188,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <ContactCTA />
+      <ContactCTA
+        title="Tule treenaamaan"
+        text="Soita tai poikkea Keskuskatu 4:ään Hollolassa. Autamme alkuun."
+      />
     </>
   );
 }

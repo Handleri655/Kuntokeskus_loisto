@@ -140,7 +140,7 @@ export default function AerialBungeePage() {
                   href={video.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="service-tile !gap-0 !p-5 text-sm font-medium"
+                  className="rounded-xl border border-[var(--line)] bg-white px-5 py-4 text-sm font-medium transition hover:border-accent/40"
                 >
                   {video.label} →
                 </a>

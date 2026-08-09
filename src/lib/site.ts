@@ -62,12 +62,12 @@ export const services = [
   {
     href: "/aerial-bungee",
     title: "Aerial Bungee",
-    text: "Maailman suosituin kuntoilutrendi – valjastreeniä, joka tuntuu vapaudelta.",
+    text: "Valjastreeniä, joka tuntuu vapaudelta.",
   },
   {
     href: "/cross-training",
     title: "Cross Training",
-    text: "Voimaa, kestävyyttä ja vartalon hallintaa yhteisöllisessä treenissä.",
+    text: "Voimaa, kestävyyttä ja vartalon hallintaa.",
   },
   {
     href: "/kangoo",
@@ -75,18 +75,18 @@ export const services = [
     text: "Intervallitreeniä hyppykengillä – ainoana Hollolassa.",
   },
   {
-    href: "/aanimaljarentoutus",
-    title: "Äänimaljarentoutus",
-    text: "Lempeää hyvinvointia äänien ja värähtelyn maailmassa.",
-  },
-  {
     href: "/personal-training",
     title: "Personal Training",
-    text: "Yksilölliset ohjelmat, kuntotestaus ja tavoitteellinen ohjaus.",
+    text: "Yksilölliset ohjelmat ja tavoitteellinen ohjaus.",
+  },
+  {
+    href: "/aanimaljarentoutus",
+    title: "Äänimaljarentoutus",
+    text: "Lempeää hyvinvointia äänien maailmassa.",
   },
   {
     href: "/kuntosali",
     title: "Kuntosali",
-    text: "Avainkortilla treenaat joka päivä klo 04–24. Uusia laitteita.",
+    text: "Avainkortilla sali joka päivä klo 04–24.",
   },
 ] as const;

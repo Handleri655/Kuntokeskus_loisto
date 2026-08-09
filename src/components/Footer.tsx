@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container-page section-pad grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <div className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
-            Kuntokeskus Loisto
+            Kuntokeskus <span className="text-accent-bright">Loisto</span>
           </div>
           <p className="mt-4 max-w-md text-white/70 leading-relaxed">
             Yksityinen kunto- ja aerobicsali Hollolan kuntakeskuksessa vuodesta{" "}

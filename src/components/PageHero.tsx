@@ -16,27 +16,27 @@ export function PageHero({
   imageAlt,
 }: PageHeroProps) {
   return (
-    <section className="relative isolate min-h-[58vh] overflow-hidden bg-ink text-white md:min-h-[64vh]">
+    <section className="relative isolate min-h-[62vh] overflow-hidden bg-ink text-white md:min-h-[70vh]">
       <Image
         src={image}
         alt={imageAlt}
         fill
         priority
-        className="animate-drift object-cover"
+        className="animate-drift object-cover object-center"
         sizes="100vw"
       />
       <div className="hero-veil absolute inset-0" />
       <div className="grain absolute inset-0" />
-      <div className="container-page relative flex min-h-[58vh] flex-col justify-end pb-14 pt-32 md:min-h-[64vh] md:pb-20">
+      <div className="container-page relative flex min-h-[62vh] flex-col justify-end pb-12 pt-28 md:min-h-[70vh] md:pb-16">
         {eyebrow ? (
-          <p className="animate-rise text-xs font-semibold uppercase tracking-[0.22em] text-accent-bright">
+          <p className="animate-rise text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-accent-bright">
             {eyebrow}
           </p>
         ) : null}
-        <h1 className="animate-rise-delay-1 font-display mt-3 max-w-4xl text-4xl font-semibold leading-[0.98] tracking-tight md:text-6xl lg:text-7xl">
+        <h1 className="animate-rise-delay-1 font-display mt-4 max-w-4xl text-[clamp(2.6rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-tight">
           {title}
         </h1>
-        <p className="animate-rise-delay-2 mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
+        <p className="animate-rise-delay-2 mt-5 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
           {lead}
         </p>
       </div>
