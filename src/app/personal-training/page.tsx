@@ -104,18 +104,21 @@ export default async function PersonalTrainingPage() {
       <section className="border-t border-[var(--line)] bg-mist/40 section-pad">
         <div className="container-page">
           <Reveal>
-            <h2 className="font-display text-3xl font-semibold tracking-tight">
+            <h2 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
               Miksi PT?
             </h2>
+            <p className="mt-3 max-w-2xl text-lg text-muted">
+              Muutama syy, miksi tapaaminen kannattaa.
+            </p>
           </Reveal>
-          <ol className="mt-8 grid gap-3 md:grid-cols-2">
+          <ol className="mt-10 grid gap-4 md:grid-cols-2">
             {reasons.map((reason, i) => (
               <Reveal key={reason} delay={Math.min(i * 0.03, 0.2)}>
-                <li className="panel px-5 py-4 text-sm leading-relaxed text-ink-soft">
-                  <span className="mr-2 font-semibold text-accent">
+                <li className="panel panel-pad flex gap-4 text-lg leading-relaxed text-ink-soft md:text-xl">
+                  <span className="font-display shrink-0 text-xl font-bold text-accent md:text-2xl">
                     {String.fromCharCode(65 + i)}.
                   </span>
-                  {reason}
+                  <span>{reason}</span>
                 </li>
               </Reveal>
             ))}
