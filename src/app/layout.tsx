@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Figtree, Syne } from "next/font/google";
+import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Syne({
+const display = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
 });
 
-const body = Figtree({
+const body = Source_Sans_3({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fi" className={`${display.variable} ${body.variable} h-full`}>
-      <body className="min-h-full flex flex-col antialiased">
+      <body className="min-h-full flex flex-col text-[17px] antialiased md:text-[18px]">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

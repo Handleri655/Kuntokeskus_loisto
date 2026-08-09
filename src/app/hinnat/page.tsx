@@ -48,26 +48,22 @@ export default async function HinnatPage() {
 
           <Reveal delay={0.05}>
             <div className="panel mt-10 overflow-x-auto">
-              <table className="min-w-[720px] w-full text-left text-sm">
-                <thead className="bg-mist/70 text-xs uppercase tracking-[0.14em] text-muted">
+              <table className="data-table min-w-[820px] w-full text-left">
+                <thead>
                   <tr>
-                    <th className="px-5 py-4 font-semibold">Tuote</th>
-                    <th className="px-5 py-4 font-semibold">Kuntosali</th>
-                    <th className="px-5 py-4 font-semibold">Ryhmäliikunta</th>
-                    <th className="px-5 py-4 font-semibold">Fitness</th>
+                    <th>Tuote</th>
+                    <th>Kuntosali</th>
+                    <th>Ryhmäliikunta</th>
+                    <th>Fitness</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[var(--line)]">
+                <tbody>
                   {membershipRows.map((row) => (
-                    <tr key={row.product} className="align-top">
-                      <td className="px-5 py-4 font-semibold text-ink">
-                        {row.product}
-                      </td>
-                      <td className="px-5 py-4 text-ink-soft">{row.kuntosali}</td>
-                      <td className="px-5 py-4 text-ink-soft">
-                        {row.ryhmaliikunta}
-                      </td>
-                      <td className="px-5 py-4 text-ink-soft">{row.fitness}</td>
+                    <tr key={row.product}>
+                      <td className="font-semibold text-ink">{row.product}</td>
+                      <td>{row.kuntosali}</td>
+                      <td>{row.ryhmaliikunta}</td>
+                      <td>{row.fitness}</td>
                     </tr>
                   ))}
                 </tbody>

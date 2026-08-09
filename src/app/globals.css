@@ -51,7 +51,56 @@ body {
 
 .font-display {
   font-family: var(--font-display), system-ui, sans-serif;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
+}
+
+.data-table {
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.data-table thead {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 168, 75, 0.12),
+    rgba(240, 242, 244, 0.9)
+  );
+}
+
+.data-table th {
+  padding: 1.1rem 1.25rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 1.15rem 1.25rem;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.data-table tbody tr:first-child td {
+  border-top: none;
+}
+
+@media (min-width: 768px) {
+  .data-table {
+    font-size: 1.15rem;
+  }
+
+  .data-table th {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.88rem;
+  }
+
+  .data-table td {
+    padding: 1.35rem 1.5rem;
+  }
 }
 
 .grain {

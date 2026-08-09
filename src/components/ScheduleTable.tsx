@@ -2,11 +2,11 @@ import type { ScheduleDay } from "@/lib/schedules";
 
 export function ScheduleTable({ days }: { days: ScheduleDay[] }) {
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-5">
       {days.map((day) => (
         <div key={day.day} className="panel overflow-hidden">
-          <div className="border-b border-[var(--line)] bg-[linear-gradient(90deg,rgba(31,138,127,0.08),transparent)] px-5 py-3.5 pl-6 md:px-6 md:pl-7">
-            <h3 className="font-display text-xl font-semibold tracking-tight">
+          <div className="border-b border-[var(--line)] bg-[linear-gradient(90deg,rgba(212,168,75,0.12),transparent)] px-5 py-4 pl-6 md:px-7 md:pl-8">
+            <h3 className="font-display text-2xl font-semibold tracking-tight md:text-[1.75rem]">
               {day.day}
             </h3>
           </div>
@@ -14,19 +14,23 @@ export function ScheduleTable({ days }: { days: ScheduleDay[] }) {
             {day.classes.map((item) => (
               <li
                 key={`${day.day}-${item.time}-${item.name}`}
-                className="grid gap-2 px-5 py-4 pl-6 sm:grid-cols-[8.5rem_1fr_auto] sm:items-start md:px-6 md:pl-7"
+                className="grid gap-2 px-5 py-5 pl-6 sm:grid-cols-[10rem_1fr_auto] sm:items-start md:px-7 md:pl-8 md:py-6"
               >
-                <span className="text-sm font-semibold text-accent">
+                <span className="text-base font-bold text-accent md:text-lg">
                   {item.time}
                 </span>
                 <div>
-                  <div className="font-medium text-ink">{item.name}</div>
+                  <div className="text-lg font-semibold text-ink md:text-xl">
+                    {item.name}
+                  </div>
                   {item.note ? (
-                    <p className="mt-1 text-sm text-muted">{item.note}</p>
+                    <p className="mt-1.5 text-base text-muted leading-relaxed">
+                      {item.note}
+                    </p>
                   ) : null}
                 </div>
                 {item.instructor ? (
-                  <span className="text-sm text-muted sm:text-right">
+                  <span className="text-base font-medium text-muted sm:text-right md:text-lg">
                     {item.instructor}
                   </span>
                 ) : null}
