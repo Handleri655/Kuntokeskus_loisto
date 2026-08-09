@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kuntokeskus Loisto – nettisivut
 
-## Getting Started
+Premium Next.js -sivusto yritykselle [Kuntokeskus Loisto Oy](https://kuntokeskusloisto.fi/).
 
-First, run the development server:
+## Käynnistys
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Avaa [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Hallinta (asiakas)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**[/admin](http://localhost:3000/admin)**
 
-## Learn More
+1. Kirjaudu salasanalla (oletus: `loisto2026`)
+2. Muokkaa hintoja / tarjouksia / ryhmäliikuntatunteja
+3. Paina **Tallenna**
 
-To learn more about Next.js, take a look at the following resources:
+## Pysyvä tallennus (GitHub + Vercel)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Admin-tallennus toimii tuotannossa **Upstash Redis** -pilvitietokannan kautta.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1. Luo Upstash-tietokanta
 
-## Deploy on Vercel
+1. Mene [console.upstash.com](https://console.upstash.com/)
+2. Create Database → valitse ilmainen (Free)
+3. Kopioi **UPSTASH_REDIS_REST_URL** ja **UPSTASH_REDIS_REST_TOKEN**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. Lisää ympäristömuuttujat
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Paikallisesti `.env.local`:
+
+```env
+ADMIN_PASSWORD=oma-vahva-salasana
+ADMIN_SECRET=oma-salainen-avain
+UPSTASH_REDIS_REST_URL=https://xxxx.upstash.io
+UPSTASH_REDIS_REST_TOKEN=xxxx
+```
+
+Vercelissä: Project → Settings → Environment Variables → samat avaimet.
+
+### 3. Julkaise
+
+Push GitHubiin → deploy Verceliin. Admin-muutokset säilyvät pilvessä deployien yli.
+
+Ilman Upstash-avaimia sivusto käyttää paikallisia tiedostoja `data/prices.json` ja `data/schedules.json` (hyvä kehitykseen / VPS:lle).
+
+## Tuotanto (VPS)
+
+```bash
+npm run build
+npm start
+```
+
+## Sisältö
+
+Kuntosali, ryhmäliikunta, Aerial Bungee, Cross Training, Kangoo, jooga, PT, painonpudotus, solarium, hyvinvointi, hinnat, tarjoukset, info ja henkilökuva.

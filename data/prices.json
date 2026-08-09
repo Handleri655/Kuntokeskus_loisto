@@ -1,0 +1,192 @@
+{
+  "updatedAt": "2026-08-09T18:44:08.192Z",
+  "headline": {
+    "eyebrow": "Hinnasto 1.1.2026 alk.",
+    "title": "Hollolan edullisimmat treenit",
+    "lead": "Ei liittymismaksuja. Kuukausi-, määrä- tai kertakortti – maksa kuukausittain tai kerralla.",
+    "highlightKuntosali": "33 €/kk",
+    "highlightRyhmaliikunta": "43 €/kk",
+    "highlightFitness": "56 €/kk"
+  },
+  "membershipRows": [
+    {
+      "product": "Avainkortti",
+      "kuntosali": "11 €",
+      "ryhmaliikunta": "11 €",
+      "fitness": "11 €"
+    },
+    {
+      "product": "Kertamaksu",
+      "kuntosali": "12 €",
+      "ryhmaliikunta": "14 €",
+      "fitness": "16 €"
+    },
+    {
+      "product": "10×-kortti",
+      "kuntosali": "71 € (61 €)",
+      "ryhmaliikunta": "89 € (79 €)",
+      "fitness": "—"
+    },
+    {
+      "product": "20×-kortti",
+      "kuntosali": "136 € (116 €)",
+      "ryhmaliikunta": "166 € (146 €)",
+      "fitness": "—"
+    },
+    {
+      "product": "1 kk",
+      "kuntosali": "49 € (44 €)",
+      "ryhmaliikunta": "62 € (57 €)",
+      "fitness": "80 € (75 €)"
+    },
+    {
+      "product": "3 kk",
+      "kuntosali": "129 € tai 43 €/kk",
+      "ryhmaliikunta": "177 € tai 59 €/kk",
+      "fitness": "162 € tai 54 €/kk (74 € / 69 €)"
+    },
+    {
+      "product": "6 kk",
+      "kuntosali": "210 € tai 35 €/kk",
+      "ryhmaliikunta": "336 € tai 56 €/kk (306 € / 51 €)",
+      "fitness": "420 € tai 70 €/kk (390 € / 65 €)"
+    },
+    {
+      "product": "12 kk",
+      "kuntosali": "396 € tai 33 €/kk",
+      "ryhmaliikunta": "564 € tai 47 €/kk (516 € / 43 €)",
+      "fitness": "732 € tai 61 €/kk (672 € / 56 €)"
+    }
+  ],
+  "extras": [
+    {
+      "title": "Aerial Bungee",
+      "text": "Alkeet/perusteet 75 min 32 € · 5×55 min 75 € · 3×55 min 60 €"
+    },
+    {
+      "title": "Solarium & hierontatuoli",
+      "text": "1 kerta 9 € · 10× 69 €"
+    },
+    {
+      "title": "Ohjelmat & testit",
+      "text": "Kuntosaliohjelma 40 / 75 / 95 € · kuntotesti 70 € · kehonkoostumus 25 €"
+    },
+    {
+      "title": "Lisämaksu jumppiin",
+      "text": "Kuntosali-kk-kortilla jumppiin 8 €/kerta – yksi tutustuminen"
+    },
+    {
+      "title": "Osamaksu",
+      "text": "6–12 kk kortit voit maksaa myös osamaksulla. 10×/20× voimassa 3 kk / 6 kk."
+    }
+  ],
+  "offers": {
+    "trialBadge": "1 kk −50 %",
+    "trialNote": "Avainkortti 11 €. Treenaat klo 04–24 joka päivä.",
+    "trialPrices": [
+      {
+        "title": "Kuntosali",
+        "price": "24,5 €"
+      },
+      {
+        "title": "Ryhmäliikunta",
+        "price": "31 €"
+      },
+      {
+        "title": "Fitness (yhdistelmä)",
+        "price": "40 €"
+      }
+    ],
+    "ptTitle": "Intensiivi-painonpudotus & kunnonkohotus",
+    "ptText": "−25 % · tavoite 2–6 kg/kk. PTx10 nyt 450 € (norm. 600 €).",
+    "yearBadge": "Vuoden kovin superetu",
+    "yearNote": "6–12 kk treenikorteilla. Fitness sisältää kuntosalin, kaikki jumpata + Aerial Bungee + Cross Training.",
+    "yearPrices": [
+      {
+        "title": "Kuntosali",
+        "price": "33 €/kk",
+        "note": "6–12 kk kortti"
+      },
+      {
+        "title": "Ryhmäliikunta",
+        "price": "43 €/kk",
+        "note": "6–12 kk kortti"
+      },
+      {
+        "title": "Fitness*",
+        "price": "56 €/kk",
+        "note": "Kuntosali + jumpata + Aerial Bungee + Cross Training"
+      }
+    ],
+    "bonusTitle": "Etusi 105–184 €!",
+    "bonuses": [
+      "1 kk treenit",
+      "Kehonkoostumusmittaus",
+      "3× solarium / hierontatuolihoidot",
+      "Personal Training 45 min – alkukartoitus"
+    ],
+    "aerialBadge": "−50 % 10.9. asti",
+    "aerialText": "Alkeet, turvallisuus ja säädöt – pakollinen ennen Aerial Bungee -perustunteja.",
+    "treatments": [
+      {
+        "title": "Hieronta 3,5 h",
+        "offer": "−25 %",
+        "price": "nyt 184 €",
+        "note": "Norm. 245 € · voidaan jakaa osiin"
+      },
+      {
+        "title": "Footbalance-pohjalliset",
+        "offer": "−15 %",
+        "price": "Medical & Sport",
+        "note": "Yksilölliset pohjalliset"
+      },
+      {
+        "title": "Fysioterapia",
+        "offer": "Kela 15 €",
+        "price": "max 4× / 2026",
+        "note": "Ei tarvita lääkärin lähetettä"
+      },
+      {
+        "title": "Hieronta & kuppaus / kuumakivi",
+        "offer": "−20 %",
+        "price": "tai faskiakäsittely −20 %",
+        "note": "Työkaluilla tai käsillä"
+      },
+      {
+        "title": "Hoitosarja 3 × 60 min",
+        "offer": "erikoishinta",
+        "price": "vain 180 €",
+        "note": "Norm. 225 €"
+      }
+    ]
+  },
+  "personalTraining": {
+    "ohjelma1": "40 €",
+    "ohjelma2": "75 €",
+    "ohjelma3": "95 €",
+    "ruokavalio": "140 €",
+    "pt2": "140 €",
+    "pt5": "330 €",
+    "pt10": "600 €",
+    "pt10Offer": "450 €",
+    "pt15": "825 €",
+    "pt15Offer": "660 €"
+  },
+  "homeHighlights": [
+    {
+      "title": "Kuntosali",
+      "price": "33 €/kk",
+      "note": "12 kk"
+    },
+    {
+      "title": "Ryhmäliikunta",
+      "price": "47 €/kk",
+      "note": "12 kk"
+    },
+    {
+      "title": "Fitness",
+      "price": "61 €/kk",
+      "note": "12 kk"
+    }
+  ]
+}

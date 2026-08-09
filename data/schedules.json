@@ -1,0 +1,274 @@
+{
+  "updatedAt": "2026-08-09T18:44:08.191Z",
+  "autumn": {
+    "eyebrow": "Ryhmäliikunta 17.8.26 →",
+    "title": "16 tuntia treeniä viikossa",
+    "lead": "Maailman suosituin kuntoilutrendi Aerial Bungee – sekä Kangoo, joogat, Cross Training, äänimalja, Lavis, Pump Up, Step-RVP-HIIT ja paljon muuta.",
+    "scheduleTitle": "Viikko-ohjelma 17.8.26 →",
+    "scheduleNote": "Kuntokeskus Loisto / ryhmäliikunta – 16 h/vko.",
+    "days": [
+      {
+        "day": "Maanantai",
+        "classes": [
+          {
+            "time": "10:00–10:55",
+            "name": "Kuntosali – kiertoharjoittelu",
+            "note": "Tehokasta kuntopiiritreeniä koko kropalle",
+            "instructor": "Jari"
+          },
+          {
+            "time": "17:15–18:00",
+            "name": "Kiinteytys-Mix",
+            "note": "Aerobic-, step-, boxbic-askelsarjoja & venyttelyt",
+            "instructor": "Jari"
+          },
+          {
+            "time": "18:05–19:00",
+            "name": "Pump Up!",
+            "note": "Lihaskestävyystreenit; levytangot / käsipainot / step",
+            "instructor": "Jari"
+          },
+          {
+            "time": "19:15–20:30",
+            "name": "Hatha-jooga 75",
+            "note": "Pehmeä jooga – uutuus!",
+            "instructor": "Ulla P."
+          }
+        ]
+      },
+      {
+        "day": "Tiistai",
+        "classes": [
+          {
+            "time": "16:15–17:15",
+            "name": "Yritysjumppa",
+            "note": "1.9.26 alk.",
+            "instructor": ""
+          },
+          {
+            "time": "19:35–20:15",
+            "name": "Step + RVP 40",
+            "note": "Askellus + reisi–vatsa–pakara",
+            "instructor": "Jari"
+          },
+          {
+            "time": "20:20–21:00",
+            "name": "Kangoo Jumps + Core + venyttely 40",
+            "note": "Intervallitunti",
+            "instructor": "Jari"
+          }
+        ]
+      },
+      {
+        "day": "Keskiviikko",
+        "classes": [
+          {
+            "time": "10:00–10:55",
+            "name": "Hyvä ryhti + Core + lihashuolto",
+            "note": "Step / core board, keppijumppa, fitball, gymstick",
+            "instructor": "Jari"
+          },
+          {
+            "time": "18:00–19:00",
+            "name": "Kiinteytys-Mix",
+            "note": "Yritysjumppa 1.9.26 alk.",
+            "instructor": "Jari"
+          },
+          {
+            "time": "19:15–20:15",
+            "name": "Voima-jooga",
+            "note": "Uutuus!",
+            "instructor": "Ulla P."
+          }
+        ]
+      },
+      {
+        "day": "Torstai",
+        "classes": [
+          {
+            "time": "17:00–17:50",
+            "name": "Lavis",
+            "note": "Kuntotanssi – uusi ohjelma & uusia tansseja",
+            "instructor": "Jari"
+          },
+          {
+            "time": "18:00–18:55",
+            "name": "Pump Up!",
+            "note": "Ohjelma 2",
+            "instructor": "Jari"
+          },
+          {
+            "time": "19:15–20:30",
+            "name": "Aerial Bungee intensiivi 75",
+            "note": "Alkeet / perusteet / turvallisuus – käytävä ennen 55-tuntia",
+            "instructor": "Jari"
+          }
+        ]
+      },
+      {
+        "day": "Perjantai",
+        "classes": [
+          {
+            "time": "10:00–10:55",
+            "name": "TBC + keppijumppa + hulahoop",
+            "note": "Total body conditioning",
+            "instructor": "Jari"
+          },
+          {
+            "time": "16:45–17:45",
+            "name": "Cross Training",
+            "note": "6× kurssi, 21.8.26 → – erillinen maksu tai Fitness-kortilla",
+            "instructor": "Jari"
+          },
+          {
+            "time": "18:00–18:55",
+            "name": "Aerial Bungee 55",
+            "note": "Alkeet / keskitaso – Fitness-kortilla mukaan",
+            "instructor": "Jari"
+          }
+        ]
+      },
+      {
+        "day": "Lauantai",
+        "classes": [
+          {
+            "time": "11:00–11:45",
+            "name": "HIIT + Core 45",
+            "note": "Joka 2. viikko",
+            "instructor": "Jari"
+          },
+          {
+            "time": "11:50–12:35",
+            "name": "Kahvakuula 45",
+            "note": "Liikepatterit + venyttelyt – joka 2. viikko",
+            "instructor": "Jari"
+          }
+        ]
+      }
+    ]
+  },
+  "summer": {
+    "eyebrow": "Kesäohjelma",
+    "title": "Ryhmäliikunta 16.8.26 asti",
+    "lead": "15 h/vko – Aerial Bungee, Cross Training, Kangoo Jumps, Core Board, Step+RVP, Pump Up, TBC ja HIIT/kahvakuula. Joogat taas elokuussa.",
+    "scheduleTitle": "Viikko-ohjelma 1.6.–16.8.26",
+    "scheduleNote": "",
+    "days": [
+      {
+        "day": "Maanantai",
+        "classes": [
+          {
+            "time": "10:00–10:55",
+            "name": "Kuntosali – kiertoharjoittelu",
+            "note": "",
+            "instructor": "Jari"
+          },
+          {
+            "time": "17:40–18:10",
+            "name": "Syke-Kiinteytys-Mix",
+            "note": "",
+            "instructor": "Jari"
+          },
+          {
+            "time": "18:20–19:15",
+            "name": "Pump Up!",
+            "note": "Ohjelma 1",
+            "instructor": "Jari"
+          },
+          {
+            "time": "19:30–20:20",
+            "name": "Aerial Bungee 50",
+            "note": "Alkeet / keskitaso",
+            "instructor": "Jari"
+          }
+        ]
+      },
+      {
+        "day": "Tiistai",
+        "classes": [
+          {
+            "time": "17:15–18:00",
+            "name": "Step + RVP 45",
+            "note": "",
+            "instructor": "Sari"
+          },
+          {
+            "time": "18:10–18:55",
+            "name": "Kangoo Jumps + Core 45",
+            "note": "",
+            "instructor": "Jari / Sari"
+          }
+        ]
+      },
+      {
+        "day": "Keskiviikko",
+        "classes": [
+          {
+            "time": "10:00–10:55",
+            "name": "Hyvä ryhti + Core + lihashuolto",
+            "note": "",
+            "instructor": "Jari"
+          },
+          {
+            "time": "17:30–18:25",
+            "name": "Kiinteytys-Mix",
+            "note": "",
+            "instructor": "Jari"
+          },
+          {
+            "time": "18:40–19:35",
+            "name": "Cross Training",
+            "note": "Fitness-kortilla ilmaiseksi",
+            "instructor": "Jari"
+          }
+        ]
+      },
+      {
+        "day": "Torstai",
+        "classes": [
+          {
+            "time": "17:00–17:50",
+            "name": "Lavis – kuntotanssi",
+            "note": "",
+            "instructor": ""
+          },
+          {
+            "time": "18:00–18:55",
+            "name": "Pump Up!",
+            "note": "Ohjelma 2",
+            "instructor": "Jari"
+          },
+          {
+            "time": "19:15–20:30",
+            "name": "Aerial Bungee intensiivi 75",
+            "note": "",
+            "instructor": "Jari"
+          }
+        ]
+      },
+      {
+        "day": "Perjantai",
+        "classes": [
+          {
+            "time": "10:00–10:55",
+            "name": "TBC + keppijumppa + hulahoop",
+            "note": "",
+            "instructor": "Jari"
+          },
+          {
+            "time": "16:30–17:00",
+            "name": "HIIT",
+            "note": "",
+            "instructor": ""
+          },
+          {
+            "time": "17:05–17:45",
+            "name": "Kahvakuula-patterit",
+            "note": "",
+            "instructor": "Jari"
+          }
+        ]
+      }
+    ]
+  }
+}
