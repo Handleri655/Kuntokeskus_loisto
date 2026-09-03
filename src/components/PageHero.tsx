@@ -26,7 +26,7 @@ export function PageHero({
           alt={imageAlt}
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-[center_35%]"
           sizes="100vw"
         />
       }

@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MotionAnchor } from "@/components/MotionPress";
 import { nav, servicesNav, site } from "@/lib/site";
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -25,14 +27,36 @@ export function Header() {
     };
   }, [open]);
 
-  const linkClass = scrolled
-    ? "text-ink-soft hover:bg-mist hover:text-ink"
-    : "text-white/85 hover:bg-white/10 hover:text-white";
+  const solid = scrolled || open;
+  const servicesActive = servicesNav.some((item) => pathname === item.href);
+
+  const linkClass = (href: string) => {
+    const active = pathname === href;
+    if (solid) {
+      return active
+        ? "nav-active"
+        : "text-ink-soft hover:bg-mist hover:text-ink";
+    }
+    return active
+      ? "nav-active-ghost"
+      : "text-white/85 hover:bg-white/10 hover:text-white";
+  };
+
+  const servicesBtnClass = () => {
+    if (solid) {
+      return servicesActive
+        ? "nav-active"
+        : "text-ink-soft hover:bg-mist hover:text-ink";
+    }
+    return servicesActive
+      ? "nav-active-ghost"
+      : "text-white/85 hover:bg-white/10 hover:text-white";
+  };
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || open
+        solid
           ? "bg-[rgba(251,252,253,0.92)] text-ink shadow-[0_1px_0_var(--line)] backdrop-blur-xl"
           : "bg-transparent text-white"
       }`}
@@ -40,22 +64,30 @@ export function Header() {
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-4 md:h-[5.25rem]">
         <Link
           href="/koti"
-          className="group leading-tight"
+          className="group flex items-center gap-3 leading-tight"
           onClick={() => setOpen(false)}
         >
-          <div className="font-display text-[1.2rem] font-semibold tracking-tight md:text-[1.4rem]">
-            Kuntokeskus{" "}
-            <span className={scrolled || open ? "text-accent" : "text-accent-bright"}>
-              Loisto
-            </span>
-          </div>
-          <div
-            className={`text-[0.68rem] uppercase tracking-[0.2em] ${
-              scrolled || open ? "text-muted" : "text-white/65"
-            }`}
+          <span
+            className={`brand-mark ${solid ? "" : "brand-mark-light"}`}
+            aria-hidden="true"
           >
-            Hollola
-          </div>
+            L
+          </span>
+          <span>
+            <div className="font-display text-[1.15rem] font-semibold tracking-tight md:text-[1.35rem]">
+              Kuntokeskus{" "}
+              <span className={solid ? "text-accent" : "text-accent-bright"}>
+                Loisto
+              </span>
+            </div>
+            <div
+              className={`text-[0.68rem] uppercase tracking-[0.2em] ${
+                solid ? "text-muted" : "text-white/65"
+              }`}
+            >
+              Hollola
+            </div>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-0.5 lg:flex">
@@ -63,7 +95,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${linkClass}`}
+              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${linkClass(item.href)}`}
             >
               {item.label}
             </Link>
@@ -76,7 +108,7 @@ export function Header() {
           >
             <button
               type="button"
-              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${linkClass}`}
+              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${servicesBtnClass()}`}
               aria-expanded={servicesOpen}
             >
               Palvelut
@@ -93,7 +125,11 @@ export function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block px-4 py-2.5 text-sm text-ink-soft transition hover:bg-mist hover:text-ink"
+                    className={`block px-4 py-2.5 text-sm transition hover:bg-mist hover:text-ink ${
+                      pathname === item.href
+                        ? "bg-mist/80 font-semibold text-ink"
+                        : "text-ink-soft"
+                    }`}
                   >
                     {item.label}
                   </Link>
@@ -106,7 +142,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${linkClass}`}
+              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${linkClass(item.href)}`}
             >
               {item.label}
             </Link>
@@ -117,7 +153,7 @@ export function Header() {
           <MotionAnchor
             href={site.phoneHref}
             className={`hidden rounded-full px-4 py-2.5 text-sm font-semibold transition md:inline-flex ${
-              scrolled
+              solid
                 ? "bg-ink text-white hover:bg-ink-soft"
                 : "bg-white text-ink hover:bg-white/90"
             }`}
@@ -127,7 +163,7 @@ export function Header() {
           <button
             type="button"
             className={`inline-flex h-11 w-11 items-center justify-center rounded-full border lg:hidden ${
-              scrolled || open
+              solid
                 ? "border-[var(--line)] text-ink"
                 : "border-white/30 text-white"
             }`}
@@ -167,7 +203,9 @@ export function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="rounded-xl px-3 py-3 font-medium text-ink-soft transition hover:bg-mist hover:text-ink"
+              className={`rounded-xl px-3 py-3 font-medium transition hover:bg-mist hover:text-ink ${
+                pathname === item.href ? "bg-mist text-ink" : "text-ink-soft"
+              }`}
             >
               {item.label}
             </Link>
@@ -188,7 +226,11 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-xl px-6 py-2.5 text-ink-soft transition hover:bg-mist hover:text-ink"
+                  className={`rounded-xl px-6 py-2.5 transition hover:bg-mist hover:text-ink ${
+                    pathname === item.href
+                      ? "bg-mist font-semibold text-ink"
+                      : "text-ink-soft"
+                  }`}
                 >
                   {item.label}
                 </Link>
@@ -200,7 +242,9 @@ export function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="rounded-xl px-3 py-3 font-medium text-ink-soft transition hover:bg-mist hover:text-ink"
+              className={`rounded-xl px-3 py-3 font-medium transition hover:bg-mist hover:text-ink ${
+                pathname === item.href ? "bg-mist text-ink" : "text-ink-soft"
+              }`}
             >
               {item.label}
             </Link>

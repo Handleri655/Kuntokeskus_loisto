@@ -3,8 +3,8 @@
 :root {
   --ink: #0e1116;
   --ink-soft: #2c333c;
-  --paper: #f0f2f4;
-  --mist: #e4e8ec;
+  --paper: #eef0f3;
+  --mist: #e2e6eb;
   --white: #fbfcfd;
   --accent: #b8892d;
   --accent-bright: #d4a84b;
@@ -38,7 +38,10 @@ html {
 }
 
 body {
-  background: var(--paper);
+  background:
+    radial-gradient(ellipse 90% 50% at 100% -10%, rgba(212, 168, 75, 0.07), transparent 55%),
+    radial-gradient(ellipse 70% 40% at 0% 100%, rgba(14, 17, 22, 0.04), transparent 50%),
+    var(--paper);
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
   line-height: 1.6;
@@ -137,6 +140,32 @@ body {
   padding-block: clamp(5rem, 9vw, 8rem);
 }
 
+.section-band {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.92)),
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212, 168, 75, 0.08), transparent 70%);
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 0.65rem;
+  background: linear-gradient(145deg, var(--accent-bright), var(--accent));
+  color: var(--ink);
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  box-shadow: 0 8px 20px -12px rgba(184, 137, 45, 0.8);
+}
+
+.brand-mark-light {
+  background: linear-gradient(145deg, #f0d18a, var(--accent-bright));
+}
+
 .container-page {
   width: min(1120px, calc(100% - 2rem));
   margin-inline: auto;
@@ -163,10 +192,12 @@ body {
 .panel {
   position: relative;
   overflow: hidden;
-  border-radius: 1.25rem;
-  background: var(--white);
-  border: 1px solid rgba(14, 17, 22, 0.08);
-  box-shadow: 0 20px 40px -32px rgba(14, 17, 22, 0.35);
+  border-radius: 1.35rem;
+  background: linear-gradient(165deg, #ffffff 0%, #f7f8fa 100%);
+  border: 1px solid rgba(14, 17, 22, 0.07);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 18px 40px -30px rgba(14, 17, 22, 0.35);
 }
 
 .panel::before {
@@ -184,12 +215,12 @@ body {
 }
 
 .panel-soft {
-  background: linear-gradient(165deg, #eef1f4 0%, #f7f8fa 60%, #ffffff 100%);
+  background: linear-gradient(165deg, #f3f5f7 0%, #fafbfc 55%, #ffffff 100%);
   box-shadow: none;
 }
 
 .panel-dark {
-  background: linear-gradient(150deg, #12151a 0%, #171b22 50%, #1c1810 130%);
+  background: linear-gradient(150deg, #12151a 0%, #171b22 45%, #1a1710 130%);
   border-color: rgba(255, 255, 255, 0.08);
   color: white;
   box-shadow: 0 28px 50px -34px rgba(0, 0, 0, 0.6);
@@ -217,13 +248,13 @@ body {
   display: grid;
   gap: 1rem 2rem;
   align-items: baseline;
-  padding: 1.5rem 0;
+  padding: 1.65rem 0;
   border-bottom: 1px solid var(--line);
   transition: opacity 0.3s ease;
 }
 
 .service-row:hover {
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 @media (min-width: 768px) {
@@ -244,10 +275,12 @@ body {
 .price-tile {
   position: relative;
   overflow: hidden;
-  border-radius: 1.15rem;
-  padding: 1.4rem 1.35rem;
-  background: linear-gradient(165deg, #ffffff, #f3f5f7);
-  border: 1px solid rgba(14, 17, 22, 0.06);
+  border-radius: 1.25rem;
+  padding: 1.5rem 1.4rem;
+  background:
+    linear-gradient(165deg, #ffffff 0%, #f6f4ef 100%);
+  border: 1px solid rgba(184, 137, 45, 0.18);
+  box-shadow: 0 14px 32px -28px rgba(14, 17, 22, 0.45);
 }
 
 .price-tile::before {
@@ -255,7 +288,48 @@ body {
   position: absolute;
   inset: 0 auto 0 0;
   width: 2px;
-  background: var(--accent-bright);
+  background: linear-gradient(180deg, var(--accent-bright), var(--accent));
+}
+
+.price-tile::after {
+  content: "";
+  position: absolute;
+  right: -20%;
+  top: -40%;
+  width: 55%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(212, 168, 75, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.quote-featured {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  background: linear-gradient(145deg, #12151a 0%, #1a1710 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 50px -34px rgba(0, 0, 0, 0.55);
+}
+
+.quote-featured::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.25rem;
+  bottom: 1.25rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-bright), transparent);
+}
+
+.nav-active {
+  background: color-mix(in oklab, var(--accent) 16%, transparent);
+  color: var(--ink) !important;
+}
+
+.nav-active-ghost {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff !important;
 }
 
 .btn-primary {

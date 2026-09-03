@@ -199,8 +199,7 @@ export default async function KuntosaliPage() {
                   Kuntosali-hinnasto
                 </h3>
                 <p className="mt-1 text-sm text-muted">
-                  Sama taulukko kuin Hinnat-sivulla (kuntosali-sarake). Päivittyy
-                  hallinnasta.
+                  Sama taulukko kuin Hinnat-sivulla (kuntosali-sarake).
                 </p>
               </div>
               <table className="data-table min-w-[420px] w-full text-left">

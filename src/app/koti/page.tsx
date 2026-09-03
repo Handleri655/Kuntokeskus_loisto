@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 };
 
 const featured = services.slice(0, 4);
+const [featuredReview, ...otherReviews] = googleReviews;
 
 export default async function HomePage() {
   const prices = await getPrices();
@@ -36,7 +37,7 @@ export default async function HomePage() {
             alt="Kuntosaliharjoittelua Kuntokeskus Loistossa Hollolassa"
             fill
             priority
-            className="object-cover object-center"
+            className="object-cover object-[center_35%]"
             sizes="100vw"
           />
         }
@@ -81,8 +82,8 @@ export default async function HomePage() {
         </HeroLine>
       </HeroMotion>
 
-      <section className="border-b border-[var(--line)] bg-white">
-        <div className="container-page grid gap-5 py-7 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[var(--line)] md:py-8">
+      <section className="border-b border-[var(--line)] bg-white/80 backdrop-blur-sm">
+        <div className="container-page grid gap-5 py-7 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[var(--line)] md:py-9">
           {[
             "Edenred · E-passi · Smartum",
             `Avainkortilla ${site.keycardHours}`,
@@ -101,7 +102,7 @@ export default async function HomePage() {
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Palvelut</p>
-            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-[2.75rem]">
               Treenaa juuri sinulle sopivalla tavalla
             </h2>
           </Reveal>
@@ -140,62 +141,75 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--line)] bg-white section-pad">
+      <section className="section-pad section-band border-y border-[var(--line)]">
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Miksi Loisto?</p>
-            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-[2.75rem]">
               Miksi juuri Loistoon?
             </h2>
           </Reveal>
-          <Stagger className="mt-10 grid gap-8 md:grid-cols-3" delay={0.05}>
+          <Stagger className="mt-10 grid gap-5 md:grid-cols-3" delay={0.05}>
             {whyLoisto.map((item, i) => (
               <StaggerItem key={item.title} hover>
-                <p className="font-display text-sm font-bold tracking-[0.16em] text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-muted leading-relaxed">{item.text}</p>
+                <HoverCard className="panel panel-pad h-full">
+                  <p className="font-display text-sm font-bold tracking-[0.16em] text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="font-display mt-4 text-2xl font-semibold tracking-tight">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-muted leading-relaxed">{item.text}</p>
+                </HoverCard>
               </StaggerItem>
             ))}
           </Stagger>
         </div>
       </section>
 
-      <section className="section-pad bg-mist/30">
+      <section className="section-pad">
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Google-arvostelut</p>
-            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-[2.75rem]">
               Mitä asiakkaat sanovat
             </h2>
-            <p className="mt-4 max-w-xl text-muted leading-relaxed">
-              Poimintoja Googlen arvosteluista – nimet piilotettu.
-            </p>
           </Reveal>
 
-          <Stagger
-            className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-            delay={0.04}
-          >
-            {googleReviews.map((review) => (
-              <StaggerItem key={review.text} hover>
-                <HoverCard className="panel panel-pad h-full">
-                  <p
-                    className="font-display text-lg leading-none tracking-tight text-accent"
-                    aria-hidden="true"
-                  >
-                    ★★★★★
-                  </p>
-                  <p className="mt-4 text-ink-soft leading-relaxed">
-                    “{review.text}”
-                  </p>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </Stagger>
+          <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+            <Reveal>
+              <HoverCard className="quote-featured h-full pl-6 md:pl-8">
+                <p
+                  className="font-display text-accent-bright"
+                  aria-hidden="true"
+                >
+                  ★★★★★
+                </p>
+                <p className="font-display mt-5 text-2xl leading-snug tracking-tight md:text-3xl">
+                  “{featuredReview.text}”
+                </p>
+                <p className="mt-6 text-sm text-white/45">Google-arvostelu</p>
+              </HoverCard>
+            </Reveal>
+
+            <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1" delay={0.06}>
+              {otherReviews.slice(0, 4).map((review) => (
+                <StaggerItem key={review.text} hover>
+                  <HoverCard className="panel panel-pad h-full">
+                    <p
+                      className="text-sm tracking-tight text-accent"
+                      aria-hidden="true"
+                    >
+                      ★★★★★
+                    </p>
+                    <p className="mt-3 text-ink-soft leading-relaxed">
+                      “{review.text}”
+                    </p>
+                  </HoverCard>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
 
           <Reveal>
             <div className="mt-8">
@@ -203,7 +217,7 @@ export default async function HomePage() {
                 href={site.googleReviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-[var(--line)] px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-white"
+                className="inline-flex items-center justify-center rounded-full border border-[var(--line)] bg-white/70 px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-white"
               >
                 Lue lisää Googlella →
               </MotionAnchor>
@@ -217,7 +231,7 @@ export default async function HomePage() {
           src="/images/group-fitness.jpg"
           alt="Ryhmäliikuntaa Kuntokeskus Loistossa"
           fill
-          className="object-cover object-center"
+          className="object-cover object-[center_40%]"
           sizes="100vw"
         />
         <div className="hero-veil absolute inset-0" />
@@ -243,11 +257,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-pad bg-white">
+      <section className="section-pad section-band">
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-end">
           <Reveal>
             <p className="eyebrow text-accent">Hinnat & tarjoukset</p>
-            <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
               Kuntosali alk.{" "}
               <span className="text-accent">{prices.headline.highlightKuntosali}</span>
             </h2>
@@ -261,7 +275,7 @@ export default async function HomePage() {
               </MotionLink>
               <MotionLink
                 href="/hinnat"
-                className="inline-flex items-center justify-center rounded-full border border-[var(--line)] px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-mist"
+                className="inline-flex items-center justify-center rounded-full border border-[var(--line)] bg-white/80 px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-white"
               >
                 Hinnasto
               </MotionLink>
@@ -272,11 +286,11 @@ export default async function HomePage() {
               {prices.homeHighlights.map((card) => (
                 <StaggerItem key={card.title} hover>
                   <HoverCard className="price-tile h-full">
-                    <p className="text-sm text-muted">{card.title}</p>
-                    <p className="font-display mt-3 text-3xl font-semibold tracking-tight">
+                    <p className="relative z-[1] text-sm text-muted">{card.title}</p>
+                    <p className="relative z-[1] font-display mt-3 text-3xl font-semibold tracking-tight">
                       {card.price}
                     </p>
-                    <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-muted">
+                    <p className="relative z-[1] mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-muted">
                       {card.note}
                     </p>
                   </HoverCard>
