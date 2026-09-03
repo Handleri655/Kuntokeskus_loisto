@@ -16,9 +16,9 @@ const portalBody = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Valitse sivusto | T:mi Jari Kotkansalo & Kuntokeskus Loisto",
+  title: "Valitse palvelu | T:mi Jari Kotkansalo & Kuntokeskus Loisto",
   description:
-    "Valitse T:mi Jari Kotkansalon hyvinvointipalvelut tai Kuntokeskus Loiston treenimaailma.",
+    "Valitse T:mi Jari Kotkansalon hyvinvointipalvelut tai Kuntokeskus Loiston treenimaailma. Hollola & Vääksy.",
   openGraph: {
     title: "T:mi Jari Kotkansalo & Kuntokeskus Loisto",
     description:
@@ -39,9 +39,16 @@ export default function PortalPage() {
           <h1 className="portal-title">
             Minne <em>haluat</em> mennä?
           </h1>
+          <p className="portal-lead">
+            Valitse palvelu ja tutustu tarkemmin.
+          </p>
         </header>
 
         <PortalChoices />
+
+        <footer className="portal-foot">
+          <p>Hollola &amp; Vääksy · © {new Date().getFullYear()}</p>
+        </footer>
       </main>
     </div>
   );

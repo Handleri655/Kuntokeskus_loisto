@@ -10,6 +10,7 @@ type Choice = {
   kicker: string;
   name: string;
   text: string;
+  cta: string;
 };
 
 const choices: Choice[] = [
@@ -18,14 +19,16 @@ const choices: Choice[] = [
     className: "portal-choice portal-choice-jari",
     kicker: "Hyvinvointi & hoito",
     name: "T:mi Jari Kotkansalo",
-    text: "Fysioterapia · hieronta · Footbalance · PT",
+    text: "Fysioterapia · Hieronta · Footbalance · PT",
+    cta: "Tutustu palveluihin",
   },
   {
     href: "/koti",
     className: "portal-choice portal-choice-loisto",
     kicker: "Treeni & kuntosali",
     name: "Kuntokeskus Loisto",
-    text: "Sali · ryhmäliikunta · Aerial Bungee · PT",
+    text: "Kuntosali · Ryhmäliikunta · Aerial Bungee · PT",
+    cta: "Treenaa Loistossa",
   },
 ];
 
@@ -39,7 +42,7 @@ export function PortalChoices() {
       animate={reduce ? undefined : "show"}
       variants={{
         hidden: {},
-        show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+        show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
       }}
     >
       {choices.map((choice) => (
@@ -48,24 +51,24 @@ export function PortalChoices() {
           href={choice.href}
           className={choice.className}
           variants={{
-            hidden: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 },
+            hidden: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 },
             show: {
               opacity: 1,
               y: 0,
-              transition: { duration: 0.8, ease },
+              transition: { duration: 0.75, ease },
             },
           }}
-          whileHover={reduce ? undefined : { scale: 1.01 }}
-          transition={{ type: "spring", stiffness: 280, damping: 26 }}
+          whileHover={reduce ? undefined : { scale: 1.008 }}
+          transition={{ type: "spring", stiffness: 260, damping: 28 }}
         >
-          <motion.span className="portal-choice-bg" aria-hidden="true" />
+          <span className="portal-choice-bg" aria-hidden="true" />
           <span className="portal-choice-veil" aria-hidden="true" />
           <span className="portal-choice-content">
             <span className="portal-choice-kicker">{choice.kicker}</span>
             <span className="portal-choice-name">{choice.name}</span>
             <span className="portal-choice-text">{choice.text}</span>
             <span className="portal-choice-cta">
-              <span>Siirry sivustolle</span>
+              <span>{choice.cta}</span>
             </span>
           </span>
         </motion.a>
