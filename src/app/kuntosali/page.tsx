@@ -243,9 +243,6 @@ export default async function KuntosaliPage() {
                     {program.kehonkoostumus} (mittaus + palaute)
                   </li>
                 </ul>
-                <p className="mt-4 text-sm text-muted">
-                  Ohjelmahinnat hallinnasta (PT-välilehti).
-                </p>
               </HoverCard>
               <HoverCard className="panel panel-dark panel-pad">
                 <h3 className="font-display text-2xl font-semibold tracking-tight text-white">
