@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Sora } from "next/font/google";
+import { PortalChoices } from "@/components/PortalChoices";
 import "./portal.css";
 
 const portalDisplay = Fraunces({
@@ -40,40 +41,7 @@ export default function PortalPage() {
           </h1>
         </header>
 
-        <div className="portal-choices">
-          <a
-            className="portal-choice portal-choice-jari"
-            href="https://tmijarik.vercel.app/koti.html"
-          >
-            <span className="portal-choice-bg" aria-hidden="true" />
-            <span className="portal-choice-veil" aria-hidden="true" />
-            <span className="portal-choice-content">
-              <span className="portal-choice-kicker">Hyvinvointi &amp; hoito</span>
-              <span className="portal-choice-name">T:mi Jari Kotkansalo</span>
-              <span className="portal-choice-text">
-                Fysioterapia · hieronta · Footbalance · PT
-              </span>
-              <span className="portal-choice-cta">
-                <span>Siirry sivustolle</span>
-              </span>
-            </span>
-          </a>
-
-          <a className="portal-choice portal-choice-loisto" href="/koti">
-            <span className="portal-choice-bg" aria-hidden="true" />
-            <span className="portal-choice-veil" aria-hidden="true" />
-            <span className="portal-choice-content">
-              <span className="portal-choice-kicker">Treeni &amp; kuntosali</span>
-              <span className="portal-choice-name">Kuntokeskus Loisto</span>
-              <span className="portal-choice-text">
-                Sali · ryhmäliikunta · Aerial Bungee · PT
-              </span>
-              <span className="portal-choice-cta">
-                <span>Siirry sivustolle</span>
-              </span>
-            </span>
-          </a>
-        </div>
+        <PortalChoices />
       </main>
     </div>
   );

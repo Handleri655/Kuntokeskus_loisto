@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 import { getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
@@ -47,7 +48,7 @@ export default async function HinnatPage() {
           </Reveal>
 
           <Reveal delay={0.05}>
-            <div className="panel mt-10 overflow-x-auto">
+            <HoverCard className="panel mt-10 overflow-x-auto">
               <table className="data-table min-w-[820px] w-full text-left">
                 <thead>
                   <tr>
@@ -68,7 +69,7 @@ export default async function HinnatPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>
@@ -83,14 +84,14 @@ export default async function HinnatPage() {
             },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 0.04}>
-              <div className="panel panel-pad h-full">
+              <HoverCard className="panel panel-pad h-full">
                 <h2 className="font-display text-xl font-semibold tracking-tight">
                   {item.title}
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted">
                   {item.text}
                 </p>
-              </div>
+              </HoverCard>
             </Reveal>
           ))}
         </div>

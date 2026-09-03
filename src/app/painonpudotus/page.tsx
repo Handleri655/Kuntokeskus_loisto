@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 import { getPrices } from "@/lib/prices";
 
@@ -48,7 +49,7 @@ export default async function PainonpudotusPage() {
             },
           ].map((card, i) => (
             <Reveal key={card.title} delay={i * 0.05}>
-              <div className="panel panel-pad flex h-full flex-col">
+              <HoverCard className="panel panel-pad flex h-full flex-col">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                   {card.old}
                 </p>
@@ -61,7 +62,7 @@ export default async function PainonpudotusPage() {
                 <p className="mt-4 text-sm leading-relaxed text-muted">
                   {card.text}
                 </p>
-              </div>
+              </HoverCard>
             </Reveal>
           ))}
         </div>

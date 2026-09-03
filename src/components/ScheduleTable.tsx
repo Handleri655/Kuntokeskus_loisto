@@ -1,10 +1,13 @@
+"use client";
+
+import { HoverCard } from "@/components/HoverCard";
 import type { ScheduleDay } from "@/lib/schedules";
 
 export function ScheduleTable({ days }: { days: ScheduleDay[] }) {
   return (
     <div className="grid gap-5">
       {days.map((day) => (
-        <div key={day.day} className="panel overflow-hidden">
+        <HoverCard key={day.day} className="panel overflow-hidden">
           <div className="border-b border-[var(--line)] bg-[linear-gradient(90deg,rgba(212,168,75,0.12),transparent)] px-5 py-4 pl-6 md:px-7 md:pl-8">
             <h3 className="font-display text-2xl font-semibold tracking-tight md:text-[1.75rem]">
               {day.day}
@@ -37,7 +40,7 @@ export function ScheduleTable({ days }: { days: ScheduleDay[] }) {
               </li>
             ))}
           </ul>
-        </div>
+        </HoverCard>
       ))}
     </div>
   );

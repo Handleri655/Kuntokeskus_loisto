@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -75,7 +76,7 @@ export default function KangooPage() {
             </div>
           </Reveal>
           <Reveal delay={0.05}>
-            <div className="panel panel-pad">
+            <HoverCard className="panel panel-pad">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                 Kangoo Power
               </p>
@@ -86,7 +87,7 @@ export default function KangooPage() {
                 Intervallitunti, joka tuntuu kevyemmältä nivelille – mutta
                 treenaa kovaa.
               </p>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>
@@ -104,12 +105,15 @@ export default function KangooPage() {
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {benefits.map((item, i) => (
               <Reveal key={item} delay={Math.min(i * 0.02, 0.2)}>
-                <li className="panel px-5 py-4 text-sm leading-relaxed text-ink-soft">
+                <HoverCard
+                  subtle
+                  className="panel px-5 py-4 text-sm leading-relaxed text-ink-soft"
+                >
                   <span className="mr-2 font-semibold text-accent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {item}
-                </li>
+                </HoverCard>
               </Reveal>
             ))}
           </ul>

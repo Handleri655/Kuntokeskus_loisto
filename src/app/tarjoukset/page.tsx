@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 import { getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
@@ -31,7 +32,7 @@ export default async function TarjouksetPage() {
       <section className="section-pad">
         <div className="container-page grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <Reveal>
-            <div className="panel panel-pad">
+            <HoverCard className="panel panel-pad">
               <div className="flex flex-wrap items-center gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                   Tutustumistreenit
@@ -46,19 +47,19 @@ export default async function TarjouksetPage() {
               <p className="mt-3 text-muted leading-relaxed">{offers.trialNote}</p>
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
                 {offers.trialPrices.map((item) => (
-                  <div key={item.title} className="price-tile">
+                  <HoverCard key={item.title} className="price-tile">
                     <p className="text-sm text-muted">{item.title}</p>
                     <p className="font-display mt-2 text-3xl font-semibold tracking-tight">
                       {item.price}
                     </p>
-                  </div>
+                  </HoverCard>
                 ))}
               </div>
-            </div>
+            </HoverCard>
           </Reveal>
 
           <Reveal delay={0.06}>
-            <div className="panel panel-dark panel-pad">
+            <HoverCard className="panel panel-dark panel-pad">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-bright">
                 Personal Training
               </p>
@@ -80,7 +81,7 @@ export default async function TarjouksetPage() {
                   PT-palvelut
                 </Link>
               </div>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>
@@ -102,19 +103,19 @@ export default async function TarjouksetPage() {
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {offers.yearPrices.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.05}>
-                <div className="price-tile h-full">
+                <HoverCard className="price-tile h-full">
                   <p className="text-sm text-muted">{item.title}</p>
                   <p className="font-display mt-2 text-4xl font-semibold tracking-tight">
                     {item.price}
                   </p>
                   <p className="mt-3 text-sm text-muted">{item.note}</p>
-                </div>
+                </HoverCard>
               </Reveal>
             ))}
           </div>
 
           <Reveal delay={0.1}>
-            <div className="panel panel-pad mt-8 border-[#e8d59a] bg-[linear-gradient(135deg,#fff8e8,#ffffff_55%)]">
+            <HoverCard className="panel panel-pad mt-8 border-[#e8d59a] bg-[linear-gradient(135deg,#fff8e8,#ffffff_55%)]">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink">
                 Nyt kaupan päälle
               </p>
@@ -131,7 +132,7 @@ export default async function TarjouksetPage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>
@@ -139,7 +140,7 @@ export default async function TarjouksetPage() {
       <section className="section-pad">
         <div className="container-page grid gap-8 lg:grid-cols-2">
           <Reveal>
-            <div className="panel panel-pad h-full">
+            <HoverCard className="panel panel-pad h-full">
               <div className="flex flex-wrap items-center gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                   Aerial Bungee
@@ -166,11 +167,11 @@ export default async function TarjouksetPage() {
                   Ryhmäliikunta 16 h/vko
                 </Link>
               </div>
-            </div>
+            </HoverCard>
           </Reveal>
 
           <Reveal delay={0.05}>
-            <div className="panel panel-soft panel-pad h-full">
+            <HoverCard className="panel panel-soft panel-pad h-full">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                 Uutuuksia
               </p>
@@ -187,7 +188,7 @@ export default async function TarjouksetPage() {
                 Ryhmäliikuntaa aamu- ja iltatunteina – 16 h / vko. Superedut alk.{" "}
                 {headline.highlightKuntosali}.
               </p>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>
@@ -210,7 +211,7 @@ export default async function TarjouksetPage() {
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {offers.treatments.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.04}>
-                <div className="panel panel-pad h-full">
+                <HoverCard className="panel panel-pad h-full">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
                     {item.offer}
                   </p>
@@ -221,7 +222,7 @@ export default async function TarjouksetPage() {
                     {item.price}
                   </p>
                   <p className="mt-2 text-sm text-muted">{item.note}</p>
-                </div>
+                </HoverCard>
               </Reveal>
             ))}
           </div>
@@ -276,7 +277,7 @@ export default async function TarjouksetPage() {
             </div>
           </Reveal>
           <Reveal delay={0.05}>
-            <div className="panel overflow-hidden p-2">
+            <HoverCard className="panel overflow-hidden p-2">
               <div className="relative aspect-[3/4] overflow-hidden rounded-[1.1rem]">
                 <Image
                   src="/images/tarjoukset-flyer.png"
@@ -286,7 +287,7 @@ export default async function TarjouksetPage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>

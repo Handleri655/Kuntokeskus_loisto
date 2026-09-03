@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 
@@ -25,7 +26,7 @@ export default function JoogaPage() {
       <section className="section-pad">
         <div className="container-page grid gap-10 lg:grid-cols-2">
           <Reveal>
-            <div className="panel panel-pad">
+            <HoverCard className="panel panel-pad">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                 Maanantai
               </p>
@@ -43,10 +44,10 @@ export default function JoogaPage() {
                   liikkeitä.
                 </p>
               </div>
-            </div>
+            </HoverCard>
           </Reveal>
           <Reveal delay={0.06}>
-            <div className="panel panel-pad">
+            <HoverCard className="panel panel-pad">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                 Keskiviikko
               </p>
@@ -64,7 +65,7 @@ export default function JoogaPage() {
                   sovellettuina – jokainen voi valita sopivan version.
                 </p>
               </div>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>

@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 import { dutyHours, openingHours, site } from "@/lib/site";
 
@@ -24,7 +25,7 @@ export default function InfoPage() {
       <section className="section-pad">
         <div className="container-page grid gap-8 lg:grid-cols-2">
           <Reveal>
-            <div className="panel panel-pad">
+            <HoverCard className="panel panel-pad">
               <h2 className="font-display text-2xl font-semibold tracking-tight">
                 Päivystys paikalla
               </h2>
@@ -42,10 +43,10 @@ export default function InfoPage() {
               <p className="mt-4 text-sm text-muted">
                 Päivystys paikalla myös erikseen sovittaessa.
               </p>
-            </div>
+            </HoverCard>
           </Reveal>
           <Reveal delay={0.05}>
-            <div className="panel panel-dark panel-pad">
+            <HoverCard className="panel panel-dark panel-pad">
               <h2 className="font-display text-2xl font-semibold tracking-tight">
                 Yhteystiedot
               </h2>
@@ -80,7 +81,7 @@ export default function InfoPage() {
                   Avainkortilla treenaat {site.keycardHours} joka päivä
                 </li>
               </ul>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>
@@ -107,7 +108,7 @@ export default function InfoPage() {
             </div>
           </Reveal>
           <Reveal delay={0.05}>
-            <div className="panel panel-pad">
+            <HoverCard className="panel panel-pad">
               <h3 className="font-display text-xl font-semibold tracking-tight">
                 Aukioloajat
               </h3>
@@ -122,7 +123,7 @@ export default function InfoPage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>

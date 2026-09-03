@@ -1,9 +1,13 @@
+"use client";
+
+import { HoverCard } from "@/components/HoverCard";
 import type { ReactNode } from "react";
 
 type PanelProps = {
   children: ReactNode;
   className?: string;
   tone?: "light" | "dark" | "soft";
+  hover?: boolean;
 };
 
 const tones = {
@@ -16,6 +20,13 @@ export function Panel({
   children,
   className = "",
   tone = "light",
+  hover = true,
 }: PanelProps) {
-  return <div className={`${tones[tone]} ${className}`.trim()}>{children}</div>;
+  const classes = `${tones[tone]} ${className}`.trim();
+
+  if (!hover) {
+    return <div className={classes}>{children}</div>;
+  }
+
+  return <HoverCard className={classes}>{children}</HoverCard>;
 }

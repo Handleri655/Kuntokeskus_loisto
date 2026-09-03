@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function CrossTrainingPage() {
       <section className="section-pad">
         <div className="container-page grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <div className="panel panel-dark panel-pad">
+            <HoverCard className="panel panel-dark panel-pad">
               <p className="text-xs uppercase tracking-[0.2em] text-accent-bright">
                 Erillinen kurssi
               </p>
@@ -39,7 +40,7 @@ export default function CrossTrainingPage() {
                 Vetäjä: työfysioterapeutti–kuntohoitaja–personal trainer Jari ·
                 041-5077919
               </p>
-            </div>
+            </HoverCard>
           </Reveal>
           <Reveal delay={0.05}>
             <div className="prose-loisto">

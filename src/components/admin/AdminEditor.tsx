@@ -262,7 +262,7 @@ export function AdminEditor({
 
           <Card
             title="Jäsenyystaulukko"
-            description="Rivit sivulla /hinnat."
+            description="Näkyy /hinnat-sivulla ja /kuntosali-sivulla (kuntosali-sarake)."
           >
             {prices.membershipRows.map((row, index) => (
               <div
@@ -640,7 +640,7 @@ export function AdminEditor({
       {tab === "pt" ? (
         <Card
           title="Personal Training -hinnat"
-          description="Näkyvät /personal-training- ja /painonpudotus-sivuilla."
+          description="Näkyvät /personal-training-, /kuntosali- (ohjelmat & testit) ja /painonpudotus-sivuilla."
         >
           <div className="grid gap-4 md:grid-cols-2">
             {(
@@ -648,6 +648,8 @@ export function AdminEditor({
                 ["ohjelma1", "Ohjelma 1 pv"],
                 ["ohjelma2", "Ohjelma 2 pv"],
                 ["ohjelma3", "Ohjelma 3 pv"],
+                ["kuntotesti", "Kuntotesti"],
+                ["kehonkoostumus", "Kehonkoostumus"],
                 ["ruokavalio", "Ruokavalio"],
                 ["pt2", "PT 2×"],
                 ["pt5", "PT 5×"],
@@ -660,7 +662,7 @@ export function AdminEditor({
               <Field
                 key={key}
                 label={label}
-                value={prices.personalTraining[key]}
+                value={prices.personalTraining[key] ?? ""}
                 onChange={(value) =>
                   setPrices({
                     ...prices,

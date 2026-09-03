@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 import { ScheduleTable } from "@/components/ScheduleTable";
 import { getSchedules } from "@/lib/schedules";
@@ -72,7 +73,7 @@ export default async function RyhmaliikuntaPage() {
             </div>
           </Reveal>
           <Reveal delay={0.06}>
-            <div className="panel panel-pad">
+            <HoverCard className="panel panel-pad">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
                 Kesäohjelma
               </p>
@@ -89,7 +90,7 @@ export default async function RyhmaliikuntaPage() {
               >
                 Katso kesäohjelma
               </Link>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>

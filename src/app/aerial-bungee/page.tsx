@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -60,7 +61,7 @@ export default function AerialBungeePage() {
             </div>
           </Reveal>
           <Reveal delay={0.06}>
-            <div className="panel panel-dark panel-pad">
+            <HoverCard className="panel panel-dark panel-pad">
               <p className="text-xs uppercase tracking-[0.2em] text-accent-bright">
                 Tunnit & hinnat
               </p>
@@ -79,7 +80,7 @@ export default function AerialBungeePage() {
                   määräkortti 5× 75 € / 3× 60 €
                 </li>
               </ul>
-            </div>
+            </HoverCard>
           </Reveal>
         </div>
       </section>
@@ -135,15 +136,16 @@ export default function AerialBungeePage() {
             </h2>
             <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {videos.map((video) => (
-                <a
-                  key={video.href}
-                  href={video.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-xl border border-[var(--line)] bg-white px-5 py-4 text-sm font-medium transition hover:border-accent/40"
-                >
-                  {video.label} →
-                </a>
+                <HoverCard key={video.href} subtle>
+                  <a
+                    href={video.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-xl border border-[var(--line)] bg-white px-5 py-4 text-sm font-medium transition hover:border-accent/40"
+                  >
+                    {video.label} →
+                  </a>
+                </HoverCard>
               ))}
             </div>
           </Reveal>

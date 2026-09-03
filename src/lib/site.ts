@@ -16,7 +16,31 @@ export const site = {
   jariSite: "https://www.tmijarik.fi",
   keycardHours: "04–24",
   founded: "1992",
+  googleReviewsUrl:
+    "https://www.google.com/search?q=Kuntokeskus+Loisto+Hollola",
 } as const;
+
+/** Google-arvosteluja – näytetään ilman nimiä */
+export const googleReviews = [
+  {
+    text: "Tuttu ja rustiikkisen kodikas perinteinen sali.",
+  },
+  {
+    text: "Mukava ja asiantunteva henkilökunta. Hyvät uusitut laitteet ja siistit tilat.",
+  },
+  {
+    text: "Sopivan kokoinen sali ja sydämellinen omistaja.",
+  },
+  {
+    text: "Paikka rauhallinen ja mukava käydä.",
+  },
+  {
+    text: "Hyvää asiakaspalvelua!",
+  },
+  {
+    text: "Siisti ja kaikki tarvittava löytyy.",
+  },
+] as const;
 
 /** Top-level nav links (desktop) */
 export const nav = [

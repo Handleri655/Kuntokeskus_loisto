@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { MotionAnchor } from "@/components/MotionPress";
 import { nav, servicesNav, site } from "@/lib/site";
 
 export function Header() {
@@ -113,7 +114,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
+          <MotionAnchor
             href={site.phoneHref}
             className={`hidden rounded-full px-4 py-2.5 text-sm font-semibold transition md:inline-flex ${
               scrolled
@@ -122,7 +123,7 @@ export function Header() {
             }`}
           >
             {site.phone}
-          </a>
+          </MotionAnchor>
           <button
             type="button"
             className={`inline-flex h-11 w-11 items-center justify-center rounded-full border lg:hidden ${

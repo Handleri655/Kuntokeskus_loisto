@@ -1,10 +1,15 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
+import { HeroLine, HeroMotion } from "@/components/HeroMotion";
+import { HoverLink } from "@/components/HoverLink";
+import { MotionAnchor, MotionLink } from "@/components/MotionPress";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
+import { Stagger, StaggerItem } from "@/components/Stagger";
 import { getPrices } from "@/lib/prices";
-import { services, site, whyLoisto } from "@/lib/site";
+import { googleReviews, services, site, whyLoisto } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -22,46 +27,59 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative isolate min-h-[100svh] overflow-hidden bg-ink text-white">
-        <Image
-          src="/images/hero-gym.jpg"
-          alt="Kuntosaliharjoittelua Kuntokeskus Loistossa Hollolassa"
-          fill
-          priority
-          className="animate-drift object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="hero-veil absolute inset-0" />
-        <div className="grain absolute inset-0" />
-        <div className="container-page relative flex min-h-[100svh] flex-col justify-end pb-14 pt-32 md:pb-20">
-          <p className="eyebrow animate-rise text-accent-bright">
+      <HeroMotion
+        className="relative isolate min-h-[100svh] overflow-hidden bg-ink text-white"
+        contentClassName="container-page relative flex min-h-[100svh] flex-col justify-end pb-14 pt-32 md:pb-20"
+        image={
+          <Image
+            src="/images/hero-gym.jpg"
+            alt="Kuntosaliharjoittelua Kuntokeskus Loistossa Hollolassa"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        }
+      >
+        <HeroLine>
+          <p className="eyebrow text-accent-bright">
             Hollola · vuodesta {site.founded}
           </p>
-          <h1 className="animate-rise-delay-1 font-display mt-5 max-w-5xl text-[clamp(3.4rem,11vw,7.5rem)] font-semibold leading-[0.9] tracking-tight">
+        </HeroLine>
+        <HeroLine>
+          <h1 className="font-display mt-5 max-w-5xl text-[clamp(3.4rem,11vw,7.5rem)] font-semibold leading-[0.9] tracking-tight">
             Kuntokeskus
             <br />
             <span className="text-accent-bright">Loisto</span>
           </h1>
-          <p className="animate-rise-delay-2 mt-5 max-w-xl text-lg font-medium text-white/90 md:text-xl">
+        </HeroLine>
+        <HeroLine>
+          <p className="mt-5 max-w-xl text-lg font-medium text-white/90 md:text-xl">
             Kuntosali, ryhmäliikunta ja personal training Hollolassa
           </p>
-          <p className="animate-rise-delay-2 mt-3 max-w-lg text-base leading-relaxed text-white/75 md:text-lg">
+        </HeroLine>
+        <HeroLine>
+          <p className="mt-3 max-w-lg text-base leading-relaxed text-white/75 md:text-lg">
             Treenaa omalla tavalla – salilla, ryhmässä tai valmentajan kanssa.
           </p>
-          <p className="animate-rise-delay-2 mt-5 text-sm font-semibold tracking-wide text-accent-bright md:text-base">
+        </HeroLine>
+        <HeroLine>
+          <p className="mt-5 text-sm font-semibold tracking-wide text-accent-bright md:text-base">
             Alk. {prices.headline.highlightKuntosali} · Ei liittymismaksua ·
             Avainkortilla {site.keycardHours}
           </p>
-          <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
-            <Link href="/hinnat" className="btn-accent">
+        </HeroLine>
+        <HeroLine>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <MotionLink href="/hinnat" className="btn-accent">
               Katso hinnat
-            </Link>
-            <a href={site.phoneHref} className="btn-ghost">
+            </MotionLink>
+            <MotionAnchor href={site.phoneHref} className="btn-ghost">
               Aloita treenaaminen
-            </a>
+            </MotionAnchor>
           </div>
-        </div>
-      </section>
+        </HeroLine>
+      </HeroMotion>
 
       <section className="border-b border-[var(--line)] bg-white">
         <div className="container-page grid gap-5 py-7 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[var(--line)] md:py-8">
@@ -88,10 +106,10 @@ export default async function HomePage() {
             </h2>
           </Reveal>
 
-          <div className="mt-10 border-t border-[var(--line)]">
+          <Stagger className="mt-10 border-t border-[var(--line)]">
             {featured.map((service, i) => (
-              <Reveal key={service.href} delay={i * 0.04}>
-                <Link href={service.href} className="service-row group">
+              <StaggerItem key={service.href}>
+                <HoverLink href={service.href} className="service-row group">
                   <span className="service-index">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -106,10 +124,10 @@ export default async function HomePage() {
                   <span className="text-sm font-semibold text-accent transition group-hover:translate-x-1">
                     Avaa →
                   </span>
-                </Link>
-              </Reveal>
+                </HoverLink>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           <Reveal>
             <Link
@@ -130,9 +148,9 @@ export default async function HomePage() {
               Miksi juuri Loistoon?
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
+          <Stagger className="mt-10 grid gap-8 md:grid-cols-3" delay={0.05}>
             {whyLoisto.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.05}>
+              <StaggerItem key={item.title} hover>
                 <p className="font-display text-sm font-bold tracking-[0.16em] text-accent">
                   {String(i + 1).padStart(2, "0")}
                 </p>
@@ -140,9 +158,57 @@ export default async function HomePage() {
                   {item.title}
                 </h3>
                 <p className="mt-3 text-muted leading-relaxed">{item.text}</p>
-              </Reveal>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
+        </div>
+      </section>
+
+      <section className="section-pad bg-mist/30">
+        <div className="container-page">
+          <Reveal>
+            <p className="eyebrow text-accent">Google-arvostelut</p>
+            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
+              Mitä asiakkaat sanovat
+            </h2>
+            <p className="mt-4 max-w-xl text-muted leading-relaxed">
+              Poimintoja Googlen arvosteluista – nimet piilotettu.
+            </p>
+          </Reveal>
+
+          <Stagger
+            className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            delay={0.04}
+          >
+            {googleReviews.map((review) => (
+              <StaggerItem key={review.text} hover>
+                <HoverCard className="panel panel-pad h-full">
+                  <p
+                    className="font-display text-lg leading-none tracking-tight text-accent"
+                    aria-hidden="true"
+                  >
+                    ★★★★★
+                  </p>
+                  <p className="mt-4 text-ink-soft leading-relaxed">
+                    “{review.text}”
+                  </p>
+                </HoverCard>
+              </StaggerItem>
+            ))}
+          </Stagger>
+
+          <Reveal>
+            <div className="mt-8">
+              <MotionAnchor
+                href={site.googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full border border-[var(--line)] px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-white"
+              >
+                Lue lisää Googlella →
+              </MotionAnchor>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -166,12 +232,12 @@ export default async function HomePage() {
               Varaa edellisenä iltana klo 20 mennessä.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/ryhmaliikunta" className="btn-accent">
+              <MotionLink href="/ryhmaliikunta" className="btn-accent">
                 Viikko-ohjelma
-              </Link>
-              <Link href="/ryhmaliikunta/kesa" className="btn-ghost">
+              </MotionLink>
+              <MotionLink href="/ryhmaliikunta/kesa" className="btn-ghost">
                 Kesäohjelma
-              </Link>
+              </MotionLink>
             </div>
           </Reveal>
         </div>
@@ -190,31 +256,33 @@ export default async function HomePage() {
               Bungeen ja Cross Trainingin.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/tarjoukset" className="btn-accent">
+              <MotionLink href="/tarjoukset" className="btn-accent">
                 Katso tarjoukset
-              </Link>
-              <Link
+              </MotionLink>
+              <MotionLink
                 href="/hinnat"
                 className="inline-flex items-center justify-center rounded-full border border-[var(--line)] px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-mist"
               >
                 Hinnasto
-              </Link>
+              </MotionLink>
             </div>
           </Reveal>
           <Reveal delay={0.08}>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <Stagger className="grid gap-3 sm:grid-cols-3">
               {prices.homeHighlights.map((card) => (
-                <div key={card.title} className="price-tile">
-                  <p className="text-sm text-muted">{card.title}</p>
-                  <p className="font-display mt-3 text-3xl font-semibold tracking-tight">
-                    {card.price}
-                  </p>
-                  <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-muted">
-                    {card.note}
-                  </p>
-                </div>
+                <StaggerItem key={card.title} hover>
+                  <HoverCard className="price-tile h-full">
+                    <p className="text-sm text-muted">{card.title}</p>
+                    <p className="font-display mt-3 text-3xl font-semibold tracking-tight">
+                      {card.price}
+                    </p>
+                    <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-muted">
+                      {card.note}
+                    </p>
+                  </HoverCard>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </Reveal>
         </div>
       </section>

@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
+import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 import { getPrices } from "@/lib/prices";
 
@@ -42,7 +43,7 @@ export default async function PersonalTrainingPage() {
       <section className="section-pad">
         <div className="container-page grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <Reveal>
-            <div className="panel panel-dark panel-pad">
+            <HoverCard className="panel panel-dark panel-pad">
               <p className="text-xs uppercase tracking-[0.2em] text-accent-bright">
                 Hinnasto
               </p>
@@ -50,7 +51,7 @@ export default async function PersonalTrainingPage() {
                 <li>
                   <strong className="text-white">Kuntosali-/harjoitteluohjelma</strong>
                   <br />
-                  1 pvän jako {pt.ohjelma1} · 2 pvän {pt.ohjelma2} · 3 pvän{" "}
+                  1 päivän jako {pt.ohjelma1} · 2 päivän {pt.ohjelma2} · 3 päivän{" "}
                   {pt.ohjelma3}
                 </li>
                 <li>
@@ -77,7 +78,7 @@ export default async function PersonalTrainingPage() {
               >
                 Painonpudotus & intensiivi
               </Link>
-            </div>
+            </HoverCard>
           </Reveal>
           <Reveal delay={0.05}>
             <div className="prose-loisto">
@@ -114,12 +115,12 @@ export default async function PersonalTrainingPage() {
           <ol className="mt-10 grid gap-4 md:grid-cols-2">
             {reasons.map((reason, i) => (
               <Reveal key={reason} delay={Math.min(i * 0.03, 0.2)}>
-                <li className="panel panel-pad flex gap-4 text-lg leading-relaxed text-ink-soft md:text-xl">
+                <HoverCard className="panel panel-pad flex gap-4 text-lg leading-relaxed text-ink-soft md:text-xl">
                   <span className="font-display shrink-0 text-xl font-bold text-accent md:text-2xl">
                     {String.fromCharCode(65 + i)}.
                   </span>
                   <span>{reason}</span>
-                </li>
+                </HoverCard>
               </Reveal>
             ))}
           </ol>
