@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Tarjoukset",
   description:
-    "Hollolan halvimmat treenit – tutustumistreenit, vuoden superetu, PT-edut ja hoitosarjat Kuntokeskus Loistossa.",
+    "Tutustumistreenit, vuoden superetu, PT-edut ja hoitosarjat Kuntokeskus Loistossa Hollolassa. Kuntosali alk. 33 €/kk.",
 };
 
 export const dynamic = "force-dynamic";
@@ -22,7 +22,7 @@ export default async function TarjouksetPage() {
     <>
       <PageHero
         eyebrow="Tarjoukset"
-        title="Hollolan halvimmat treenit"
+        title="Tarjoukset Loistossa"
         lead="Tutustumistreenit, vuoden superetu, PT-edut ja hyvinvointitarjoukset – kaikki yhdestä paikasta."
         image="/images/hero-hinnat.jpg"
         imageAlt="Treenitarjoukset Kuntokeskus Loistossa"
@@ -280,7 +280,7 @@ export default async function TarjouksetPage() {
               <div className="relative aspect-[3/4] overflow-hidden rounded-[1.1rem]">
                 <Image
                   src="/images/tarjoukset-flyer.png"
-                  alt="Hollolan halvimmat treenit -tarjouslehti"
+                  alt="Kuntokeskus Loiston tarjouslehti"
                   fill
                   className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 50vw"

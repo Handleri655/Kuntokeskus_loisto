@@ -18,12 +18,19 @@ const body = Source_Sans_3({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} Oy | Hollola`,
+    default: "Kuntosali Hollola | Kuntokeskus Loisto",
     template: `%s | ${site.name}`,
   },
   description:
-    "Kuntokeskus Loisto – kuntosali, ryhmäliikunta, Aerial Bungee, PT, solarium ja hyvinvointipalvelut Hollolassa. Avainkortilla treenaat klo 04–24.",
+    "Kuntokeskus Loisto tarjoaa kuntosalin, ryhmäliikuntaa, Aerial Bungeeta, Cross Trainingia ja Personal Trainingia Hollolassa. Avainkortilla sali klo 04–24. Ei liittymismaksuja.",
   metadataBase: new URL("https://kuntokeskusloisto.fi"),
+  openGraph: {
+    title: "Kuntosali Hollola | Kuntokeskus Loisto",
+    description:
+      "Kuntosali, ryhmäliikunta ja personal training Hollolassa vuodesta 1992.",
+    locale: "fi_FI",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

@@ -1,11 +1,19 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Reveal } from "@/components/Reveal";
 import { getPrices } from "@/lib/prices";
-import { services, site } from "@/lib/site";
+import { services, site, whyLoisto } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Kuntosali Hollola | Kuntokeskus Loisto",
+  description:
+    "Kuntokeskus Loisto tarjoaa kuntosalin, ryhmäliikuntaa, Aerial Bungeeta, Cross Trainingia ja Personal Trainingia Hollolassa. Avainkortilla sali klo 04–24. Ei liittymismaksuja.",
+  alternates: { canonical: "/koti" },
+};
 
 const featured = services.slice(0, 4);
 
@@ -17,7 +25,7 @@ export default async function HomePage() {
       <section className="relative isolate min-h-[100svh] overflow-hidden bg-ink text-white">
         <Image
           src="/images/hero-gym.jpg"
-          alt="Kuntosaliharjoittelua Kuntokeskus Loistossa"
+          alt="Kuntosaliharjoittelua Kuntokeskus Loistossa Hollolassa"
           fill
           priority
           className="animate-drift object-cover object-center"
@@ -27,23 +35,29 @@ export default async function HomePage() {
         <div className="grain absolute inset-0" />
         <div className="container-page relative flex min-h-[100svh] flex-col justify-end pb-14 pt-32 md:pb-20">
           <p className="eyebrow animate-rise text-accent-bright">
-            Hollola · {site.founded}
+            Hollola · vuodesta {site.founded}
           </p>
-          <h1 className="animate-rise-delay-1 font-display mt-5 max-w-5xl text-[clamp(3.8rem,12vw,8rem)] font-semibold leading-[0.9] tracking-tight">
+          <h1 className="animate-rise-delay-1 font-display mt-5 max-w-5xl text-[clamp(3.4rem,11vw,7.5rem)] font-semibold leading-[0.9] tracking-tight">
             Kuntokeskus
             <br />
             <span className="text-accent-bright">Loisto</span>
           </h1>
-          <p className="animate-rise-delay-2 mt-6 max-w-md text-base leading-relaxed text-white/75 md:text-lg">
-            Treeniä ja hyvinvointia kaikenikäisille. Avainkortilla sali{" "}
-            {site.keycardHours}.
+          <p className="animate-rise-delay-2 mt-5 max-w-xl text-lg font-medium text-white/90 md:text-xl">
+            Kuntosali, ryhmäliikunta ja personal training Hollolassa
+          </p>
+          <p className="animate-rise-delay-2 mt-3 max-w-lg text-base leading-relaxed text-white/75 md:text-lg">
+            Treenaa omalla tavalla – salilla, ryhmässä tai valmentajan kanssa.
+          </p>
+          <p className="animate-rise-delay-2 mt-5 text-sm font-semibold tracking-wide text-accent-bright md:text-base">
+            Alk. {prices.headline.highlightKuntosali} · Ei liittymismaksua ·
+            Avainkortilla {site.keycardHours}
           </p>
           <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
-            <Link href="/tarjoukset" className="btn-accent">
-              Katso tarjoukset
+            <Link href="/hinnat" className="btn-accent">
+              Katso hinnat
             </Link>
             <a href={site.phoneHref} className="btn-ghost">
-              Soita {site.phone}
+              Aloita treenaaminen
             </a>
           </div>
         </div>
@@ -70,7 +84,7 @@ export default async function HomePage() {
           <Reveal>
             <p className="eyebrow text-accent">Palvelut</p>
             <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
-              Treeniä, joka tuntuu
+              Treenaa juuri sinulle sopivalla tavalla
             </h2>
           </Reveal>
 
@@ -108,10 +122,34 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="border-y border-[var(--line)] bg-white section-pad">
+        <div className="container-page">
+          <Reveal>
+            <p className="eyebrow text-accent">Miksi Loisto?</p>
+            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
+              Miksi juuri Loistoon?
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid gap-8 md:grid-cols-3">
+            {whyLoisto.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.05}>
+                <p className="font-display text-sm font-bold tracking-[0.16em] text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-muted leading-relaxed">{item.text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="relative min-h-[70vh] overflow-hidden bg-ink text-white md:min-h-[75vh]">
         <Image
           src="/images/group-fitness.jpg"
-          alt="Ryhmäliikuntaa"
+          alt="Ryhmäliikuntaa Kuntokeskus Loistossa"
           fill
           className="object-cover object-center"
           sizes="100vw"
@@ -142,15 +180,14 @@ export default async function HomePage() {
       <section className="section-pad bg-white">
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-end">
           <Reveal>
-            <p className="eyebrow text-accent">Tarjoukset</p>
+            <p className="eyebrow text-accent">Hinnat & tarjoukset</p>
             <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-5xl">
-              Hollolan
-              <br />
-              halvimmat treenit
+              Kuntosali alk.{" "}
+              <span className="text-accent">{prices.headline.highlightKuntosali}</span>
             </h2>
             <p className="mt-4 max-w-md text-muted leading-relaxed">
-              Superetu alk. {prices.headline.highlightKuntosali}. Fitness
-              sisältää salin, jumpata, Aerial Bungeen ja Cross Trainingin.
+              Ei liittymismaksuja. Fitness sisältää salin, jumpata, Aerial
+              Bungeen ja Cross Trainingin.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/tarjoukset" className="btn-accent">
@@ -183,8 +220,8 @@ export default async function HomePage() {
       </section>
 
       <ContactCTA
-        title="Tule treenaamaan"
-        text="Soita tai poikkea Keskuskatu 4:ään Hollolassa. Autamme alkuun."
+        title="Tule tutustumaan"
+        text="Soita tai poikkea Keskuskatu 4:ään Hollolassa. Autamme alkuun – ilman liittymismaksua."
       />
     </>
   );

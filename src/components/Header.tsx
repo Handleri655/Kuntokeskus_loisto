@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { moreNav, nav, site } from "@/lib/site";
+import { nav, servicesNav, site } from "@/lib/site";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -22,6 +23,10 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  const linkClass = scrolled
+    ? "text-ink-soft hover:bg-mist hover:text-ink"
+    : "text-white/85 hover:bg-white/10 hover:text-white";
 
   return (
     <header
@@ -52,45 +57,38 @@ export function Header() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
-          {nav.map((item) => (
+        <nav className="hidden items-center gap-0.5 lg:flex">
+          {nav.slice(0, 2).map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${
-                scrolled
-                  ? "text-ink-soft hover:bg-mist hover:text-ink"
-                  : "text-white/85 hover:bg-white/10 hover:text-white"
-              }`}
+              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${linkClass}`}
             >
               {item.label}
             </Link>
           ))}
+
           <div
             className="relative"
-            onMouseEnter={() => setMoreOpen(true)}
-            onMouseLeave={() => setMoreOpen(false)}
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
           >
             <button
               type="button"
-              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${
-                scrolled
-                  ? "text-ink-soft hover:bg-mist hover:text-ink"
-                  : "text-white/85 hover:bg-white/10 hover:text-white"
-              }`}
-              aria-expanded={moreOpen}
+              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${linkClass}`}
+              aria-expanded={servicesOpen}
             >
-              Lisää
+              Palvelut
             </button>
             <div
-              className={`absolute right-0 top-full min-w-[14rem] pt-2 transition ${
-                moreOpen
+              className={`absolute left-0 top-full min-w-[16rem] pt-2 transition ${
+                servicesOpen
                   ? "pointer-events-auto opacity-100"
                   : "pointer-events-none opacity-0"
               }`}
             >
               <div className="overflow-hidden rounded-2xl border border-[var(--line)] bg-white py-2 shadow-xl shadow-black/10">
-                {moreNav.map((item) => (
+                {servicesNav.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -102,6 +100,16 @@ export function Header() {
               </div>
             </div>
           </div>
+
+          {nav.slice(2).map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${linkClass}`}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -153,7 +161,7 @@ export function Header() {
         } overflow-hidden border-t border-[var(--line)] bg-[rgba(251,252,253,0.98)] transition-all duration-500`}
       >
         <div className="container-page flex max-h-[calc(100dvh-4.5rem)] flex-col gap-1 overflow-y-auto py-6 text-ink">
-          {[...nav, ...moreNav].map((item) => (
+          {nav.slice(0, 2).map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -163,6 +171,40 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+
+          <button
+            type="button"
+            className="flex items-center justify-between rounded-xl px-3 py-3 text-left font-medium text-ink-soft transition hover:bg-mist hover:text-ink"
+            onClick={() => setMobileServicesOpen((v) => !v)}
+            aria-expanded={mobileServicesOpen}
+          >
+            Palvelut
+            <span className="text-muted">{mobileServicesOpen ? "−" : "+"}</span>
+          </button>
+          {mobileServicesOpen
+            ? servicesNav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-xl px-6 py-2.5 text-ink-soft transition hover:bg-mist hover:text-ink"
+                >
+                  {item.label}
+                </Link>
+              ))
+            : null}
+
+          {nav.slice(2).map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-3 font-medium text-ink-soft transition hover:bg-mist hover:text-ink"
+            >
+              {item.label}
+            </Link>
+          ))}
+
           <a
             href={site.phoneHref}
             className="mt-3 inline-flex items-center justify-center rounded-full bg-ink px-5 py-3.5 font-semibold text-white"

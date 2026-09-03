@@ -18,26 +18,45 @@ export const site = {
   founded: "1992",
 } as const;
 
+/** Top-level nav links (desktop) */
 export const nav = [
   { href: "/kuntosali", label: "Kuntosali" },
   { href: "/ryhmaliikunta", label: "Ryhmäliikunta" },
-  { href: "/aerial-bungee", label: "Aerial Bungee" },
-  { href: "/personal-training", label: "PT" },
-  { href: "/tarjoukset", label: "Tarjoukset" },
   { href: "/hinnat", label: "Hinnat" },
-  { href: "/hyvinvointi", label: "Hyvinvointi" },
-  { href: "/info", label: "Info" },
+  { href: "/tarjoukset", label: "Tarjoukset" },
+  { href: "/loisto", label: "Meistä" },
+  { href: "/info", label: "Yhteystiedot" },
 ] as const;
 
-export const moreNav = [
+/** Services dropdown */
+export const servicesNav = [
+  { href: "/aerial-bungee", label: "Aerial Bungee" },
   { href: "/cross-training", label: "Cross Training" },
   { href: "/kangoo", label: "Kangoo Power / Jumps" },
-  { href: "/aanimaljarentoutus", label: "Äänimaljarentoutus" },
+  { href: "/personal-training", label: "Personal Training" },
   { href: "/jooga", label: "Jooga" },
+  { href: "/hyvinvointi", label: "Hyvinvointi" },
   { href: "/painonpudotus", label: "Painonpudotus" },
   { href: "/solarium", label: "Solarium" },
-  { href: "/jari", label: "Henkilökuva" },
-  { href: "/loisto", label: "Loisto" },
+  { href: "/aanimaljarentoutus", label: "Äänimaljarentoutus" },
+] as const;
+
+/** @deprecated use servicesNav — kept for any leftover imports */
+export const moreNav = servicesNav;
+
+export const whyLoisto = [
+  {
+    title: "Yli 30 vuotta Hollolassa",
+    text: `Kuntokeskus Loisto on palvellut Hollolassa vuodesta ${site.founded}. Paikallinen sali, jonka tunnet – ei ketjua.`,
+  },
+  {
+    title: "Monipuoliset treenimahdollisuudet",
+    text: "Kuntosali, ryhmäliikunta, Aerial Bungee, Cross Training, Kangoo ja PT samassa talossa Keskuskadulla.",
+  },
+  {
+    title: "Tukea tavoitteisiin",
+    text: "Et jää yksin. Jari Kotkansalon ohjauksella saat apua harjoitteluun, hyvinvointiin ja tavoitteidesi saavuttamiseen.",
+  },
 ] as const;
 
 export const dutyHours = [
@@ -62,31 +81,31 @@ export const services = [
   {
     href: "/aerial-bungee",
     title: "Aerial Bungee",
-    text: "Valjastreeniä, joka tuntuu vapaudelta.",
+    text: "Valjastreeniä Loistossa – keventää nivelet ja nostaa treenin uudelle tasolle.",
   },
   {
     href: "/cross-training",
     title: "Cross Training",
-    text: "Voimaa, kestävyyttä ja vartalon hallintaa.",
+    text: "Voimaa ja kestävyyttä ohjatusti. Sopii juuri sinulle, aloittelijasta edistyneeseen.",
   },
   {
     href: "/kangoo",
     title: "Kangoo Power / Jumps",
-    text: "Intervallitreeniä hyppykengillä – ainoana Hollolassa.",
+    text: "Hyppykenkätreeniä ainoana Hollolassa – tehokasta, nivelystävällistä ja hauskaa.",
   },
   {
     href: "/personal-training",
     title: "Personal Training",
-    text: "Yksilölliset ohjelmat ja tavoitteellinen ohjaus.",
+    text: "Jarin yksilöohjaus: fysioterapiaosaaminen ja treeniohjelma samassa paketissa.",
   },
   {
     href: "/aanimaljarentoutus",
     title: "Äänimaljarentoutus",
-    text: "Lempeää hyvinvointia äänien maailmassa.",
+    text: "Syvärentoutusta äänimaljoin – palautumiseen arjen keskellä.",
   },
   {
     href: "/kuntosali",
     title: "Kuntosali",
-    text: "Avainkortilla sali joka päivä klo 04–24.",
+    text: `Oma avainkortti, sali auki ${site.keycardHours}. Treenaa milloin sinulle sopii.`,
   },
 ] as const;

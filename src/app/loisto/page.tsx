@@ -6,18 +6,18 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Loisto",
+  title: "Meistä",
   description:
-    "Tutustu Kuntokeskus Loistoon – kuntosali, ryhmäliikunta, solarium, PT ja hyvinvointi Hollolassa.",
+    "Kuntokeskus Loisto on palvellut Hollolassa vuodesta 1992. Tutustu saliin, palveluihin ja Jari Kotkansalon osaamiseen.",
 };
 
 export default function LoistoPage() {
   return (
     <>
       <PageHero
-        eyebrow="Loisto"
-        title="Treenaa kovaa Hollolassa"
-        lead="Kuntosali · ryhmäliikunta · solarium · personal training · painonpudotus. Toimivat & viihtyisät tilat kunnon kohotukseen."
+        eyebrow="Meistä"
+        title="Hollolassa vuodesta 1992"
+        lead="Kuntosali · ryhmäliikunta · solarium · personal training · painonpudotus. Paikallinen kuntokeskus, jossa treenaat omalla tavallasi."
         image="/images/hero-gym.jpg"
         imageAlt="Kuntokeskus Loisto"
       />

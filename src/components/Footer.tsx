@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { moreNav, nav, openingHours, site } from "@/lib/site";
+import { nav, openingHours, servicesNav, site } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -11,7 +11,8 @@ export function Footer() {
           </div>
           <p className="mt-4 max-w-md text-white/70 leading-relaxed">
             Yksityinen kunto- ja aerobicsali Hollolan kuntakeskuksessa vuodesta{" "}
-            {site.founded}. Palveluita kaikenikäisille – yksin tai yhdessä.
+            {site.founded}. Kuntosali, ryhmäliikunta ja PT – paikallisesti,
+            ilman liittymismaksua.
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             {site.paymentMethods.map((method) => (
@@ -28,7 +29,7 @@ export function Footer() {
         <div>
           <h2 className="eyebrow text-white/45">Sivut</h2>
           <ul className="mt-4 grid gap-2 text-sm text-white/80">
-            {[...nav, ...moreNav.slice(0, 4)].map((item) => (
+            {[...nav, ...servicesNav.slice(0, 4)].map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="transition hover:text-white">
                   {item.label}

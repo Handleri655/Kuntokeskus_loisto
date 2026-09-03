@@ -4,9 +4,9 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Kuntosali",
+  title: "Kuntosali Hollola",
   description:
-    "Kuntosalipalvelut Hollolassa – yksilölliset ohjelmat, kuntotestaus ja avainkortilla treeni klo 04–24.",
+    "Kuntosali Hollolassa – Kuntokeskus Loisto. Yksilölliset ohjelmat, kuntotestaus ja avainkortilla treeni klo 04–24. Ei liittymismaksuja.",
 };
 
 export default function KuntosaliPage() {
