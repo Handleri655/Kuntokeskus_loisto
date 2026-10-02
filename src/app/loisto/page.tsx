@@ -28,15 +28,16 @@ export default function LoistoPage() {
           <Reveal>
             <div className="prose-loisto">
               <p>
-                Kuntokeskus Loisto Oy tarjoaa monipuoliset kuntoilutilat, joissa
-                voit treenata tehokkaasti haluamallasi tasolla. Kuntosalia
-                täydentää viihtyisä ryhmäliikuntasali, jossa on monipuolinen
-                tarjonta motivoivia ryhmäliikuntatunteja.
+                Aerodiggarit perustettiin vuonna 1992 ja toimii nykyään
+                Kuntokeskus Loisto -nimellä. Tarjoamme monipuoliset
+                kuntoilutilat, joissa voit treenata tehokkaasti
+                haluamallasi tasolla. Kuntosalia täydentää viihtyisä
+                ryhmäliikuntasali, jossa on monipuolinen tarjonta motivoivia
+                ryhmäliikuntatunteja.
               </p>
               <p>
                 Kuntokeskuksessamme on tila, jossa voit rentoutua treenien
-                välillä ja nauttia terveellisiä välipaloja – ja juoda vaikka
-                kahvit.
+                välillä. Ilmainen pysäköinti kuuluu asioiville.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
@@ -77,7 +78,7 @@ export default function LoistoPage() {
             },
             {
               title: "Kardiotreenejä & painonpudotusta",
-              text: "Juoksumatot, kuntopyörät, soutulaitteet, crosstrainerit ja stepper – sydänystävällistä treeniä kalorien polttoon.",
+              text: "Juoksumatot, kuntopyörät, soutulaitteet, crosstrainerit, stepper ja hiihtoergo – sydänystävällistä treeniä.",
             },
             {
               title: "Voimatreenejä & PT",

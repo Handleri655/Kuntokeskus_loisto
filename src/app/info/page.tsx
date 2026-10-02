@@ -170,9 +170,12 @@ export default function InfoPage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 rounded-[1.15rem] bg-[rgba(212,168,75,0.12)] px-4 py-4">
+              <div className="mt-6 rounded-[1.15rem] bg-[rgba(224,122,40,0.12)] px-4 py-4">
                 <p className="font-display text-lg font-semibold tracking-tight text-ink">
                   Avainkortilla treenaat {site.keycardHours} joka päivä.
+                </p>
+                <p className="mt-2 text-sm text-ink-soft">
+                  Sisään pitää olla {site.keycardEntryBy} mennessä.
                 </p>
               </div>
             </HoverCard>
@@ -216,8 +219,8 @@ export default function InfoPage() {
             </h2>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
               Avainkortilla pääset treenaamaan {site.keycardHours} joka päivä.
-              Päivystysaikoina henkilökuntamme on paikalla auttamassa ja
-              vastaamassa kysymyksiin.
+              Sisään tulee olla {site.keycardEntryBy} mennessä. Päivystysaikoina
+              henkilökuntamme on paikalla auttamassa ja vastaamassa kysymyksiin.
             </p>
           </Reveal>
           <Reveal delay={0.05}>

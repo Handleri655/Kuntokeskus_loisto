@@ -137,9 +137,10 @@ export default async function HinnatPage() {
               Valitse kortti
             </h2>
             <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
-              Suluissa opiskelijat, eläkeläiset ja työtön-hinta. Fitness-kortti
-              sisältää kuntosalin {site.keycardHours}, Aerial Bungee 55, Cross
-              Trainingin ja kaikki jumpata.
+              Fitness (yhdistelmä): työssäkäyvä, opiskelija, eläkeläinen ja
+              työtön – alennettu hinta suluissa. Fitness sisältää kuntosalin{" "}
+              {site.keycardHours}, Aerial Bungee 55, Cross Trainingin ja kaikki
+              jumpata.
             </p>
           </Reveal>
 

@@ -3,11 +3,12 @@ import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
 import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Cross Training",
   description:
-    "Cross Training -tunnit Kuntokeskus Loistossa – voimaa, kestävyyttä ja vartalon hallintaa.",
+    "Cross Training -tunnit Kuntokeskus Loistossa – voimaa, kestävyyttä ja vartalon hallintaa. Lauantaisin alk. klo 11.30.",
 };
 
 export default function CrossTrainingPage() {
@@ -16,7 +17,7 @@ export default function CrossTrainingPage() {
       <PageHero
         eyebrow="Cross Training"
         title="Tehokasta kierto­harjoittelua"
-        lead="Alk. 21.8.26 pe klo 16.45–17.45 (6× kurssi). Muista varata paikka – minimi 4 hlöä."
+        lead="Lauantaisin alk. klo 11.30–12.30 (2.10.26 alk.). Muista varata paikka."
         image="/images/training.jpg"
         imageAlt="Cross Training -treeni"
       />
@@ -26,9 +27,10 @@ export default function CrossTrainingPage() {
           <Reveal>
             <HoverCard className="panel panel-dark panel-pad">
               <p className="text-xs uppercase tracking-[0.2em] text-accent-bright">
-                Erillinen kurssi
+                Tunnit & hinta
               </p>
               <ul className="mt-5 space-y-3 text-white/85">
+                <li>Lauantai klo 11.30–12.30</li>
                 <li>Kertamaksu 14 €</li>
                 <li>6× kurssi 72 €</li>
                 <li>
@@ -37,8 +39,8 @@ export default function CrossTrainingPage() {
                 </li>
               </ul>
               <p className="mt-6 text-sm text-white/60">
-                Vetäjä: työfysioterapeutti–kuntohoitaja–personal trainer Jari ·
-                041-5077919
+                Vetäjä: työfysioterapeutti, kuntohoitaja ja personal trainer Jari
+                · {site.jariPhone}
               </p>
             </HoverCard>
           </Reveal>
@@ -57,8 +59,6 @@ export default function CrossTrainingPage() {
               <p>
                 Tavoitteena on parantaa fyysistä kuntoa monipuolisesti: voimaa,
                 kestävyyttä, nopeutta, notkeutta, koordinaatiota ja tasapainoa.
-                Harjoituksissa korostuvat korkean intensiteetin lyhytkestoiset
-                suoritukset ja jatkuvasti muuttuvat treenimuodot.
               </p>
             </div>
           </Reveal>
@@ -72,9 +72,12 @@ export default function CrossTrainingPage() {
               Mitä saat
             </h2>
             <ul className="prose-loisto mt-4">
-              <li>Kunto: lisää energiaa ja kestävyyttä arkeen</li>
-              <li>Voima: lihasvoimaa vaativien liikkeiden myötä</li>
-              <li>Kestävyyttä: sydän- ja verenkiertoelimistö kehittyy</li>
+              <li>
+                Saadut hyödyt auttavat arjessa sekä työelämässä – kuntoa, voimaa
+                ja jaksamista
+              </li>
+              <li>Yhteisöllisyys – treenaat yhdessä motivoivassa ryhmässä</li>
+              <li>Kunto: lisää energiaa ja kestävyyttä</li>
               <li>Monipuolisuus: laaja kirjo harjoitteita</li>
             </ul>
           </Reveal>
@@ -89,17 +92,15 @@ export default function CrossTrainingPage() {
                 tuloksekkaaseen harjoitteluun; aktiivitreenaajan kanssa voidaan
                 keskittyä tietyn osa-alueen kehittämiseen (Personal Training).
               </p>
-              <p>
-                Välineinä mm. kuminauhat, käsipainot, kahvakuulat, painotangot,
-                kuntosalilaitteet ja step-laudat. Core Board -harjoittelu tukee
-                vartalon hallintaa.
-              </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <ContactCTA title="Varaa paikka Cross Trainingiin" />
+      <ContactCTA
+        title="Varaa paikka Cross Trainingiin"
+        showMessageOptions
+      />
     </>
   );
 }

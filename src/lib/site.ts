@@ -4,8 +4,10 @@ export const site = {
   tagline: "Hollolan kuntokeskus vuodesta 1992",
   phone: "040-1402849",
   phoneHref: "tel:0401402849",
+  smsHref: "sms:0401402849",
   jariPhone: "041-5077919",
   jariPhoneHref: "tel:0415077919",
+  jariSmsHref: "sms:0415077919",
   email: "jari.kotkansalo@gmail.com",
   emailHref: "mailto:jari.kotkansalo@gmail.com",
   address: "Keskuskatu 4, 15870 Hollola",
@@ -14,7 +16,9 @@ export const site = {
   paymentMethods: ["Edenred", "E-passi", "Smartum"],
   bankAccount: "OP FI37 5311 0020 1134 71",
   jariSite: "https://www.tmijarik.fi",
+  nimenhuutoUrl: "https://aerodiggarit.nimenhuuto.com",
   keycardHours: "04–24",
+  keycardEntryBy: "klo 23",
   founded: "1992",
   googleReviewsUrl:
     "https://www.google.com/search?q=Kuntokeskus+Loisto+Hollola",
@@ -59,10 +63,10 @@ export const servicesNav = [
   { href: "/kangoo", label: "Kangoo Power / Jumps" },
   { href: "/personal-training", label: "Personal Training" },
   { href: "/jooga", label: "Jooga" },
+  { href: "/aanimaljarentoutus", label: "Äänimaljarentoutus" },
   { href: "/hyvinvointi", label: "Hyvinvointi" },
   { href: "/painonpudotus", label: "Painonpudotus" },
   { href: "/solarium", label: "Solarium" },
-  { href: "/aanimaljarentoutus", label: "Äänimaljarentoutus" },
 ] as const;
 
 /** @deprecated use servicesNav — kept for any leftover imports */
@@ -84,19 +88,19 @@ export const whyLoisto = [
 ] as const;
 
 export const dutyHours = [
-  { day: "Maanantai", hours: "09:45–12:00 & 15:00–17:15" },
-  { day: "Tiistai", hours: "17:00–20:30" },
-  { day: "Keskiviikko", hours: "14:00–17:00 & 19:15–20:30" },
-  { day: "Torstai", hours: "14:00–17:15" },
+  { day: "Maanantai", hours: "09:45–12:00 & 15:00–18:00" },
+  { day: "Tiistai", hours: "17:15–20:30" },
+  { day: "Keskiviikko", hours: "15:00–18:00 & 19:10–20:30" },
+  { day: "Torstai", hours: "15:00–18:00" },
   { day: "Perjantai", hours: "09:45–12:00" },
   { day: "Lauantai–Sunnuntai", hours: "Suljettu" },
 ] as const;
 
 export const openingHours = [
-  { day: "Maanantai", hours: "09:45–17:15" },
-  { day: "Tiistai", hours: "17:00–20:30" },
-  { day: "Keskiviikko", hours: "14:00–20:30" },
-  { day: "Torstai", hours: "14:00–17:15" },
+  { day: "Maanantai", hours: "09:45–12:00 & 15:00–18:00" },
+  { day: "Tiistai", hours: "17:15–20:30" },
+  { day: "Keskiviikko", hours: "15:00–18:00 & 19:10–20:30" },
+  { day: "Torstai", hours: "15:00–18:00" },
   { day: "Perjantai", hours: "09:45–12:00" },
   { day: "Lauantai–Sunnuntai", hours: "Suljettu" },
 ] as const;

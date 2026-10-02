@@ -23,6 +23,7 @@ const goals = [
   "parantaa kuntoa?",
   "saada selkeä harjoittelusuunnitelma?",
   "saada tukea ruokavalioon?",
+  "saada tukea elämäntavan muutokseen?",
   "päästä tavoitteisiin ammattilaisen avulla?",
 ] as const;
 
@@ -144,7 +145,8 @@ export default async function PainonpudotusPage() {
             <p className="mt-8 max-w-2xl leading-relaxed text-ink-soft">
               Tavoitteena on turvallinen ja pitkäjänteinen painonpudotus.
               Tavoitteet asetetaan yksilöllisesti – lähtötilanteesi ja arkesi
-              huomioiden.
+              huomioiden. Jari on suorittanut useita painonhallinnan
+              koulutuksia, mm. Xtrava Gansen -yhteistyössä.
             </p>
           </Reveal>
         </div>
@@ -289,9 +291,9 @@ export default async function PainonpudotusPage() {
 
       <ContactCTA
         title="Aloita painonpudotusohjelma"
-        text="Soita tai kysy sopivasta paketista. Mietitään yhdessä, millainen valmennus sopii juuri sinulle."
+        text="Tekstaa, soita tai lähetä sähköposti – kysy sopivasta paketista."
         primaryLabel="Aloita painonpudotusohjelma"
-        phoneSecondaryLabel={`Soita ${site.phone}`}
+        showMessageOptions
       />
     </>
   );

@@ -24,7 +24,7 @@ const highlights = [
   },
   {
     title: "Yksilöllinen ohjaus",
-    text: "Apua harjoitteluun ja laitteisiin tarvittaessa.",
+    text: "Yksilöllinen ohjaus, kuntotestaus ja kehonkoostumusmittaus.",
   },
   {
     title: "Monipuoliset välineet",

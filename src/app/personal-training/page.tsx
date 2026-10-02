@@ -77,9 +77,14 @@ export default async function PersonalTrainingPage() {
           </h1>
         </HeroLine>
         <HeroLine>
+          <p className="mt-3 text-sm font-semibold tracking-wide text-white/75 md:text-base">
+            Työfysioterapeutti · Kuntohoitaja · Personal trainer
+          </p>
+        </HeroLine>
+        <HeroLine>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-            Yksilöllistä valmennusta, joka auttaa sinua harjoittelemaan
-            tavoitteellisesti ja löytämään toimivan tavan liikkua.
+            Yksilöllistä valmennusta työfysioterapeutilta, kuntohoitajalta ja
+            personal trainerilta – tavoitteellisesti ja toimivasti.
           </p>
         </HeroLine>
         <HeroLine>
@@ -103,9 +108,8 @@ export default async function PersonalTrainingPage() {
             </h2>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
               Selvitetään lähtötilanteesi ja tehdään harjoittelusta
-              tavoitteellista. Kuntotesti voidaan suunnitella tavoitteidesi
-              mukaan ja sen perusteella voidaan laatia henkilökohtainen
-              harjoitteluohjelma.
+              tavoitteellista. Kuntotestin pohjalta voidaan laatia
+              henkilökohtainen harjoitteluohjelma.
             </p>
             <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
               Testiin voi kuulua esimerkiksi aerobisen kunnon testaus
@@ -149,7 +153,7 @@ export default async function PersonalTrainingPage() {
                 href={site.phoneHref}
                 className="btn-primary mt-8 w-full text-center"
               >
-                Kysy kuntotestistä
+                Kysy kuntotestistä – soita
               </MotionAnchor>
             </HoverCard>
           </Reveal>
@@ -216,7 +220,8 @@ export default async function PersonalTrainingPage() {
                   {pt.ruokavalio}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted">
-                  Sisältää laadinnan ja ohjausajan.
+                  Yksilöllisen ravinto-ohjelman laadinta asiakkaan tavoitteiden
+                  pohjalta. Sisältää laadinnan ja ohjausajan.
                 </p>
               </HoverCard>
             </Reveal>
@@ -336,8 +341,8 @@ export default async function PersonalTrainingPage() {
                   Ruokavalio
                 </h3>
                 <p className="mt-3 flex-1 leading-relaxed text-ink-soft">
-                  Ruokavalio-ohjelma tavoitteesi mukaan, laadinta ja
-                  ohjausaika mukana.
+                  Yksilöllisen ravinto-ohjelman laadinta asiakkaan tavoitteiden
+                  pohjalta.
                 </p>
                 <p className="font-display mt-5 text-2xl font-semibold tracking-tight">
                   {pt.ruokavalio}
@@ -377,9 +382,9 @@ export default async function PersonalTrainingPage() {
 
       <ContactCTA
         title="Otetaan seuraava askel yhdessä."
-        text="Varaa PT-tapaaminen tai kysy lisää. Mietitään yhdessä, millainen valmennus sopii juuri sinulle."
+        text="Tekstaa, soita tai lähetä sähköposti – mietitään yhdessä sopiva valmennus."
         primaryLabel="Varaa PT-tapaaminen"
-        phoneSecondaryLabel={`Soita ${site.phone}`}
+        showMessageOptions
       />
     </>
   );

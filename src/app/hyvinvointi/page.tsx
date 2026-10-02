@@ -33,7 +33,7 @@ const services = [
   },
   {
     title: "Fysioterapia & faskiakäsittely",
-    text: "Työfysioterapeutin käsittelyä ja faskiatyötä.",
+    text: "Työfysioterapeutin faskiakäsittelyä raudoilla tai käsin. Kela 15 € / hoito.",
   },
   {
     title: "Footbalance-pohjalliset",
@@ -260,12 +260,11 @@ export default async function HyvinvointiPage() {
 
       <ContactCTA
         title="Kaipaatko apua kehonhuoltoon?"
-        text="Varaa aika helposti puhelimitse tai kysy sopivasta palvelusta."
+        text="Tekstaa, soita tai lähetä sähköposti – kysy sopivasta palvelusta."
         primaryLabel={`Soita Jarille ${site.jariPhone}`}
         primaryHref={site.jariPhoneHref}
-        secondaryLabel="www.tmijarik.fi"
-        secondaryHref={site.jariSite}
-        secondaryExternal
+        showMessageOptions
+        smsHref={site.jariSmsHref}
         hideInfoLink
       />
     </>

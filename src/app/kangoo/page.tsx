@@ -20,24 +20,24 @@ export const dynamic = "force-dynamic";
 
 const benefits = [
   {
+    title: "Sydän & lihakset",
+    text: "Parantaa sydämen ja lihaksiston kestävyyttä.",
+  },
+  {
     title: "Tehokas treeni",
-    text: "Nosta sykettä ja harjoita koko kehoa.",
+    text: "Polttaa tehokkaasti kaloreita ja edistää rasvanpolttoa.",
   },
   {
-    title: "Kestävyyskunto",
-    text: "Kehitä aerobista kuntoa vauhdikkaalla intervalliharjoittelulla.",
+    title: "Kehonkoostumus",
+    text: "Tukee kehonkoostumusta ja lihasmassan kehitystä.",
   },
   {
-    title: "Koko keho töihin",
-    text: "Monipuoliset liikkeet haastavat useita lihasryhmiä.",
+    title: "Nivelystävällisempi liikkuminen",
+    text: "Jousitetut kengät pehmentävät iskua – treeni tuntuu pehmeämmältä myös hyppytunnilla.",
   },
   {
     title: "Koordinaatio",
     text: "Kehitä kehonhallintaa ja liikkeen hallintaa.",
-  },
-  {
-    title: "Nivelystävällisempi liikkuminen",
-    text: "Jousitettu kenkä tekee harjoittelusta erilaisen tavan liikkua.",
   },
   {
     title: "Ennen kaikkea hauskaa",
@@ -84,6 +84,7 @@ export default async function KangooPage() {
   const kerta = findMembershipPrice(prices.membershipRows, "Kertamaksu");
   const x10 = findMembershipPrice(prices.membershipRows, "10×-kortti");
   const month = findMembershipPrice(prices.membershipRows, "1 kk");
+  const year12 = findMembershipPrice(prices.membershipRows, "12 kk");
 
   return (
     <>
@@ -143,8 +144,10 @@ export default async function KangooPage() {
               Harjoittelu yhdistää sykettä nostavan aerobisen treenin, koko
               kehon liikkeet ja hauskan tekemisen.
             </p>
-            <p className="mt-4 text-sm font-semibold text-ink">
-              Ainoana Hollolassa.
+            <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
+              Kangoo Power -tunnilla on runsaasti terveysvaikutuksia. Jousitetut
+              kengät tekevät hyppytreenistä nivelystävällisempää – iskunvaimennus
+              on huomattavasti pehmeämpää kuin tavallisilla kengillä.
             </p>
           </Reveal>
           <Reveal delay={0.06}>
@@ -233,8 +236,9 @@ export default async function KangooPage() {
               Tunnit & hinnat
             </h2>
             <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
-              Kangoo kuuluu ryhmäliikuntaan. Hinnat ovat samat kuin
-              hinnastossa – ei erillistä Kangoo-lisämaksua.
+              Kangoo kuuluu ryhmäliikuntaan. 12 kk ryhmäliikunta alk.{" "}
+              {prices.headline.highlightRyhmaliikunta}
+              {year12 ? ` (${year12})` : ""}.
             </p>
           </Reveal>
 
@@ -383,9 +387,10 @@ export default async function KangooPage() {
 
       <ContactCTA
         title="Valmis kokeilemaan Kangooa?"
-        text="Kysy seuraavista tunneista ja tule kokeilemaan vauhdikasta treeniä Hollolassa."
-        primaryLabel="Kysy seuraavista tunneista"
-        phoneSecondaryLabel={`Soita ${site.phone}`}
+        text="Varaa paikka tunnille Nimenhuudossa tai soita / tekstaa."
+        primaryLabel="Varaa paikka tunnille"
+        primaryHref={site.nimenhuutoUrl}
+        showMessageOptions
       />
     </>
   );

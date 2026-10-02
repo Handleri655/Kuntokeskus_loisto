@@ -79,7 +79,7 @@ export default async function TarjouksetPage() {
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
                   Tutustumistreenit
                 </p>
-                <span className="inline-flex rounded-full bg-[rgba(212,168,75,0.25)] px-3 py-1 text-xs font-bold tracking-[0.12em] text-ink">
+                <span className="inline-flex rounded-full bg-[rgba(224,122,40,0.28)] px-4 py-1.5 text-sm font-bold tracking-[0.12em] text-ink md:text-base">
                   {offers.trialBadge}
                 </span>
               </div>
@@ -215,8 +215,8 @@ export default async function TarjouksetPage() {
               Trenditreenejä Hollolassa
             </h2>
             <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
-              Ryhmäliikuntaa aamu- ja iltatunteina – 16 h / vko. Superedut alk.{" "}
-              {headline.highlightKuntosali}.
+              Ryhmäliikuntaa aamu- ja iltatunteina – 16 h / vko. Ryhmäliikunta
+              alk. {headline.highlightRyhmaliikunta}.
             </p>
           </Reveal>
           <Stagger
@@ -299,7 +299,7 @@ export default async function TarjouksetPage() {
               Tarjouslehti
             </h2>
             <p className="mt-4 max-w-md leading-relaxed text-ink-soft">
-              Katso kaikki ajankohtaiset tarjoukset yhdestä tarjouslehdestä.
+              Katso viimeisimmän tarjouslehden kaikki ajankohtaiset edut.
             </p>
             <p className="mt-4 text-sm text-muted">
               {site.address} · {site.phone}

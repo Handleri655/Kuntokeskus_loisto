@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Äänimaljarentoutus Hollola",
   description:
-    "Äänimaljarentoutus Kuntokeskus Loistossa Hollolassa – perjantaisin klo 18–19. Jäsen 14 €, ei-jäsen 19 €. Varaa paikkasi.",
+    "Äänimaljarentoutus Kuntokeskus Loistossa Hollolassa – tiistaisin klo 17.30–18.30 (joka toinen tiistai). Jäsen 14 €, ei-jäsen 19 €.",
   alternates: { canonical: "/aanimaljarentoutus" },
 };
 
@@ -26,8 +26,8 @@ const expectations = [
 const steps = [
   {
     number: "01",
-    title: "Saavu ja asetu mukavasti",
-    text: "Makuulle alustalle tai istumaan – ota mukaan alusta, huopa ja tyyny.",
+    title: "Lämmin vaatetus päälle",
+    text: "Saavu ja asetu mukavasti – ota mukaan alusta, huopa ja tyyny. Pukeudu lämpimästi.",
   },
   {
     number: "02",
@@ -82,7 +82,7 @@ export default function AanimaljarentoutusPage() {
         </HeroLine>
         <HeroLine>
           <p className="mt-4 text-sm font-semibold tracking-wide text-accent-bright md:text-base">
-            Perjantaisin klo 18–19 · Jäsen 14 € · Ei-jäsen 19 €
+            Tiistaisin klo 17.30–18.30 · Jäsen 14 € · Ei-jäsen 19 €
           </p>
         </HeroLine>
         <HeroLine>
@@ -221,10 +221,10 @@ export default function AanimaljarentoutusPage() {
                   Aika & hinta
                 </p>
                 <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight">
-                  Perjantaisin klo 18–19
+                  Tiistaisin klo 17.30–18.30
                 </h3>
                 <p className="mt-2 text-sm text-white/60">
-                  Kuun viimeinen perjantai
+                  Joka toinen tiistai
                 </p>
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
                   <div>
@@ -283,10 +283,9 @@ export default function AanimaljarentoutusPage() {
 
       <ContactCTA
         title="Anna itsellesi tunti rauhaa"
-        text="Äänimaljarentoutus perjantaisin klo 18–19. Jäsenille 14 € · Ei-jäsenille 19 €."
+        text="Äänimaljarentoutus tiistaisin klo 17.30–18.30 (joka toinen tiistai). Jäsenille 14 € · Ei-jäsenille 19 €."
         primaryLabel="Varaa paikkasi"
-        secondaryLabel="Lähetä sähköposti"
-        secondaryHref={site.emailHref}
+        showMessageOptions
       />
     </>
   );

@@ -287,7 +287,7 @@ export default function AerialBungeePage() {
                 <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight">
                   Aerial Bungee 55
                 </h3>
-                <p className="mt-3 text-ink-soft">Pe 18–18.55</p>
+                <p className="mt-3 text-ink-soft">Pe 18.45–19.40</p>
                 <p className="mt-2 text-sm text-muted">
                   Alkeet / keskitaso. Fitness-kortilla tai määräkortilla.
                 </p>

@@ -25,11 +25,11 @@ const yearRound = [
 ] as const;
 
 const firstVisit = [
-  "Suositeltu ensimmäinen aika: 5 min",
+  "Käyttöaika 5–20 min riippuen ihotyypistä.",
+  "Solariumissa on ajastin – valitse hoitopituus laitteen ohjeiden mukaan.",
   "Poista kosmetiikka ennen solariumin käyttöä.",
   "Puhdista makuualusta, tyyny ja suojalasit ohjeiden mukaan.",
   "Käytä aina asianmukaisia suojalaseja.",
-  "Noudata laitteen käyttöohjeita ja suositeltuja käyttöaikoja.",
 ] as const;
 
 const safety = [
@@ -54,7 +54,7 @@ const safety = [
 const faq = [
   {
     q: "Kauanko ensimmäinen solariumkerta kestää?",
-    a: "Suosittelemme ensimmäiseksi kerraksi noin 5 minuuttia.",
+    a: "Ensimmäiseksi kerraksi suosittelemme lyhyttä aikaa. Käyttöaika on yleensä 5–20 minuuttia ihotyypistä riippuen – solariumissa on ajastin.",
   },
   {
     q: "Tarvitsenko omat suojalasit?",
