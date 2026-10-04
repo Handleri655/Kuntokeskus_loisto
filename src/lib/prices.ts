@@ -25,6 +25,18 @@ export type TreatmentItem = {
   note: string;
 };
 
+export type ServicePrices = {
+  aerialIntensivi: string;
+  aerial5x: string;
+  aerial3x: string;
+  crossKerta: string;
+  cross6x: string;
+  aanimaljaMember: string;
+  aanimaljaGuest: string;
+  painonpudotusIntensiivi: string;
+  painonpudotusDuo: string;
+};
+
 export type PricesData = {
   updatedAt: string;
   headline: {
@@ -68,28 +80,106 @@ export type PricesData = {
     kehonkoostumus?: string;
   };
   homeHighlights: PriceItem[];
+  /** Palvelusivujen erillishinnat (Aerial, Cross, äänimalja jne.) */
+  servicePrices: ServicePrices;
+  /** Ryhmäliikuntasivun esittelyteksti */
+  ryhmaliikuntaInfo: RyhmaliikuntaInfo;
+};
+
+export type RyhmaliikuntaInfo = {
+  intro: string;
+  classes: string[];
+  outro: string;
 };
 
 const STORAGE_KEY = "loisto:prices";
 const SEED_FILE = "data/prices.json";
 
+export const defaultServicePrices: ServicePrices = {
+  aerialIntensivi: "32 €",
+  aerial5x: "75 €",
+  aerial3x: "60 €",
+  crossKerta: "14 €",
+  cross6x: "72 €",
+  aanimaljaMember: "14 €",
+  aanimaljaGuest: "19 €",
+  painonpudotusIntensiivi: "360 €/hlö",
+  painonpudotusDuo: "315 €/hlö",
+};
+
+export const defaultRyhmaliikuntaInfo: RyhmaliikuntaInfo = {
+  intro:
+    "Jumpata pidetään 4:llä, Aerial Bungee 3:lla ja joogat 6:lla. Varaus & peruutus viimeistään edellisenä iltana klo 20 mennessä. Ilmoittaudu Nimenhuudossa tai lähetä nimi & sähköposti tekstiviestillä numeroon 040-1402849.",
+  classes: [
+    "Hatha-jooga 75 ma 19.15–20.30 & Voima-jooga 60 ke 19.15–20.15",
+    "Cross Training la 11.30–12.30 (2.10. alk.)",
+    "HIIT+Core 45 & Kahvakuula 45 pe 16.45–17.30 / 17.40–18.25",
+    "Aerial Bungee intensiivi 75 to 19.15–20.30 – 32 €",
+    "Aerial Bungee 55 pe 18.45–19.40 – Fitness-kortilla mukaan",
+    "Äänimaljarentoutus ti 17.30–18.30 (joka toinen tiistai)",
+  ],
+  outro:
+    "Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen. Fitness sisältää kuntosalin 4–24 + jumpata + Aerial Bungee 55 + Cross Training + joogat. Ryhmäliikunta sisältää jumpata + Kangoo Jumps + joogat.",
+};
+
+type StoredPrices = Omit<PricesData, "servicePrices" | "ryhmaliikuntaInfo"> & {
+  servicePrices?: Partial<ServicePrices> | null;
+  ryhmaliikuntaInfo?: Partial<RyhmaliikuntaInfo> | null;
+};
+
+export function normalizePrices(data: StoredPrices): PricesData {
+  const info = data.ryhmaliikuntaInfo ?? {};
+  return {
+    ...data,
+    servicePrices: {
+      ...defaultServicePrices,
+      ...(data.servicePrices ?? {}),
+    },
+    ryhmaliikuntaInfo: {
+      intro: info.intro ?? defaultRyhmaliikuntaInfo.intro,
+      classes: Array.isArray(info.classes)
+        ? info.classes
+        : defaultRyhmaliikuntaInfo.classes,
+      outro: info.outro ?? defaultRyhmaliikuntaInfo.outro,
+    },
+  };
+}
+
+/** @deprecated use normalizePrices */
+export function withServicePrices(data: StoredPrices): PricesData {
+  return normalizePrices(data);
+}
+
 export async function getPrices(): Promise<PricesData> {
-  return readStoredJson<PricesData>(STORAGE_KEY, SEED_FILE);
+  const data = await readStoredJson<StoredPrices>(STORAGE_KEY, SEED_FILE);
+  return normalizePrices(data);
 }
 
 export async function savePrices(data: PricesData): Promise<PricesData> {
   const program = getGymProgramPrices(data.personalTraining);
+  const normalized = normalizePrices(data);
+  const { servicePrices, ryhmaliikuntaInfo } = normalized;
   const extras = data.extras.map((item) => {
-    if (!/ohjelmat/i.test(item.title)) return item;
-    return {
-      ...item,
-      text: `Kuntosaliohjelma ${program.ohjelma1} / ${program.ohjelma2} / ${program.ohjelma3} · kuntotesti ${program.kuntotesti} · kehonkoostumus ${program.kehonkoostumus}`,
-    };
+    if (/ohjelmat/i.test(item.title)) {
+      return {
+        ...item,
+        text: `Kuntosaliohjelma ${program.ohjelma1} / ${program.ohjelma2} / ${program.ohjelma3} · kuntotesti ${program.kuntotesti} · kehonkoostumus ${program.kehonkoostumus}`,
+      };
+    }
+    if (/aerial/i.test(item.title)) {
+      return {
+        ...item,
+        text: `Alkeet/perusteet 75 min ${servicePrices.aerialIntensivi} · 5×55 min ${servicePrices.aerial5x} · 3×55 min ${servicePrices.aerial3x}`,
+      };
+    }
+    return item;
   });
 
   const next: PricesData = {
     ...data,
     extras,
+    servicePrices,
+    ryhmaliikuntaInfo,
     personalTraining: {
       ...data.personalTraining,
       kuntotesti: program.kuntotesti,

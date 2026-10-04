@@ -18,8 +18,8 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <HeroMotion
-      className="relative isolate min-h-[62vh] overflow-hidden bg-ink text-white md:min-h-[70vh]"
-      contentClassName="container-page relative flex min-h-[62vh] flex-col justify-end pb-12 pt-28 md:min-h-[70vh] md:pb-16"
+      className="relative isolate min-h-[52vh] overflow-hidden bg-ink text-white md:min-h-[60vh]"
+      contentClassName="container-page relative flex min-h-[52vh] flex-col justify-end pb-10 pt-28 md:min-h-[60vh] md:pb-14"
       image={
         <Image
           src={image}
@@ -37,7 +37,7 @@ export function PageHero({
         </HeroLine>
       ) : null}
       <HeroLine>
-        <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.6rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-tight">
+        <h1 className="font-display mt-3 max-w-3xl text-[clamp(2.1rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight">
           {title}
         </h1>
       </HeroLine>

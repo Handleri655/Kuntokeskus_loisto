@@ -3,6 +3,7 @@ import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
 import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
+import { getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -11,7 +12,11 @@ export const metadata: Metadata = {
     "Cross Training -tunnit Kuntokeskus Loistossa – voimaa, kestävyyttä ja vartalon hallintaa. Lauantaisin alk. klo 11.30.",
 };
 
-export default function CrossTrainingPage() {
+export const dynamic = "force-dynamic";
+
+export default async function CrossTrainingPage() {
+  const { servicePrices } = await getPrices();
+
   return (
     <>
       <PageHero
@@ -31,8 +36,8 @@ export default function CrossTrainingPage() {
               </p>
               <ul className="mt-5 space-y-3 text-white/85">
                 <li>Lauantai klo 11.30–12.30</li>
-                <li>Kertamaksu 14 €</li>
-                <li>6× kurssi 72 €</li>
+                <li>Kertamaksu {servicePrices.crossKerta}</li>
+                <li>6× kurssi {servicePrices.cross6x}</li>
                 <li>
                   Fitness-kuukausikortilla mukaan ilmaiseksi (vähintään 3 kk
                   kortti)

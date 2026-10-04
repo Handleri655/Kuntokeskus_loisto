@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
@@ -52,8 +52,8 @@ export default async function PersonalTrainingPage() {
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[78vh] overflow-hidden bg-ink text-white md:min-h-[85vh]"
-        contentClassName="container-page relative flex min-h-[78vh] flex-col justify-end pb-12 pt-28 md:min-h-[85vh] md:pb-16"
+        className="relative isolate min-h-[54vh] overflow-hidden bg-ink text-white md:min-h-[62vh]"
+        contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
             src="/images/training.jpg"
@@ -71,7 +71,7 @@ export default async function PersonalTrainingPage() {
           </p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.4rem,6.5vw,4.75rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight">
             Valmentajasi{" "}
             <span className="text-accent-bright">Jari</span>
           </h1>

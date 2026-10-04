@@ -1,90 +1,165 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { ScheduleEditor } from "@/components/admin/ScheduleEditor";
-import { Card, Field, TextArea } from "@/components/admin/fields";
+import { useEffect, useMemo, useState } from "react";
+import { FlyerImageEditor } from "@/components/admin/FlyerImageEditor";
+import { MembershipPricesEditor } from "@/components/admin/MembershipPricesEditor";
+import { Card, Field, ItemBox, TextArea } from "@/components/admin/fields";
 import type { PricesData } from "@/lib/prices";
-import type { SchedulesData } from "@/lib/schedules";
 
 type Props = {
   initialPrices: PricesData;
-  initialSchedules: SchedulesData;
   storageMode: "cloud" | "file";
 };
 
-type TabId =
-  | "hinnasto"
-  | "tarjoukset"
-  | "pt"
-  | "syksy"
-  | "kesa";
+type TabId = "hinnasto" | "tarjoukset" | "pt" | "palvelut" | "ryhmaliikunta";
 
-const tabs: { id: TabId; label: string; hint: string }[] = [
-  { id: "hinnasto", label: "Hinnasto", hint: "Kortit ja lisähinnat" },
-  { id: "tarjoukset", label: "Tarjoukset", hint: "Kampanjat ja edut" },
-  { id: "pt", label: "PT-hinnat", hint: "Personal training" },
-  { id: "syksy", label: "Tunnit (syksy)", hint: "Viikko-ohjelma" },
-  { id: "kesa", label: "Tunnit (kesä)", hint: "Kesäohjelma" },
+const tabs: { id: TabId; label: string }[] = [
+  { id: "hinnasto", label: "Hinnasto" },
+  { id: "tarjoukset", label: "Tarjoukset" },
+  { id: "pt", label: "PT-hinnat" },
+  { id: "palvelut", label: "Palveluhinnat" },
+  { id: "ryhmaliikunta", label: "Ryhmäliikunta" },
 ];
+
+const ptFields = [
+  ["ohjelma1", "Treeniohjelma 1 pv/vko"],
+  ["ohjelma2", "Treeniohjelma 2 pv/vko"],
+  ["ohjelma3", "Treeniohjelma 3 pv/vko"],
+  ["kuntotesti", "Kuntotesti"],
+  ["kehonkoostumus", "Kehonkoostumusmittaus"],
+  ["ruokavalio", "Ravinto-ohjelma"],
+  ["pt2", "PT 2 kertaa"],
+  ["pt5", "PT 5 kertaa"],
+  ["pt10", "PT 10 kertaa"],
+  ["pt10Offer", "PT 10 kertaa, tarjoushinta"],
+  ["pt15", "PT 15 kertaa"],
+  ["pt15Offer", "PT 15 kertaa, tarjoushinta"],
+] as const;
+
+const servicePriceFields = [
+  ["aerialIntensivi", "Aerial Bungee intensiivi 75 min"],
+  ["aerial5x", "Aerial Bungee 5× 55 min"],
+  ["aerial3x", "Aerial Bungee 3× 55 min"],
+  ["crossKerta", "Cross Training kertamaksu"],
+  ["cross6x", "Cross Training 6× kurssi"],
+  ["aanimaljaMember", "Äänimaljarentoutus, jäsen"],
+  ["aanimaljaGuest", "Äänimaljarentoutus, ei-jäsen"],
+  ["painonpudotusIntensiivi", "Painonpudotus PT intensiivi 5×"],
+  ["painonpudotusDuo", "Painonpudotus duo-tarjous"],
+] as const;
+
+const SAVED_FLASH_KEY = "loisto-admin-saved-at";
+const SAVED_FLASH_MS = 10000;
+
+function Feedback({
+  status,
+  error,
+}: {
+  status: string | null;
+  error: string | null;
+}) {
+  if (error) {
+    return (
+      <p
+        role="alert"
+        className="rounded-xl border border-signal/25 bg-[rgba(212,84,42,0.1)] px-4 py-3 text-sm font-semibold text-signal"
+      >
+        Tallennus epäonnistui: {error}
+      </p>
+    );
+  }
+  if (status) {
+    return (
+      <p
+        role="status"
+        className="rounded-xl border border-emerald-400 bg-emerald-100 px-4 py-3 text-sm font-semibold text-emerald-900"
+      >
+        {status}
+      </p>
+    );
+  }
+  return null;
+}
 
 export function AdminEditor({
   initialPrices,
-  initialSchedules,
   storageMode,
 }: Props) {
   const [prices, setPrices] = useState(initialPrices);
-  const [schedules, setSchedules] = useState(initialSchedules);
+  const [savedPrices, setSavedPrices] = useState(initialPrices);
   const [tab, setTab] = useState<TabId>("hinnasto");
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [justSaved, setJustSaved] = useState(false);
+
+  const dirty = useMemo(
+    () => JSON.stringify(prices) !== JSON.stringify(savedPrices),
+    [prices, savedPrices],
+  );
 
   const updatedLabel = useMemo(() => {
     try {
-      const latest = Math.max(
-        new Date(prices.updatedAt).getTime(),
-        new Date(schedules.updatedAt).getTime(),
-      );
-      return new Date(latest).toLocaleString("fi-FI");
+      return new Date(prices.updatedAt).toLocaleString("fi-FI");
     } catch {
       return prices.updatedAt;
     }
-  }, [prices.updatedAt, schedules.updatedAt]);
+  }, [prices.updatedAt]);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem(SAVED_FLASH_KEY);
+    if (!raw) return;
+    const savedAt = Number(raw);
+    if (Number.isFinite(savedAt) && Date.now() - savedAt < SAVED_FLASH_MS) {
+      setJustSaved(true);
+      setStatus("Tallennus onnistui. Muutokset näkyvät sivuilla heti.");
+    } else {
+      sessionStorage.removeItem(SAVED_FLASH_KEY);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!status && !justSaved) return;
+    const remaining = (() => {
+      const raw = sessionStorage.getItem(SAVED_FLASH_KEY);
+      const savedAt = raw ? Number(raw) : Date.now();
+      return Math.max(0, SAVED_FLASH_MS - (Date.now() - savedAt));
+    })();
+    const timer = window.setTimeout(() => {
+      setStatus(null);
+      setJustSaved(false);
+      sessionStorage.removeItem(SAVED_FLASH_KEY);
+    }, remaining || SAVED_FLASH_MS);
+    return () => window.clearTimeout(timer);
+  }, [status, justSaved]);
 
   async function save() {
+    sessionStorage.setItem(SAVED_FLASH_KEY, String(Date.now()));
     setSaving(true);
     setStatus(null);
     setError(null);
+    setJustSaved(false);
     try {
-      const [pricesRes, schedulesRes] = await Promise.all([
-        fetch("/api/prices", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(prices),
-        }),
-        fetch("/api/schedules", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(schedules),
-        }),
-      ]);
+      const pricesRes = await fetch("/api/prices", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(prices),
+      });
 
       const pricesData = await pricesRes.json();
-      const schedulesData = await schedulesRes.json();
 
       if (!pricesRes.ok) {
         throw new Error(pricesData.error || "Hintojen tallennus epäonnistui");
       }
-      if (!schedulesRes.ok) {
-        throw new Error(
-          schedulesData.error || "Aikataulun tallennus epäonnistui",
-        );
-      }
 
+      sessionStorage.setItem(SAVED_FLASH_KEY, String(Date.now()));
       setPrices(pricesData);
-      setSchedules(schedulesData);
-      setStatus("Tallennettu. Muutokset näkyvät sivuilla heti.");
+      setSavedPrices(pricesData);
+      setJustSaved(true);
+      setStatus("Tallennus onnistui. Muutokset näkyvät sivuilla heti.");
     } catch (err) {
+      sessionStorage.removeItem(SAVED_FLASH_KEY);
+      setJustSaved(false);
       setError(err instanceof Error ? err.message : "Virhe tallennuksessa");
     } finally {
       setSaving(false);
@@ -98,27 +173,29 @@ export function AdminEditor({
 
   return (
     <div className="pb-10">
-      <div className="sticky top-[4.5rem] z-40 -mx-1 mb-6 border-b border-[var(--line)] bg-[rgba(243,245,247,0.92)] px-1 py-4 backdrop-blur-xl md:top-[5.25rem]">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+      <div className="sticky top-[4.5rem] z-40 -mx-1 mb-6 border-b border-[var(--line)] bg-[rgba(251,252,253,0.94)] px-1 py-4 backdrop-blur-xl md:top-[5.25rem]">
+        <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+            <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
               Hallinta
-            </p>
-            <h1 className="font-display mt-1 text-2xl font-semibold tracking-tight md:text-3xl">
-              Sivuston sisältö
             </h1>
             <p className="mt-1 text-sm text-muted">
-              Viimeksi tallennettu: {updatedLabel}
+              Viimeksi tallennettu {updatedLabel}
+              {dirty ? (
+                <span className="ml-2 font-semibold text-accent">
+                  · tallentamattomia muutoksia
+                </span>
+              ) : null}
             </p>
             <p
               className={`mt-2 inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
                 storageMode === "cloud"
-                  ? "bg-[rgba(31,138,127,0.12)] text-accent"
+                  ? "bg-emerald-50 text-emerald-800"
                   : "bg-[#ffe8c8] text-[#8a5a00]"
               }`}
             >
               {storageMode === "cloud"
-                ? "Pilvitallennus käytössä (Upstash)"
+                ? "Pilvitallennus käytössä"
                 : "Paikallinen tallennus – lisää Upstash tuotantoon"}
             </p>
           </div>
@@ -127,9 +204,11 @@ export function AdminEditor({
               type="button"
               onClick={save}
               disabled={saving}
-              className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60 ${
+                justSaved ? "bg-emerald-600" : "bg-accent"
+              }`}
             >
-              {saving ? "Tallennetaan…" : "Tallenna"}
+              {saving ? "Tallennetaan…" : justSaved ? "Tallennettu" : "Tallenna"}
             </button>
             <button
               type="button"
@@ -141,55 +220,41 @@ export function AdminEditor({
           </div>
         </div>
 
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+        {status || error ? (
+          <div className="mt-3">
+            <Feedback status={status} error={error} />
+          </div>
+        ) : null}
+
+        <div className="mt-4 flex gap-1 overflow-x-auto pb-1">
           {tabs.map((item) => (
             <button
               key={item.id}
               type="button"
-              onClick={() => {
-                setTab(item.id);
-                setStatus(null);
-                setError(null);
-              }}
-              className={`min-w-[8.5rem] rounded-2xl px-4 py-3 text-left transition ${
+              onClick={() => setTab(item.id)}
+              className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
                 tab === item.id
-                  ? "bg-ink text-white shadow-md"
-                  : "bg-white text-ink-soft ring-1 ring-[var(--line)] hover:bg-mist"
+                  ? "bg-ink text-white"
+                  : "text-ink-soft hover:bg-white"
               }`}
             >
-              <div className="text-sm font-semibold">{item.label}</div>
-              <div
-                className={`mt-0.5 text-xs ${
-                  tab === item.id ? "text-white/65" : "text-muted"
-                }`}
-              >
-                {item.hint}
-              </div>
+              {item.label}
             </button>
           ))}
         </div>
       </div>
 
-      {status ? (
-        <p className="mb-4 rounded-2xl border border-accent/25 bg-[rgba(31,138,127,0.08)] px-4 py-3 text-sm font-medium text-ink">
-          {status}
-        </p>
-      ) : null}
-      {error ? (
-        <p className="mb-4 rounded-2xl border border-signal/30 bg-[rgba(228,87,46,0.08)] px-4 py-3 text-sm font-medium text-signal">
-          {error}
-        </p>
-      ) : null}
-
       {tab === "hinnasto" ? (
         <div className="space-y-4">
           <Card
             title="Hinnastosivun otsikot"
-            description="Näkyvät /hinnat-sivulla ja etusivun korostuksissa."
+            description="Korostushinnat näkyvät myös etusivulla ja ryhmäliikunnassa."
+            appearsOn="/hinnat"
           >
             <div className="grid gap-4 md:grid-cols-2">
               <Field
-                label="Pieni otsikko"
+                label="Yläotsikko"
+                hint="Pieni rivi otsikon yläpuolella"
                 value={prices.headline.eyebrow}
                 onChange={(value) =>
                   setPrices({
@@ -209,7 +274,8 @@ export function AdminEditor({
                 }
               />
               <Field
-                label="Kuntosali (korostus)"
+                label="Kuntosali, hintanosto"
+                hint="Esim. 33 €/kk"
                 value={prices.headline.highlightKuntosali}
                 onChange={(value) =>
                   setPrices({
@@ -222,7 +288,8 @@ export function AdminEditor({
                 }
               />
               <Field
-                label="Ryhmäliikunta (korostus)"
+                label="Ryhmäliikunta, hintanosto"
+                hint="Esim. 43 €/kk"
                 value={prices.headline.highlightRyhmaliikunta}
                 onChange={(value) =>
                   setPrices({
@@ -235,7 +302,8 @@ export function AdminEditor({
                 }
               />
               <Field
-                label="Fitness (korostus)"
+                label="Fitness, hintanosto"
+                hint="Esim. 56 €/kk"
                 value={prices.headline.highlightFitness}
                 onChange={(value) =>
                   setPrices({
@@ -260,64 +328,15 @@ export function AdminEditor({
             />
           </Card>
 
-          <Card
-            title="Jäsenyystaulukko"
-            description="Näkyy /hinnat-sivulla ja /kuntosali-sivulla (kuntosali-sarake)."
-          >
-            {prices.membershipRows.map((row, index) => (
-              <div
-                key={`${row.product}-${index}`}
-                className="grid gap-3 rounded-xl bg-[#f8fafb] p-4 md:grid-cols-4"
-              >
-                <Field
-                  label="Tuote"
-                  value={row.product}
-                  onChange={(value) => {
-                    const membershipRows = [...prices.membershipRows];
-                    membershipRows[index] = { ...row, product: value };
-                    setPrices({ ...prices, membershipRows });
-                  }}
-                />
-                <Field
-                  label="Kuntosali"
-                  value={row.kuntosali}
-                  onChange={(value) => {
-                    const membershipRows = [...prices.membershipRows];
-                    membershipRows[index] = { ...row, kuntosali: value };
-                    setPrices({ ...prices, membershipRows });
-                  }}
-                />
-                <Field
-                  label="Ryhmäliikunta"
-                  value={row.ryhmaliikunta}
-                  onChange={(value) => {
-                    const membershipRows = [...prices.membershipRows];
-                    membershipRows[index] = { ...row, ryhmaliikunta: value };
-                    setPrices({ ...prices, membershipRows });
-                  }}
-                />
-                <Field
-                  label="Fitness"
-                  value={row.fitness}
-                  onChange={(value) => {
-                    const membershipRows = [...prices.membershipRows];
-                    membershipRows[index] = { ...row, fitness: value };
-                    setPrices({ ...prices, membershipRows });
-                  }}
-                />
-              </div>
-            ))}
-          </Card>
+          <MembershipPricesEditor prices={prices} setPrices={setPrices} />
 
           <Card
             title="Lisähinnat"
-            description="Esim. Aerial Bungee, solarium, ohjelmat."
+            description="Esim. Aerial Bungee, solarium ja ohjelmat."
+            appearsOn="/hinnat"
           >
             {prices.extras.map((item, index) => (
-              <div
-                key={`${item.title}-${index}`}
-                className="grid gap-3 rounded-xl bg-[#f8fafb] p-4 md:grid-cols-2"
-              >
+              <ItemBox key={`${item.title}-${index}`} className="md:grid-cols-2">
                 <Field
                   label="Otsikko"
                   value={item.title}
@@ -328,7 +347,7 @@ export function AdminEditor({
                   }}
                 />
                 <Field
-                  label="Teksti / hinta"
+                  label="Hinta tai selite"
                   value={item.text}
                   onChange={(value) => {
                     const extras = [...prices.extras];
@@ -336,20 +355,18 @@ export function AdminEditor({
                     setPrices({ ...prices, extras });
                   }}
                 />
-              </div>
+              </ItemBox>
             ))}
           </Card>
 
           <Card
             title="Etusivun kolme hintaa"
-            description="Näkyvät etusivun tarjousosiossa."
+            description="Kolme nostoa etusivun tarjousosiossa."
+            appearsOn="/koti"
           >
             <div className="grid gap-4 md:grid-cols-3">
               {prices.homeHighlights.map((item, index) => (
-                <div
-                  key={`home-${index}`}
-                  className="grid gap-3 rounded-xl bg-[#f8fafb] p-4"
-                >
+                <ItemBox key={`home-${index}`}>
                   <Field
                     label="Otsikko"
                     value={item.title}
@@ -377,7 +394,7 @@ export function AdminEditor({
                       setPrices({ ...prices, homeHighlights });
                     }}
                   />
-                </div>
+                </ItemBox>
               ))}
             </div>
           </Card>
@@ -389,10 +406,12 @@ export function AdminEditor({
           <Card
             title="Tutustumistreenit"
             description="1 kk -tarjous uusille asiakkaille."
+            appearsOn="/tarjoukset"
           >
             <div className="grid gap-4 md:grid-cols-2">
               <Field
-                label="Badge"
+                label="Tarjousmerkki"
+                hint="Esim. 1 kk −50 %"
                 value={prices.offers.trialBadge}
                 onChange={(value) =>
                   setPrices({
@@ -414,10 +433,7 @@ export function AdminEditor({
             </div>
             <div className="grid gap-4 md:grid-cols-3">
               {prices.offers.trialPrices.map((item, index) => (
-                <div
-                  key={`trial-${index}`}
-                  className="grid gap-3 rounded-xl bg-[#f8fafb] p-4"
-                >
+                <ItemBox key={`trial-${index}`}>
                   <Field
                     label="Tuote"
                     value={item.title}
@@ -442,12 +458,16 @@ export function AdminEditor({
                       });
                     }}
                   />
-                </div>
+                </ItemBox>
               ))}
             </div>
           </Card>
 
-          <Card title="PT-kampanja" description="Tarjoukset-sivun PT-osio.">
+          <Card
+            title="PT-kampanja"
+            description="Personal Training -osio tarjoukset-sivulla."
+            appearsOn="/tarjoukset"
+          >
             <Field
               label="Otsikko"
               value={prices.offers.ptTitle}
@@ -473,13 +493,11 @@ export function AdminEditor({
           <Card
             title="Vuoden superetu"
             description="6–12 kk kuukausihinnat."
+            appearsOn="/tarjoukset"
           >
             <div className="grid gap-4 md:grid-cols-3">
               {prices.offers.yearPrices.map((item, index) => (
-                <div
-                  key={`year-${index}`}
-                  className="grid gap-3 rounded-xl bg-[#f8fafb] p-4"
-                >
+                <ItemBox key={`year-${index}`}>
                   <Field
                     label="Tuote"
                     value={item.title}
@@ -516,7 +534,7 @@ export function AdminEditor({
                       });
                     }}
                   />
-                </div>
+                </ItemBox>
               ))}
             </div>
             <Field
@@ -549,10 +567,11 @@ export function AdminEditor({
             />
           </Card>
 
-          <Card title="Aerial Bungee -tarjous">
+          <Card title="Aerial Bungee -tarjous" appearsOn="/tarjoukset">
             <div className="grid gap-4 md:grid-cols-2">
               <Field
-                label="Badge"
+                label="Tarjousmerkki"
+                hint="Esim. −50 % 10.9. asti"
                 value={prices.offers.aerialBadge}
                 onChange={(value) =>
                   setPrices({
@@ -576,12 +595,13 @@ export function AdminEditor({
 
           <Card
             title="Hoitosarjat"
-            description="Hyvinvointitarjoukset sivulla /tarjoukset."
+            description="Hyvinvointitarjoukset."
+            appearsOn="/tarjoukset"
           >
             {prices.offers.treatments.map((item, index) => (
-              <div
+              <ItemBox
                 key={`treatment-${index}`}
-                className="grid gap-3 rounded-xl bg-[#f8fafb] p-4 md:grid-cols-2"
+                className="md:grid-cols-2"
               >
                 <Field
                   label="Otsikko"
@@ -631,34 +651,21 @@ export function AdminEditor({
                     });
                   }}
                 />
-              </div>
+              </ItemBox>
             ))}
           </Card>
+          <FlyerImageEditor />
         </div>
       ) : null}
 
       {tab === "pt" ? (
         <Card
           title="Personal Training -hinnat"
-          description="Näkyvät /personal-training-, /kuntosali- (ohjelmat & testit) ja /painonpudotus-sivuilla."
+          description="Käytössä PT-, kuntosali- ja painonpudotussivuilla."
+          appearsOn="/personal-training, /kuntosali, /painonpudotus"
         >
           <div className="grid gap-4 md:grid-cols-2">
-            {(
-              [
-                ["ohjelma1", "Ohjelma 1 pv"],
-                ["ohjelma2", "Ohjelma 2 pv"],
-                ["ohjelma3", "Ohjelma 3 pv"],
-                ["kuntotesti", "Kuntotesti"],
-                ["kehonkoostumus", "Kehonkoostumus"],
-                ["ruokavalio", "Ruokavalio"],
-                ["pt2", "PT 2×"],
-                ["pt5", "PT 5×"],
-                ["pt10", "PT 10× normaali"],
-                ["pt10Offer", "PT 10× tarjous"],
-                ["pt15", "PT 15× normaali"],
-                ["pt15Offer", "PT 15× tarjous"],
-              ] as const
-            ).map(([key, label]) => (
+            {ptFields.map(([key, label]) => (
               <Field
                 key={key}
                 label={label}
@@ -678,31 +685,109 @@ export function AdminEditor({
         </Card>
       ) : null}
 
-      {tab === "syksy" ? (
-        <ScheduleEditor
-          mode="autumn"
-          schedules={schedules}
-          onChange={setSchedules}
-        />
-      ) : null}
-
-      {tab === "kesa" ? (
-        <ScheduleEditor
-          mode="summer"
-          schedules={schedules}
-          onChange={setSchedules}
-        />
-      ) : null}
-
-      <div className="mt-6 flex justify-end">
-        <button
-          type="button"
-          onClick={save}
-          disabled={saving}
-          className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white disabled:opacity-60"
+      {tab === "palvelut" ? (
+        <Card
+          title="Palvelusivujen hinnat"
+          description="Nämä hinnat näkyvät suoraan palvelusivuilla. Aerial-hinnat päivittyvät myös hinnaston lisähintoihin."
+          appearsOn="/aerial-bungee, /cross-training, /aanimaljarentoutus, /painonpudotus, /ryhmaliikunta"
         >
-          {saving ? "Tallennetaan…" : "Tallenna muutokset"}
-        </button>
+          <div className="grid gap-4 md:grid-cols-2">
+            {servicePriceFields.map(([key, label]) => (
+              <Field
+                key={key}
+                label={label}
+                value={prices.servicePrices[key]}
+                onChange={(value) =>
+                  setPrices({
+                    ...prices,
+                    servicePrices: {
+                      ...prices.servicePrices,
+                      [key]: value,
+                    },
+                  })
+                }
+              />
+            ))}
+          </div>
+        </Card>
+      ) : null}
+
+      {tab === "ryhmaliikunta" ? (
+        <Card
+          title="Ryhmäliikuntasivun esittely"
+          description="Teksti ryhmäliikuntasivun alussa. Tuntilista: yksi tunti per rivi."
+          appearsOn="/ryhmaliikunta"
+        >
+          <TextArea
+            label="Johdanto"
+            hint="Varausohjeet ja yleiset tiedot"
+            rows={4}
+            value={prices.ryhmaliikuntaInfo.intro}
+            onChange={(value) =>
+              setPrices({
+                ...prices,
+                ryhmaliikuntaInfo: {
+                  ...prices.ryhmaliikuntaInfo,
+                  intro: value,
+                },
+              })
+            }
+          />
+          <TextArea
+            label="Tuntilista"
+            hint="Yksi rivi = yksi kohta listassa"
+            rows={8}
+            value={prices.ryhmaliikuntaInfo.classes.join("\n")}
+            onChange={(value) =>
+              setPrices({
+                ...prices,
+                ryhmaliikuntaInfo: {
+                  ...prices.ryhmaliikuntaInfo,
+                  classes: value
+                    .split("\n")
+                    .map((line) => line.trim())
+                    .filter(Boolean),
+                },
+              })
+            }
+          />
+          <TextArea
+            label="Lopputeksti"
+            hint="Ohjaajat ja mitä kortit sisältävät"
+            rows={4}
+            value={prices.ryhmaliikuntaInfo.outro}
+            onChange={(value) =>
+              setPrices({
+                ...prices,
+                ryhmaliikuntaInfo: {
+                  ...prices.ryhmaliikuntaInfo,
+                  outro: value,
+                },
+              })
+            }
+          />
+        </Card>
+      ) : null}
+
+      <div className="mt-6 space-y-3 rounded-2xl border border-[var(--line)] bg-white p-4">
+        <Feedback status={status} error={error} />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-muted">
+            {dirty
+              ? "Muutoksia ei ole vielä tallennettu."
+              : "Kaikki muutokset on tallennettu."}
+          </p>
+          <button
+            type="button"
+            onClick={save}
+            disabled={saving}
+            className={`rounded-full px-6 py-3 text-sm font-semibold text-white disabled:opacity-60 ${
+              justSaved ? "bg-emerald-600" : "bg-accent"
+            }`}
+          >
+            {saving ? "Tallennetaan…" : justSaved ? "Tallennettu" : "Tallenna muutokset"}
+          </button>
+        </div>
       </div>
     </div>
   );

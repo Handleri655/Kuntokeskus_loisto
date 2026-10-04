@@ -83,8 +83,8 @@ export default async function SolariumPage() {
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[78vh] overflow-hidden bg-ink text-white md:min-h-[85vh]"
-        contentClassName="container-page relative flex min-h-[78vh] flex-col justify-end pb-12 pt-28 md:min-h-[85vh] md:pb-16"
+        className="relative isolate min-h-[54vh] overflow-hidden bg-ink text-white md:min-h-[62vh]"
+        contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
             src="/images/hero-solarium.jpg"
@@ -100,7 +100,7 @@ export default async function SolariumPage() {
           <p className="eyebrow text-accent-bright">Solarium · Hollola</p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.4rem,6.5vw,4.75rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight">
             Solarium{" "}
             <span className="text-accent-bright">Hollolassa</span>
           </h1>
@@ -168,6 +168,32 @@ export default async function SolariumPage() {
                 Kysy solariumkorttia
               </MotionAnchor>
             </HoverCard>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-pad pt-0">
+        <div className="container-page grid items-center gap-8 lg:grid-cols-[1fr_0.95fr] lg:gap-14">
+          <Reveal>
+            <p className="eyebrow text-accent">Hierontatuoli</p>
+            <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-[2.5rem]">
+              Hierontatuoli salilla
+            </h2>
+            <p className="mt-4 max-w-md leading-relaxed text-ink-soft">
+              {chairSolarium?.text ?? "Hierontatuoli kuntokeskuksessa."} Kysy
+              käyttöä paikan päällä.
+            </p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <div className="relative aspect-[5/4] overflow-hidden rounded-[1.35rem] bg-white">
+              <Image
+                src="/images/hierontatuoli.jpg"
+                alt="Hierontatuoli Kuntokeskus Loistossa"
+                fill
+                className="object-contain p-4"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+              />
+            </div>
           </Reveal>
         </div>
       </section>

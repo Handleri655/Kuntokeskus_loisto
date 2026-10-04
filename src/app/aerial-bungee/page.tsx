@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
@@ -6,6 +6,7 @@ import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor, MotionLink } from "@/components/MotionPress";
 import { Reveal } from "@/components/Reveal";
 import { Stagger, StaggerItem } from "@/components/Stagger";
+import { getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
     "Tutustu Kuntokeskus Loiston Aerial Bungee -tunteihin Hollolassa. Katso tunnit, hinnat ja eri tasot sekä ilmoittaudu mukaan.",
   alternates: { canonical: "/aerial-bungee" },
 };
+
+export const dynamic = "force-dynamic";
 
 const benefits = [
   {
@@ -74,12 +77,14 @@ const faq = [
   },
 ] as const;
 
-export default function AerialBungeePage() {
+export default async function AerialBungeePage() {
+  const { servicePrices } = await getPrices();
+
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[78vh] overflow-hidden bg-ink text-white md:min-h-[85vh]"
-        contentClassName="container-page relative flex min-h-[78vh] flex-col justify-end pb-12 pt-28 md:min-h-[85vh] md:pb-16"
+        className="relative isolate min-h-[54vh] overflow-hidden bg-ink text-white md:min-h-[62vh]"
+        contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
             src="/images/training.jpg"
@@ -97,7 +102,7 @@ export default function AerialBungeePage() {
           </p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.4rem,6.5vw,4.75rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight">
             Aerial Bungee Hollolassa –{" "}
             <span className="text-accent-bright">Ilmalento alkaa</span>
           </h1>
@@ -274,7 +279,7 @@ export default function AerialBungeePage() {
                   55 -tuntia. Välillä myös pe:sin.
                 </p>
                 <p className="font-display mt-8 text-4xl font-semibold tracking-tight md:text-5xl">
-                  32 €
+                  {servicePrices.aerialIntensivi}
                 </p>
               </HoverCard>
             </Reveal>
@@ -295,13 +300,13 @@ export default function AerialBungeePage() {
                   <div>
                     <p className="text-sm text-muted">5× 55 min</p>
                     <p className="font-display mt-1 text-3xl font-semibold tracking-tight md:text-4xl">
-                      75 €
+                      {servicePrices.aerial5x}
                     </p>
                   </div>
                   <div>
                     <p className="text-sm text-muted">3× 55 min</p>
                     <p className="font-display mt-1 text-3xl font-semibold tracking-tight md:text-4xl">
-                      60 €
+                      {servicePrices.aerial3x}
                     </p>
                   </div>
                 </div>

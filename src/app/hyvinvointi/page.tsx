@@ -55,8 +55,8 @@ export default async function HyvinvointiPage() {
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[78vh] overflow-hidden bg-ink text-white md:min-h-[85vh]"
-        contentClassName="container-page relative flex min-h-[78vh] flex-col justify-end pb-12 pt-28 md:min-h-[85vh] md:pb-16"
+        className="relative isolate min-h-[54vh] overflow-hidden bg-ink text-white md:min-h-[62vh]"
+        contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
             src="/images/hero-hyvinvointi.jpg"
@@ -72,7 +72,7 @@ export default async function HyvinvointiPage() {
           <p className="eyebrow text-accent-bright">Hyvinvointi · Hollola</p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.3rem,6vw,4.5rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.4rem)] font-semibold leading-[1.05] tracking-tight">
             Hyvinvointia, palautumista ja{" "}
             <span className="text-accent-bright">lihashuoltoa</span>
           </h1>
@@ -87,6 +87,9 @@ export default async function HyvinvointiPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <MotionAnchor href={site.jariPhoneHref} className="btn-accent">
               Varaa hoitoaika
+            </MotionAnchor>
+            <MotionAnchor href={site.jariSmsHref} className="btn-ghost">
+              Tekstaa
             </MotionAnchor>
             <MotionLink href="#palvelut" className="btn-ghost">
               Katso palvelut
@@ -116,12 +119,20 @@ export default async function HyvinvointiPage() {
                   <p className="mt-3 flex-1 leading-relaxed text-ink-soft">
                     {item.text}
                   </p>
-                  <MotionAnchor
-                    href={site.jariPhoneHref}
-                    className="mt-5 inline-flex text-sm font-semibold text-accent"
-                  >
-                    Varaa aika →
-                  </MotionAnchor>
+                  <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1">
+                    <MotionAnchor
+                      href={site.jariPhoneHref}
+                      className="inline-flex text-sm font-semibold text-accent"
+                    >
+                      Varaa aika →
+                    </MotionAnchor>
+                    <MotionAnchor
+                      href={site.jariSmsHref}
+                      className="inline-flex text-sm font-semibold text-ink-soft transition hover:text-accent"
+                    >
+                      Tekstaa
+                    </MotionAnchor>
+                  </div>
                 </HoverCard>
               </StaggerItem>
             ))}
@@ -237,7 +248,7 @@ export default async function HyvinvointiPage() {
           <Reveal>
             <p className="eyebrow text-accent">Hierontatuoli</p>
             <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-[2.5rem]">
-              Hierontatuoli salilla
+              Hierontatuoli kuntokeskuksessa
             </h2>
             <p className="mt-4 max-w-md leading-relaxed text-ink-soft">
               {chair?.text ?? "Hierontatuoli kuntokeskuksessa."} Kysy käyttöä

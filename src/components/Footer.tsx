@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { nav, openingHours, servicesNav, site } from "@/lib/site";
+import { nav, servicesNav, site } from "@/lib/site";
 
 export function Footer() {
   return (
     <footer className="bg-ink text-white">
       <div className="container-page section-pad grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
-          <div className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
+          <div className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
             Kuntokeskus <span className="text-accent-bright">Loisto</span>
           </div>
           <p className="mt-4 max-w-md text-white/70 leading-relaxed">
@@ -61,14 +61,6 @@ export function Footer() {
               Ilmainen pysäköinti · Avainkortilla kuntosali {site.keycardHours}
             </li>
           </ul>
-          <div className="mt-6 space-y-1.5 text-sm text-white/55">
-            {openingHours.slice(0, 5).map((row) => (
-              <div key={row.day} className="flex justify-between gap-4">
-                <span>{row.day}</span>
-                <span>{row.hours}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
       <div className="border-t border-white/10">

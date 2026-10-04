@@ -17,6 +17,8 @@ export const site = {
   bankAccount: "OP FI37 5311 0020 1134 71",
   jariSite: "https://www.tmijarik.fi",
   nimenhuutoUrl: "https://aerodiggarit.nimenhuuto.com",
+  nimenhuutoEventsUrl: "https://aerodiggarit.nimenhuuto.com/events",
+  nimenhuutoCsvUrl: "https://aerodiggarit.nimenhuuto.com/calendar/csv",
   keycardHours: "04–24",
   keycardEntryBy: "klo 23",
   founded: "1992",
@@ -48,10 +50,10 @@ export const googleReviews = [
 
 /** Top-level nav links (desktop) */
 export const nav = [
+  { href: "/tarjoukset", label: "Tarjoukset" },
   { href: "/kuntosali", label: "Kuntosali" },
   { href: "/ryhmaliikunta", label: "Ryhmäliikunta" },
   { href: "/hinnat", label: "Hinnat" },
-  { href: "/tarjoukset", label: "Tarjoukset" },
   { href: "/loisto", label: "Meistä" },
   { href: "/info", label: "Yhteystiedot" },
 ] as const;
@@ -96,16 +98,17 @@ export const dutyHours = [
   { day: "Lauantai–Sunnuntai", hours: "Suljettu" },
 ] as const;
 
-export const openingHours = [
-  { day: "Maanantai", hours: "09:45–12:00 & 15:00–18:00" },
-  { day: "Tiistai", hours: "17:15–20:30" },
-  { day: "Keskiviikko", hours: "15:00–18:00 & 19:10–20:30" },
-  { day: "Torstai", hours: "15:00–18:00" },
-  { day: "Perjantai", hours: "09:45–12:00" },
-  { day: "Lauantai–Sunnuntai", hours: "Suljettu" },
-] as const;
-
 export const services = [
+  {
+    href: "/personal-training",
+    title: "Personal Training",
+    text: "Jarin yksilöohjaus: fysioterapiaosaaminen ja treeniohjelma samassa paketissa.",
+  },
+  {
+    href: "/solarium",
+    title: "Solarium ja hierontatuoli",
+    text: "Rusketusta ympäri vuoden ja hierontatuoli salilla – kysy käyttöä paikan päällä.",
+  },
   {
     href: "/aerial-bungee",
     title: "Aerial Bungee",
@@ -120,11 +123,6 @@ export const services = [
     href: "/kangoo",
     title: "Kangoo Power / Jumps",
     text: "Hyppykenkätreeniä ainoana Hollolassa – tehokasta, nivelystävällistä ja hauskaa.",
-  },
-  {
-    href: "/personal-training",
-    title: "Personal Training",
-    text: "Jarin yksilöohjaus: fysioterapiaosaaminen ja treeniohjelma samassa paketissa.",
   },
   {
     href: "/aanimaljarentoutus",

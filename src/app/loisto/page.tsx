@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
@@ -56,10 +56,10 @@ export default function LoistoPage() {
             </div>
           </Reveal>
           <Reveal delay={0.05}>
-            <div className="relative aspect-[5/4] overflow-hidden rounded-[2rem]">
+            <div className="relative aspect-[5/4] overflow-hidden rounded-2xl">
               <Image
-                src="/images/gym-floor.jpg"
-                alt="Kuntosalin tiloja"
+                src="/images/kuntosali-13.jpg"
+                alt="Treenausta Kuntokeskus Loiston kuntosalilla"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -69,7 +69,7 @@ export default function LoistoPage() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--line)] bg-white section-pad">
+      <section className="section-pad border-y border-[var(--line)] bg-[var(--white)]">
         <div className="container-page grid gap-6 md:grid-cols-3">
           {[
             {

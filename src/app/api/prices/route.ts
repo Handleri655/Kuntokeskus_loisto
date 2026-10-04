@@ -19,11 +19,25 @@ export async function PUT(request: Request) {
   }
 
   const saved = await savePrices(body);
-  revalidatePath("/");
-  revalidatePath("/hinnat");
-  revalidatePath("/tarjoukset");
-  revalidatePath("/personal-training");
-  revalidatePath("/painonpudotus");
+  for (const path of [
+    "/",
+    "/koti",
+    "/hinnat",
+    "/tarjoukset",
+    "/personal-training",
+    "/painonpudotus",
+    "/kuntosali",
+    "/ryhmaliikunta",
+    "/aerial-bungee",
+    "/cross-training",
+    "/aanimaljarentoutus",
+    "/jooga",
+    "/kangoo",
+    "/hyvinvointi",
+    "/solarium",
+  ]) {
+    revalidatePath(path);
+  }
 
   return NextResponse.json(saved);
 }

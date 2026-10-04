@@ -6,14 +6,17 @@ import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor } from "@/components/MotionPress";
 import { Reveal } from "@/components/Reveal";
 import { Stagger, StaggerItem } from "@/components/Stagger";
+import { getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Äänimaljarentoutus Hollola",
   description:
-    "Äänimaljarentoutus Kuntokeskus Loistossa Hollolassa – tiistaisin klo 17.30–18.30 (joka toinen tiistai). Jäsen 14 €, ei-jäsen 19 €.",
+    "Äänimaljarentoutus Kuntokeskus Loistossa Hollolassa – tiistaisin klo 17.30–18.30 (joka toinen tiistai).",
   alternates: { canonical: "/aanimaljarentoutus" },
 };
+
+export const dynamic = "force-dynamic";
 
 const expectations = [
   "Rauhallinen hetki pois arjen kiireestä",
@@ -46,16 +49,18 @@ const steps = [
   },
 ] as const;
 
-export default function AanimaljarentoutusPage() {
+export default async function AanimaljarentoutusPage() {
+  const { servicePrices } = await getPrices();
+
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[78vh] overflow-hidden bg-ink text-white md:min-h-[85vh]"
-        contentClassName="container-page relative flex min-h-[78vh] flex-col justify-end pb-12 pt-28 md:min-h-[85vh] md:pb-16"
+        className="relative isolate min-h-[54vh] overflow-hidden bg-ink text-white md:min-h-[62vh]"
+        contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/jooga.jpg"
-            alt="Rauhallinen rentoutumistila äänimaljarentoutukseen"
+            src="/images/aanimalja-01.jpg"
+            alt="Äänimaljoja ja soittimia äänimaljarentoutuksessa"
             fill
             priority
             className="object-cover object-[center_40%]"
@@ -69,7 +74,7 @@ export default function AanimaljarentoutusPage() {
           </p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.2rem,5.8vw,4.25rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2rem,4.8vw,3.3rem)] font-semibold leading-[1.05] tracking-tight">
             Lempeää hyvinvointia{" "}
             <span className="text-accent-bright">äänien maailmassa</span>
           </h1>
@@ -82,7 +87,9 @@ export default function AanimaljarentoutusPage() {
         </HeroLine>
         <HeroLine>
           <p className="mt-4 text-sm font-semibold tracking-wide text-accent-bright md:text-base">
-            Tiistaisin klo 17.30–18.30 · Jäsen 14 € · Ei-jäsen 19 €
+            Tiistaisin klo 17.30–18.30 · Jäsen{" "}
+            {servicePrices.aanimaljaMember} · Ei-jäsen{" "}
+            {servicePrices.aanimaljaGuest}
           </p>
         </HeroLine>
         <HeroLine>
@@ -115,6 +122,49 @@ export default function AanimaljarentoutusPage() {
               hyvinvointituokio.
             </p>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="section-pad pt-0">
+        <div className="container-page">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-[1.35rem] sm:col-span-2">
+              <Image
+                src="/images/aanimalja-01.jpg"
+                alt="Äänimaljoja, gongi ja rumpu rentoutustunnilla"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 66vw"
+              />
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.35rem] lg:aspect-auto lg:min-h-full">
+              <Image
+                src="/images/aanimalja-03.jpg"
+                alt="Ohjaaja äänimaljojen ja soittimien äärellä"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.35rem]">
+              <Image
+                src="/images/aanimalja-02.jpg"
+                alt="Ohjaaja soittaa gongia äänimaljarentoutuksessa"
+                fill
+                className="object-cover object-[center_30%]"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.35rem] sm:col-span-2">
+              <Image
+                src="/images/aanimalja-04.jpg"
+                alt="Gongi ja äänimaljat äänimaljarentoutuksessa"
+                fill
+                className="object-cover object-[center_25%]"
+                sizes="(max-width: 640px) 100vw, 66vw"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -230,13 +280,13 @@ export default function AanimaljarentoutusPage() {
                   <div>
                     <p className="text-sm text-white/55">Jäsen</p>
                     <p className="font-display mt-1 text-4xl font-semibold tracking-tight">
-                      14 €
+                      {servicePrices.aanimaljaMember}
                     </p>
                   </div>
                   <div>
                     <p className="text-sm text-white/55">Ei-jäsen</p>
                     <p className="font-display mt-1 text-4xl font-semibold tracking-tight">
-                      19 €
+                      {servicePrices.aanimaljaGuest}
                     </p>
                   </div>
                 </div>
@@ -283,7 +333,7 @@ export default function AanimaljarentoutusPage() {
 
       <ContactCTA
         title="Anna itsellesi tunti rauhaa"
-        text="Äänimaljarentoutus tiistaisin klo 17.30–18.30 (joka toinen tiistai). Jäsenille 14 € · Ei-jäsenille 19 €."
+        text={`Äänimaljarentoutus tiistaisin klo 17.30–18.30 (joka toinen tiistai). Jäsenille ${servicePrices.aanimaljaMember} · Ei-jäsenille ${servicePrices.aanimaljaGuest}.`}
         primaryLabel="Varaa paikkasi"
         showMessageOptions
       />

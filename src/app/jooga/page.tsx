@@ -4,6 +4,7 @@ import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
 import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
+import { findGymPrice, getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,7 +13,15 @@ export const metadata: Metadata = {
     "Hatha-jooga ja voima-jooga Kuntokeskus Loistossa – ohjaajana Ulla.",
 };
 
-export default function JoogaPage() {
+export const dynamic = "force-dynamic";
+
+export default async function JoogaPage() {
+  const prices = await getPrices();
+  const kerta =
+    prices.membershipRows.find((row) =>
+      /kertamaksu/i.test(row.product),
+    )?.ryhmaliikunta ?? findGymPrice(prices.membershipRows, ["Kertamaksu"]);
+
   return (
     <>
       <PageHero
@@ -76,7 +85,7 @@ export default function JoogaPage() {
             <div className="prose-loisto">
               <p>
                 Kuukausikortilla pääset ilmaiseksi mukaan (Ryhmäliikunta /
-                Fitness) tai 10×-kortilla (1 krt) tai kertamaksulla 14 €.
+                Fitness) tai 10×-kortilla (1 krt) tai kertamaksulla {kerta}.
               </p>
               <p>
                 Varaa paikka: {site.phone} – ilmoita koko nimi ja

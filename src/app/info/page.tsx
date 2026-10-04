@@ -1,16 +1,16 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
 import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor } from "@/components/MotionPress";
 import { Reveal } from "@/components/Reveal";
-import { dutyHours, openingHours, site } from "@/lib/site";
+import { dutyHours, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Yhteystiedot Hollola",
   description:
-    "Kuntokeskus Loiston yhteystiedot, aukioloajat ja sijainti Hollolassa. Soita, lähetä sähköpostia tai poikkea Keskuskatu 4:ään.",
+    "Kuntokeskus Loiston yhteystiedot, päivystys ja sijainti Hollolassa. Soita, lähetä sähköpostia tai poikkea Keskuskatu 4:ään. Avainkortilla treenaat 04–24.",
   alternates: { canonical: "/info" },
 };
 
@@ -18,8 +18,8 @@ export default function InfoPage() {
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[70vh] overflow-hidden bg-ink text-white md:min-h-[75vh]"
-        contentClassName="container-page relative flex min-h-[70vh] flex-col justify-end pb-12 pt-28 md:min-h-[75vh] md:pb-16"
+        className="relative isolate min-h-[50vh] overflow-hidden bg-ink text-white md:min-h-[58vh]"
+        contentClassName="container-page relative flex min-h-[50vh] flex-col justify-end pb-10 pt-28 md:min-h-[58vh] md:pb-14"
         image={
           <Image
             src="/images/hero-gym.jpg"
@@ -35,7 +35,7 @@ export default function InfoPage() {
           <p className="eyebrow text-accent-bright">Yhteystiedot · Hollola</p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.4rem,6.5vw,4.75rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight">
             Ota{" "}
             <span className="text-accent-bright">yhteyttä</span>
           </h1>
@@ -150,46 +150,16 @@ export default function InfoPage() {
       </section>
 
       <section className="section-pad section-band border-y border-[var(--line)]">
-        <div className="container-page grid gap-5 lg:grid-cols-2">
+        <div className="container-page">
           <Reveal>
-            <HoverCard className="panel panel-pad h-full">
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
-                Aukioloajat
-              </p>
-              <h2 className="font-display mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
-                Aukioloajat
-              </h2>
-              <ul className="mt-6 space-y-3">
-                {openingHours.map((row) => (
-                  <li
-                    key={row.day}
-                    className="flex justify-between gap-4 border-b border-[var(--line)] pb-3 text-sm last:border-0 last:pb-0 md:text-base"
-                  >
-                    <span className="font-medium text-ink">{row.day}</span>
-                    <span className="shrink-0 text-ink-soft">{row.hours}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 rounded-[1.15rem] bg-[rgba(224,122,40,0.12)] px-4 py-4">
-                <p className="font-display text-lg font-semibold tracking-tight text-ink">
-                  Avainkortilla treenaat {site.keycardHours} joka päivä.
-                </p>
-                <p className="mt-2 text-sm text-ink-soft">
-                  Sisään pitää olla {site.keycardEntryBy} mennessä.
-                </p>
-              </div>
-            </HoverCard>
-          </Reveal>
-
-          <Reveal delay={0.05}>
-            <HoverCard className="panel panel-pad h-full">
+            <HoverCard className="panel panel-pad">
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
                 Päivystys
               </p>
               <h2 className="font-display mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
                 Päivystys paikalla
               </h2>
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-6 max-w-xl space-y-3">
                 {dutyHours.map((row) => (
                   <li
                     key={row.day}
@@ -205,6 +175,14 @@ export default function InfoPage() {
               <p className="mt-5 text-sm text-muted">
                 Päivystys paikalla myös erikseen sovittaessa.
               </p>
+              <div className="mt-6 rounded-[1.15rem] bg-[rgba(224,122,40,0.12)] px-4 py-4">
+                <p className="font-display text-lg font-semibold tracking-tight text-ink">
+                  Avainkortilla treenaat {site.keycardHours} joka päivä.
+                </p>
+                <p className="mt-2 text-sm text-ink-soft">
+                  Sisään pitää olla {site.keycardEntryBy} mennessä.
+                </p>
+              </div>
             </HoverCard>
           </Reveal>
         </div>
@@ -226,8 +204,8 @@ export default function InfoPage() {
           <Reveal delay={0.05}>
             <div className="relative aspect-[5/4] overflow-hidden rounded-[1.35rem]">
               <Image
-                src="/images/gym-floor.jpg"
-                alt="Kuntosali Kuntokeskus Loistossa"
+                src="/images/kuntosali-10.jpg"
+                alt="Treenausta Kuntokeskus Loiston kuntosalilla"
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 45vw"

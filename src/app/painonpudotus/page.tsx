@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
@@ -51,7 +51,7 @@ const benefits = [
 ] as const;
 
 export default async function PainonpudotusPage() {
-  const { personalTraining: pt } = await getPrices();
+  const { personalTraining: pt, servicePrices } = await getPrices();
 
   const packages = [
     {
@@ -64,9 +64,9 @@ export default async function PainonpudotusPage() {
     {
       title: "PT intensiivi 5×",
       sessions: "5 tapaamista",
-      price: "nyt 360 €/hlö",
+      price: `nyt ${servicePrices.painonpudotusIntensiivi}`,
       old: `${pt.pt10Offer} (−20 %)`,
-      text: "Tai duo-tarjous −30 % nyt 315 €/hlö. Sis. 5× PT (tai 4× + ryhmäliikunta-kortti 8×) + materiaalit, mittaus & kunto-ohjelmat 3 kpl.",
+      text: `Tai duo-tarjous −30 % nyt ${servicePrices.painonpudotusDuo}. Sis. 5× PT (tai 4× + ryhmäliikunta-kortti 8×) + materiaalit, mittaus & kunto-ohjelmat 3 kpl.`,
     },
     {
       title: "PT 15× 55 min",
@@ -80,8 +80,8 @@ export default async function PainonpudotusPage() {
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[78vh] overflow-hidden bg-ink text-white md:min-h-[85vh]"
-        contentClassName="container-page relative flex min-h-[78vh] flex-col justify-end pb-12 pt-28 md:min-h-[85vh] md:pb-16"
+        className="relative isolate min-h-[54vh] overflow-hidden bg-ink text-white md:min-h-[62vh]"
+        contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
             src="/images/gym-floor.jpg"
@@ -99,7 +99,7 @@ export default async function PainonpudotusPage() {
           </p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.2rem,5.8vw,4.25rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2rem,4.8vw,3.3rem)] font-semibold leading-[1.05] tracking-tight">
             Painonpudotusohjelma, joka tehdään{" "}
             <span className="text-accent-bright">sinun tavoitteidesi mukaan</span>
           </h1>

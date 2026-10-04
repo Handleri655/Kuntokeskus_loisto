@@ -33,7 +33,7 @@ export function AdminLogin() {
         onSubmit={onSubmit}
         className="overflow-hidden rounded-3xl border border-[var(--line)] bg-white shadow-sm"
       >
-        <div className="border-b border-[var(--line)] bg-[#f8fafb] px-6 py-5">
+        <div className="border-b border-[var(--line)] px-6 py-5">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
             Hallinta
           </p>

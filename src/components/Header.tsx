@@ -29,6 +29,12 @@ export function Header() {
 
   const solid = scrolled || open;
   const servicesActive = servicesNav.some((item) => pathname === item.href);
+  const offersItem = nav.find((item) => item.href === "/tarjoukset");
+  const primaryNav = nav.filter((item) => item.href !== "/tarjoukset");
+  const offersActive = pathname === "/tarjoukset";
+  const offersClass = offersActive
+    ? "bg-accent-bright text-ink"
+    : "bg-accent text-white hover:bg-accent-bright hover:text-ink";
 
   const linkClass = (href: string) => {
     const active = pathname === href;
@@ -57,41 +63,44 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         solid
-          ? "bg-[rgba(251,252,253,0.92)] text-ink shadow-[0_1px_0_var(--line)] backdrop-blur-xl"
+          ? "bg-[rgba(244,239,230,0.94)] text-ink shadow-[0_1px_0_var(--line)] backdrop-blur-xl"
           : "bg-transparent text-white"
       }`}
     >
-      <div className="container-page flex h-[4.5rem] items-center justify-between gap-4 md:h-[5.25rem]">
-        <Link
-          href="/koti"
-          className="group flex items-center gap-3 leading-tight"
-          onClick={() => setOpen(false)}
-        >
-          <span
-            className={`brand-mark ${solid ? "" : "brand-mark-light"}`}
-            aria-hidden="true"
+      <div className="container-page flex h-[4.5rem] items-center justify-between gap-3 md:h-[5.25rem] md:gap-4">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+          <Link
+            href="/koti"
+            className="group min-w-0 leading-tight"
+            onClick={() => setOpen(false)}
           >
-            L
-          </span>
-          <span>
-            <div className="font-display text-[1.15rem] font-semibold tracking-tight md:text-[1.35rem]">
-              Kuntokeskus{" "}
+            <div className="font-display text-[1.05rem] font-semibold tracking-tight sm:text-[1.15rem] md:text-[1.35rem]">
+              <span className="hidden sm:inline">Kuntokeskus </span>
               <span className={solid ? "text-accent" : "text-accent-bright"}>
                 Loisto
               </span>
             </div>
             <div
-              className={`text-[0.68rem] uppercase tracking-[0.2em] ${
-                solid ? "text-muted" : "text-white/65"
+              className={`hidden text-[0.78rem] sm:block ${
+                solid ? "text-muted" : "text-white/70"
               }`}
             >
               Hollola
             </div>
-          </span>
-        </Link>
+          </Link>
+          {offersItem ? (
+            <Link
+              href={offersItem.href}
+              onClick={() => setOpen(false)}
+              className={`shrink-0 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold shadow-sm transition sm:px-3.5 ${offersClass}`}
+            >
+              {offersItem.label}
+            </Link>
+          ) : null}
+        </div>
 
         <nav className="hidden items-center gap-0.5 lg:flex">
-          {nav.slice(0, 2).map((item) => (
+          {primaryNav.slice(0, 2).map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -120,7 +129,7 @@ export function Header() {
                   : "pointer-events-none opacity-0"
               }`}
             >
-              <div className="overflow-hidden rounded-2xl border border-[var(--line)] bg-white py-2 shadow-xl shadow-black/10">
+              <div className="overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--white)] py-2 shadow-xl shadow-black/10">
                 {servicesNav.map((item) => (
                   <Link
                     key={item.href}
@@ -138,7 +147,7 @@ export function Header() {
             </div>
           </div>
 
-          {nav.slice(2).map((item) => (
+          {primaryNav.slice(2).map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -195,10 +204,10 @@ export function Header() {
       <div
         className={`lg:hidden ${
           open ? "max-h-[100dvh] opacity-100" : "max-h-0 opacity-0"
-        } overflow-hidden border-t border-[var(--line)] bg-[rgba(251,252,253,0.98)] transition-all duration-500`}
+        } overflow-hidden border-t border-[var(--line)] bg-[rgba(244,239,230,0.98)] transition-all duration-500`}
       >
         <div className="container-page flex max-h-[calc(100dvh-4.5rem)] flex-col gap-1 overflow-y-auto py-6 text-ink">
-          {nav.slice(0, 2).map((item) => (
+          {primaryNav.slice(0, 2).map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -237,7 +246,7 @@ export function Header() {
               ))
             : null}
 
-          {nav.slice(2).map((item) => (
+          {primaryNav.slice(2).map((item) => (
             <Link
               key={item.href}
               href={item.href}

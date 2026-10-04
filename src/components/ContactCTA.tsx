@@ -40,16 +40,16 @@ export function ContactCTA({
   smsHref = site.smsHref,
 }: ContactCTAProps) {
   return (
-    <section className="section-pad">
+    <section className="section-pad pt-0">
       <Reveal>
-        <HoverCard className="panel panel-dark container-page px-6 py-12 md:px-12 md:py-16">
+        <HoverCard className="panel panel-dark container-page px-6 py-10 md:px-10 md:py-12">
           <div className="grid gap-8 md:grid-cols-[1.3fr_0.9fr] md:items-end">
             <div>
               <p className="eyebrow text-accent-bright">Yhteys</p>
-              <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
+              <h2 className="font-display mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
                 {title}
               </h2>
-              <p className="mt-4 max-w-md text-white/70 leading-relaxed">{text}</p>
+              <p className="mt-3 max-w-md text-white/72 leading-relaxed">{text}</p>
             </div>
             <div className="flex flex-col gap-3">
               {showMessageOptions ? (

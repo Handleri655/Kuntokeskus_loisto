@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
@@ -8,6 +8,7 @@ import { MotionAnchor, MotionLink } from "@/components/MotionPress";
 import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 import { Stagger, StaggerItem } from "@/components/Stagger";
+import { gymActionPhotos } from "@/lib/gym-photos";
 import { getPrices } from "@/lib/prices";
 import { googleReviews, services, site, whyLoisto } from "@/lib/site";
 
@@ -29,8 +30,8 @@ export default async function HomePage() {
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[100svh] overflow-hidden bg-ink text-white"
-        contentClassName="container-page relative flex min-h-[100svh] flex-col justify-end pb-14 pt-32 md:pb-20"
+        className="relative isolate min-h-[88svh] overflow-hidden bg-ink text-white"
+        contentClassName="container-page relative flex min-h-[88svh] flex-col justify-end pb-12 pt-32 md:pb-16"
         image={
           <Image
             src="/images/hero-gym.jpg"
@@ -48,7 +49,7 @@ export default async function HomePage() {
           </p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-5 max-w-5xl text-[clamp(3.4rem,11vw,7.5rem)] font-semibold leading-[0.9] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.6rem,8vw,5rem)] font-semibold leading-[1.02] tracking-tight">
             Kuntokeskus
             <br />
             <span className="text-accent-bright">Loisto</span>
@@ -82,7 +83,7 @@ export default async function HomePage() {
         </HeroLine>
       </HeroMotion>
 
-      <section className="border-b border-[var(--line)] bg-white/80 backdrop-blur-sm">
+      <section className="border-b border-[var(--line)] bg-[var(--white)]/85 backdrop-blur-sm">
         <div className="container-page grid gap-5 py-7 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[var(--line)] md:py-9">
           {[
             "Edenred · E-passi · Smartum",
@@ -98,24 +99,43 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="section-pad pb-0">
+        <div className="container-page">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {gymActionPhotos.map((photo) => (
+              <Link
+                key={photo.src}
+                href="/kuntosali#laitteet"
+                className="relative aspect-[4/3] overflow-hidden rounded-2xl"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover transition duration-500 hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-pad">
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Palvelut</p>
-            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-[2.75rem]">
-              Treenaa juuri sinulle sopivalla tavalla
+            <h2 className="font-display mt-2 max-w-2xl text-3xl font-semibold tracking-tight md:text-[2.15rem]">
+              Valmennusta ja palautumista
             </h2>
           </Reveal>
 
-          <Stagger className="mt-10 border-t border-[var(--line)]">
-            {featured.map((service, i) => (
+          <Stagger className="mt-8 border-t border-[var(--line)]">
+            {featured.map((service) => (
               <StaggerItem key={service.href}>
                 <HoverLink href={service.href} className="service-row group">
-                  <span className="service-index">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   <div>
-                    <h3 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+                    <h3 className="font-display text-xl font-semibold tracking-tight md:text-2xl">
                       {service.title}
                     </h3>
                     <p className="mt-2 max-w-xl text-muted leading-relaxed">
@@ -145,18 +165,15 @@ export default async function HomePage() {
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Miksi Loisto?</p>
-            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+            <h2 className="font-display mt-2 max-w-2xl text-3xl font-semibold tracking-tight md:text-[2.15rem]">
               Miksi juuri Loistoon?
             </h2>
           </Reveal>
-          <Stagger className="mt-10 grid gap-5 md:grid-cols-3" delay={0.05}>
-            {whyLoisto.map((item, i) => (
+          <Stagger className="mt-8 grid gap-4 md:grid-cols-3" delay={0.05}>
+            {whyLoisto.map((item) => (
               <StaggerItem key={item.title} hover>
                 <HoverCard className="panel panel-pad h-full">
-                  <p className="font-display text-sm font-bold tracking-[0.16em] text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="font-display mt-4 text-2xl font-semibold tracking-tight">
+                  <h3 className="font-display text-xl font-semibold tracking-tight">
                     {item.title}
                   </h3>
                   <p className="mt-3 text-muted leading-relaxed">{item.text}</p>
@@ -171,7 +188,7 @@ export default async function HomePage() {
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Google-arvostelut</p>
-            <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+            <h2 className="font-display mt-2 max-w-2xl text-3xl font-semibold tracking-tight md:text-[2.15rem]">
               Mitä asiakkaat sanovat
             </h2>
           </Reveal>
@@ -185,7 +202,7 @@ export default async function HomePage() {
                 >
                   ★★★★★
                 </p>
-                <p className="font-display mt-5 text-2xl leading-snug tracking-tight md:text-3xl">
+                <p className="font-display mt-4 text-xl leading-snug tracking-tight md:text-2xl">
                   “{featuredReview.text}”
                 </p>
                 <p className="mt-6 text-sm text-white/45">Google-arvostelu</p>
@@ -226,7 +243,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="relative min-h-[70vh] overflow-hidden bg-ink text-white md:min-h-[75vh]">
+      <section className="relative min-h-[48vh] overflow-hidden bg-ink text-white md:min-h-[54vh]">
         <Image
           src="/images/group-fitness.jpg"
           alt="Ryhmäliikuntaa Kuntokeskus Loistossa"
@@ -235,10 +252,10 @@ export default async function HomePage() {
           sizes="100vw"
         />
         <div className="hero-veil absolute inset-0" />
-        <div className="container-page relative flex min-h-[70vh] flex-col justify-end pb-14 pt-28 md:min-h-[75vh] md:pb-20">
+        <div className="container-page relative flex min-h-[48vh] flex-col justify-end pb-10 pt-24 md:min-h-[54vh] md:pb-14">
           <Reveal>
             <p className="eyebrow text-accent-bright">Ryhmäliikunta</p>
-            <h2 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
+            <h2 className="font-display mt-2 max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">
               16 tuntia viikossa
             </h2>
             <p className="mt-4 max-w-lg text-white/75 leading-relaxed">
@@ -261,7 +278,7 @@ export default async function HomePage() {
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-end">
           <Reveal>
             <p className="eyebrow text-accent">Hinnat & tarjoukset</p>
-            <h2 className="font-display mt-3 text-4xl font-semibold tracking-tight md:text-[2.75rem]">
+            <h2 className="font-display mt-2 text-3xl font-semibold tracking-tight md:text-[2.15rem]">
               Kuntosali alk.{" "}
               <span className="text-accent">{prices.headline.highlightKuntosali}</span>
             </h2>

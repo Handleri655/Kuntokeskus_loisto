@@ -1,11 +1,13 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
+import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor, MotionLink } from "@/components/MotionPress";
 import { Reveal } from "@/components/Reveal";
 import { Stagger, StaggerItem } from "@/components/Stagger";
+import { gymGallery, gymHeroSlides } from "@/lib/gym-photos";
 import { findGymPrice, getGymProgramPrices, getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
@@ -75,24 +77,15 @@ export default async function KuntosaliPage() {
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[78vh] overflow-hidden bg-ink text-white md:min-h-[85vh]"
-        contentClassName="container-page relative flex min-h-[78vh] flex-col justify-end pb-12 pt-28 md:min-h-[85vh] md:pb-16"
-        image={
-          <Image
-            src="/images/gym-floor.jpg"
-            alt="Kuntosalilaitteita Kuntokeskus Loistossa Hollolassa"
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        }
+        className="relative isolate min-h-[56vh] overflow-hidden bg-ink text-white md:min-h-[66vh]"
+        contentClassName="container-page relative flex min-h-[56vh] flex-col justify-end pb-10 pt-28 md:min-h-[66vh] md:pb-14"
+        image={<HeroSlideshow slides={gymHeroSlides} />}
       >
         <HeroLine>
           <p className="eyebrow text-accent-bright">Kuntosali · Hollola</p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.6rem,7vw,5.2rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-3 max-w-3xl text-[clamp(2.1rem,5.2vw,3.6rem)] font-semibold leading-[1.05] tracking-tight">
             Kuntosali Hollolassa –{" "}
             <span className="text-accent-bright">treenaa omalla tavalla</span>
           </h1>
@@ -116,7 +109,7 @@ export default async function KuntosaliPage() {
         </HeroLine>
       </HeroMotion>
 
-      <section className="border-b border-[var(--line)] bg-white">
+      <section className="border-b border-[var(--line)] bg-[var(--white)]">
         <div className="container-page grid gap-6 py-8 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[var(--line)] md:py-10">
           {highlights.map((item) => (
             <div key={item.title} className="md:px-8">
@@ -129,11 +122,51 @@ export default async function KuntosaliPage() {
         </div>
       </section>
 
-      <section className="section-pad">
+      <section id="laitteet" className="section-pad scroll-mt-28">
+        <div className="container-page">
+          <Reveal>
+            <p className="eyebrow text-accent">Sali</p>
+            <h2 className="font-display mt-2 max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">
+              Laitteet ja tilat kuvina
+            </h2>
+            <p className="mt-4 max-w-2xl text-lg text-muted leading-relaxed">
+              Laitteet, vapaat painot ja jumppatila samassa
+              kuntokeskuksessa Hollolassa.
+            </p>
+          </Reveal>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {gymGallery.map((photo, i) => (
+              <div
+                key={photo.src}
+                className={`relative overflow-hidden rounded-[1.35rem] ${
+                  i === 0
+                    ? "aspect-[16/10] sm:col-span-2 lg:col-span-2"
+                    : "aspect-[4/3]"
+                }`}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover"
+                  sizes={
+                    i === 0
+                      ? "(max-width: 1024px) 100vw, 66vw"
+                      : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad pt-0">
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Miksi Loisto?</p>
-            <h2 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="font-display mt-2 max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">
               Kuntosali, jossa sinun ei tarvitse treenata yksin
             </h2>
             <p className="mt-4 max-w-2xl text-lg text-muted leading-relaxed">
@@ -144,14 +177,11 @@ export default async function KuntosaliPage() {
             </p>
           </Reveal>
 
-          <Stagger className="mt-12 grid gap-6 md:grid-cols-3" delay={0.05}>
-            {whyCards.map((card, i) => (
+          <Stagger className="mt-8 grid gap-4 md:grid-cols-3" delay={0.05}>
+            {whyCards.map((card) => (
               <StaggerItem key={card.title} hover>
                 <HoverCard className="panel panel-pad h-full">
-                  <p className="font-display text-sm font-bold tracking-[0.16em] text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="font-display mt-4 text-2xl font-semibold tracking-tight">
+                  <h3 className="font-display text-xl font-semibold tracking-tight">
                     {card.title}
                   </h3>
                   <p className="mt-3 text-muted leading-relaxed">{card.text}</p>
@@ -162,11 +192,11 @@ export default async function KuntosaliPage() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--line)] bg-white section-pad">
+      <section className="section-pad border-y border-[var(--line)] bg-[var(--white)]">
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Hinnat</p>
-            <h2 className="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="font-display mt-2 max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">
               Valitse sinulle sopiva treenimäärä
             </h2>
             <p className="mt-4 max-w-2xl text-muted leading-relaxed">

@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
@@ -7,6 +7,8 @@ import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor, MotionLink } from "@/components/MotionPress";
 import { Reveal } from "@/components/Reveal";
 import { ScheduleTable } from "@/components/ScheduleTable";
+import { UpcomingClasses } from "@/components/UpcomingClasses";
+import { getUpcomingNimenhuutoEvents } from "@/lib/nimenhuuto";
 import { getPrices } from "@/lib/prices";
 import { getSchedules } from "@/lib/schedules";
 import { site } from "@/lib/site";
@@ -20,13 +22,17 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function RyhmaliikuntaPage() {
-  const [{ autumn }, prices] = await Promise.all([getSchedules(), getPrices()]);
+  const [{ autumn }, prices, upcoming] = await Promise.all([
+    getSchedules(),
+    getPrices(),
+    getUpcomingNimenhuutoEvents(),
+  ]);
 
   return (
     <>
       <HeroMotion
-        className="relative isolate min-h-[72vh] overflow-hidden bg-ink text-white md:min-h-[78vh]"
-        contentClassName="container-page relative flex min-h-[72vh] flex-col justify-end pb-12 pt-28 md:min-h-[78vh] md:pb-16"
+        className="relative isolate min-h-[52vh] overflow-hidden bg-ink text-white md:min-h-[60vh]"
+        contentClassName="container-page relative flex min-h-[52vh] flex-col justify-end pb-10 pt-28 md:min-h-[60vh] md:pb-14"
         image={
           <Image
             src="/images/group-fitness.jpg"
@@ -42,7 +48,7 @@ export default async function RyhmaliikuntaPage() {
           <p className="eyebrow text-accent-bright">{autumn.eyebrow}</p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.3rem,6vw,4.5rem)] font-semibold leading-[0.95] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.4rem)] font-semibold leading-[1.05] tracking-tight">
             {autumn.title}
           </h1>
         </HeroLine>
@@ -67,8 +73,8 @@ export default async function RyhmaliikuntaPage() {
             >
               Ilmoittaudu tunneille
             </MotionAnchor>
-            <MotionLink href="#viikko-ohjelma" className="btn-ghost">
-              Viikko-ohjelma
+            <MotionLink href="#tulevat-tunnit" className="btn-ghost">
+              Tulevat tunnit
             </MotionLink>
           </div>
         </HeroLine>
@@ -78,43 +84,13 @@ export default async function RyhmaliikuntaPage() {
         <div className="container-page grid gap-8 lg:grid-cols-[1fr_0.85fr]">
           <Reveal>
             <div className="prose-loisto">
-              <p>
-                Jumpata pidetään 4:llä, Aerial Bungee 3:lla ja joogat 6:lla.
-                Varaus & peruutus viimeistään edellisenä iltana klo 20
-                mennessä. Ilmoittaudu Nimenhuudossa tai lähetä nimi & sähköposti
-                tekstiviestillä numeroon {site.phone}.
-              </p>
+              <p>{prices.ryhmaliikuntaInfo.intro}</p>
               <ul>
-                <li>
-                  <strong>Hatha-jooga 75</strong> ma 19.15–20.30 &{" "}
-                  <strong>Voima-jooga 60</strong> ke 19.15–20.15
-                </li>
-                <li>
-                  <strong>Cross Training</strong> la 11.30–12.30 (2.10. alk.)
-                </li>
-                <li>
-                  <strong>HIIT+Core 45 & Kahvakuula 45</strong> pe
-                  16.45–17.30 / 17.40–18.25
-                </li>
-                <li>
-                  <strong>Aerial Bungee intensiivi 75</strong> to 19.15–20.30 –
-                  32 €
-                </li>
-                <li>
-                  <strong>Aerial Bungee 55</strong> pe 18.45–19.40 –
-                  Fitness-kortilla mukaan
-                </li>
-                <li>
-                  <strong>Äänimaljarentoutus</strong> ti 17.30–18.30 (joka toinen
-                  tiistai)
-                </li>
+                {prices.ryhmaliikuntaInfo.classes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
-              <p>
-                Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen. Fitness
-                sisältää kuntosalin 4–24 + jumpata + Aerial Bungee 55 + Cross
-                Training + joogat. Ryhmäliikunta sisältää jumpata + Kangoo Jumps
-                + joogat.
-              </p>
+              <p>{prices.ryhmaliikuntaInfo.outro}</p>
             </div>
           </Reveal>
           <Reveal delay={0.06}>
@@ -153,30 +129,32 @@ export default async function RyhmaliikuntaPage() {
       </section>
 
       <section
-        id="viikko-ohjelma"
+        id="tulevat-tunnit"
         className="border-t border-[var(--line)] bg-mist/40 section-pad scroll-mt-28"
       >
         <div className="container-page">
           <Reveal>
-            <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
-              {autumn.scheduleTitle}
+            <p className="eyebrow text-accent">Nimenhuuto</p>
+            <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              Tulevat tunnit
             </h2>
-            {autumn.scheduleNote ? (
-              <p className="mt-3 max-w-2xl text-muted">{autumn.scheduleNote}</p>
-            ) : null}
+            <p className="mt-3 max-w-2xl text-muted">
+              Päivittyy automaattisesti Aerodiggarit-kalenterista. Ilmoittaudu
+              viimeistään edellisenä iltana klo{"\u00a0"}20.
+            </p>
           </Reveal>
           <div className="mt-8">
-            <ScheduleTable days={autumn.days} />
+            <UpcomingClasses feed={upcoming} />
           </div>
           <Reveal>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <MotionAnchor
-                href={site.nimenhuutoUrl}
+                href={site.nimenhuutoEventsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-accent"
               >
-                Ilmoittaudu Nimenhuudossa
+                Kaikki tunnit Nimenhuudossa
               </MotionAnchor>
               <a
                 href={site.nimenhuutoUrl}
@@ -188,6 +166,29 @@ export default async function RyhmaliikuntaPage() {
               </a>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section
+        id="viikko-ohjelma"
+        className="border-t border-[var(--line)] section-pad scroll-mt-28"
+      >
+        <div className="container-page">
+          <Reveal>
+            <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
+              {autumn.scheduleTitle}
+            </h2>
+            {autumn.scheduleNote ? (
+              <p className="mt-3 max-w-2xl text-muted">{autumn.scheduleNote}</p>
+            ) : null}
+            <p className="mt-2 max-w-2xl text-sm text-muted">
+              Tyypillinen viikko. Tarkat päivät ja ilmoittautuminen ovat
+              yllä Nimenhuudossa.
+            </p>
+          </Reveal>
+          <div className="mt-8">
+            <ScheduleTable days={autumn.days} />
+          </div>
         </div>
       </section>
 
