@@ -208,7 +208,7 @@ function PriceBlock({
       >
         {label}
       </p>
-      {empty || !hasPrice ? (
+      {empty || !group ? (
         <p className={`font-medium text-muted ${reduced ? "mt-1 md:mt-0" : "mt-1 md:mt-0"}`}>
           —
         </p>

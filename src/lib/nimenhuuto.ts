@@ -191,7 +191,7 @@ function cleanSubject(raw: string): {
   let end: string | undefined;
   const timeMatch = text.match(TIME_RANGE);
   if (timeMatch) {
-    end = normalizeTime(timeMatch[2]);
+    end = normalizeTime(timeMatch[2]) ?? undefined;
     text = text.slice(timeMatch[0].length).trim();
   }
   text = text.replace(DATE_ARROW_TAIL, "").trim();
