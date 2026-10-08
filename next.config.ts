@@ -5,8 +5,13 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/home",
-        destination: "/koti",
-        permanent: false,
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/koti",
+        destination: "/",
+        permanent: true,
       },
       {
         source: "/nimaljarentoutus",

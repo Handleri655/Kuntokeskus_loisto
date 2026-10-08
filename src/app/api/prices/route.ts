@@ -21,7 +21,7 @@ export async function PUT(request: Request) {
   const saved = await savePrices(body);
   for (const path of [
     "/",
-    "/koti",
+    "/",
     "/hinnat",
     "/tarjoukset",
     "/personal-training",

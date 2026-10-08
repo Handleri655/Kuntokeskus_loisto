@@ -10,6 +10,8 @@ type HeroMotionProps = {
   children: ReactNode;
   className?: string;
   contentClassName?: string;
+  /** Override default hero-veil (e.g. hero-veil-strong for bright photos) */
+  veilClassName?: string;
 };
 
 /** Full-bleed hero: ken-burns image + staggered text entrance (motion.dev). */
@@ -18,6 +20,7 @@ export function HeroMotion({
   children,
   className,
   contentClassName,
+  veilClassName = "hero-veil",
 }: HeroMotionProps) {
   const reduce = useReducedMotion();
 
@@ -31,7 +34,7 @@ export function HeroMotion({
       >
         {image}
       </motion.div>
-      <div className="hero-veil absolute inset-0" />
+      <div className={`${veilClassName} absolute inset-0`} />
       <div className="grain absolute inset-0" />
       <motion.div
         className={contentClassName}

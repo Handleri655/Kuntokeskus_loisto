@@ -4,6 +4,7 @@ import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
 import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor, MotionLink } from "@/components/MotionPress";
+import { FlyerLightbox } from "@/components/FlyerLightbox";
 import { OfferBoard } from "@/components/OfferBoard";
 import { Reveal } from "@/components/Reveal";
 import { flyerSrc, getFlyer } from "@/lib/flyer";
@@ -131,13 +132,10 @@ export default async function TarjouksetPage() {
           </Reveal>
           <Reveal delay={0.05}>
             <HoverCard className="panel overflow-hidden p-2">
-              <div className="relative aspect-[3/4] max-h-[36rem] overflow-hidden rounded-[1.1rem] lg:aspect-[4/5]">
-                <img
-                  src={flyerImageSrc}
-                  alt="Kuntokeskus Loiston tarjouslehti"
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
+              <FlyerLightbox
+                src={flyerImageSrc}
+                alt="Kuntokeskus Loiston tarjouslehti"
+              />
             </HoverCard>
           </Reveal>
         </div>

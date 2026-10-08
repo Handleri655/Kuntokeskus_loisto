@@ -6,9 +6,9 @@ import { Header } from "@/components/Header";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isPortal = pathname === "/";
+  const isPrintSheet = pathname.startsWith("/ryhmaliikunta/tulosta");
 
-  if (isPortal) {
+  if (isPrintSheet) {
     return <>{children}</>;
   }
 

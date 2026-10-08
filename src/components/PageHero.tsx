@@ -7,6 +7,7 @@ type PageHeroProps = {
   lead: string;
   image: string;
   imageAlt: string;
+  veilClassName?: string;
 };
 
 export function PageHero({
@@ -15,11 +16,13 @@ export function PageHero({
   lead,
   image,
   imageAlt,
+  veilClassName,
 }: PageHeroProps) {
   return (
     <HeroMotion
       className="relative isolate min-h-[52vh] overflow-hidden bg-ink text-white md:min-h-[60vh]"
       contentClassName="container-page relative flex min-h-[52vh] flex-col justify-end pb-10 pt-28 md:min-h-[60vh] md:pb-14"
+      veilClassName={veilClassName}
       image={
         <Image
           src={image}

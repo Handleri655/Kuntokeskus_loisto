@@ -23,6 +23,7 @@ type ContactCTAProps = {
   /** Show text / call / email contact options */
   showMessageOptions?: boolean;
   smsHref?: string;
+  smsLabel?: string;
 };
 
 export function ContactCTA({
@@ -38,6 +39,7 @@ export function ContactCTA({
   hideInfoLink,
   showMessageOptions,
   smsHref = site.smsHref,
+  smsLabel = "Tekstaa",
 }: ContactCTAProps) {
   return (
     <section className="section-pad pt-0">
@@ -69,7 +71,7 @@ export function ContactCTA({
                     className="btn-ghost text-center"
                     fullWidth
                   >
-                    Tekstaa
+                    {smsLabel}
                   </MotionAnchor>
                   <MotionAnchor
                     href={site.emailHref}

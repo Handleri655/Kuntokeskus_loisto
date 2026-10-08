@@ -87,14 +87,15 @@ export default async function AerialBungeePage() {
         contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/training.jpg"
+            src="/images/kuntosali-08.jpg"
             alt="Aerial Bungee -harjoittelua Kuntokeskus Loistossa Hollolassa"
             fill
             priority
-            className="object-cover object-[center_35%]"
+            className="object-cover object-[center_40%]"
             sizes="100vw"
           />
         }
+        veilClassName="hero-veil-strong"
       >
         <HeroLine>
           <p className="eyebrow text-accent-bright">
@@ -143,7 +144,7 @@ export default async function AerialBungeePage() {
           <Reveal delay={0.06}>
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.35rem] md:aspect-[5/4]">
               <Image
-                src="/images/training.jpg"
+                src="/images/group-fitness.jpg"
                 alt="Bungee-valjastreeniä Loistossa"
                 fill
                 className="object-cover object-center"

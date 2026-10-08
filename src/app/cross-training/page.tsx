@@ -25,6 +25,7 @@ export default async function CrossTrainingPage() {
         lead="Lauantaisin alk. klo 11.30–12.30 (2.10.26 alk.). Muista varata paikka."
         image="/images/training.jpg"
         imageAlt="Cross Training -treeni"
+        veilClassName="hero-veil-strong"
       />
 
       <section className="section-pad">

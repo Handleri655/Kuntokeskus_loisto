@@ -67,6 +67,7 @@ export default async function AanimaljarentoutusPage() {
             sizes="100vw"
           />
         }
+        veilClassName="hero-veil-strong"
       >
         <HeroLine>
           <p className="eyebrow text-accent-bright">

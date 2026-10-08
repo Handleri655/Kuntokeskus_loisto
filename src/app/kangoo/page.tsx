@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
@@ -93,14 +93,16 @@ export default async function KangooPage() {
         contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/group-fitness.jpg"
-            alt="Kangoo Power -intervallitreeniä Kuntokeskus Loistossa Hollolassa"
+            src="/images/kangoo-hero.jpg"
+            alt="Kangoo Jumps -hyppytreeniä"
             fill
             priority
-            className="object-cover object-[center_35%]"
+            quality={90}
+            className="object-cover object-[center_45%]"
             sizes="100vw"
           />
         }
+        veilClassName="hero-veil-strong"
       >
         <HeroLine>
           <p className="eyebrow text-accent-bright">
@@ -332,7 +334,7 @@ export default async function KangooPage() {
 
           <Reveal>
             <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted">
-              Ryhmäliikunta-kortti sisältää jumpata ja Kangoo Jumpsin.
+              Ryhmäliikunta-kortti sisältää jumpat ja Kangoo Jumpsin.
               Fitness-kortilla mukaan myös Aerial Bungee ja Cross Training.
               Katso koko{" "}
               <a

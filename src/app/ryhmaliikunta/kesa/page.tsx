@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
 import { PageHero } from "@/components/PageHero";
@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Kesän ryhmäliikunta",
   description:
-    "Kuntokeskus Loiston kesän ryhmäliikunta – Aerial Bungee, Kangoo ja jumpata.",
+    "Kuntokeskus Loiston kesän ryhmäliikunta – Aerial Bungee, Kangoo ja jumpat.",
 };
 
 export const dynamic = "force-dynamic";
@@ -24,24 +24,25 @@ export default async function KesaRyhmaliikuntaPage() {
         eyebrow={summer.eyebrow}
         title={summer.title}
         lead={summer.lead}
-        image="/images/training.jpg"
-        imageAlt="Treeniä Kuntokeskus Loistossa"
+        image="/images/group-fitness.jpg"
+        imageAlt="Ryhmäliikuntaa Kuntokeskus Loistossa"
+        veilClassName="hero-veil-strong"
       />
 
       <section className="section-pad">
         <div className="container-page prose-loisto max-w-3xl">
           <Reveal>
             <p>
-              Jumpata pidetään 4:llä & Aerial Bungee -tunnit 3:lla. Ohjaajat:
+              Jumpat pidetään 4:llä & Aerial Bungee -tunnit 3:lla. Ohjaajat:
               Jari Kotkansalo, Sari Hätönen. Varaus & peruutus viimeistään
               edellisenä iltana klo 20 mennessä – lähetä koko nimi &
               sähköposti tekstiviestillä {site.phone}.
             </p>
             <p>
-              Fitness-kortti sis. kuntosalin + kaikki jumpata + Aerial Bungee 50
-              & Cross Training -tunnin. Ryhmäliikunta-kortti sis. kaikki jumpata
+              Fitness-kortti sis. kuntosalin + kaikki jumpat + Aerial Bungee 50
+              & Cross Training -tunnin. Ryhmäliikunta-kortti sis. kaikki jumpat
               + Kangoo Jumpsin. Maksuvälineenä käy liikuntaraha, pankkikortti,
-              käteinen – myös Edenred, Smartum ja E-passi.
+              käteinen – myös Edenred ja E-passi.
             </p>
             <Link
               href="/ryhmaliikunta"

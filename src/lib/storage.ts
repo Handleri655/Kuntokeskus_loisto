@@ -22,7 +22,7 @@ export function getStorageMode(): "cloud" | "file" {
 async function readFileJson<T>(relativePath: string): Promise<T> {
   const filePath = path.join(process.cwd(), "data", path.basename(relativePath));
   const raw = await fs.readFile(filePath, "utf8");
-  return JSON.parse(raw) as T;
+  return JSON.parse(raw.replace(/^\uFEFF/, "")) as T;
 }
 
 async function writeFileJson<T>(relativePath: string, value: T) {

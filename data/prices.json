@@ -64,7 +64,7 @@
       "text": "Alkeet/perusteet 75 min 32 € · 5×55 min 75 € · 3×55 min 60 €"
     },
     {
-      "title": "Solarium & hierontatuoli",
+      "title": "Solarium / hierontatuoli",
       "text": "1 kerta 9 € · 10× 69 €"
     },
     {
@@ -98,9 +98,9 @@
       }
     ],
     "ptTitle": "Intensiivi-painonpudotus & kunnonkohotus",
-    "ptText": "−25 % · tavoite 2–6 kg/kk. PTx10 nyt 450 € (norm. 600 €).",
+    "ptText": "−25 %. Tavoite 2–6 kg/kk. PT×10 nyt 450 € (norm. 600 €).",
     "yearBadge": "Vuoden kovin superetu",
-    "yearNote": "6–12 kk treenikorteilla. Fitness sisältää kuntosalin, kaikki jumpata + Aerial Bungee + Cross Training.",
+    "yearNote": "6–12 kk treenikorteilla. Fitness sisältää kuntosalin, kaikki jumpat + Aerial Bungee + Cross Training.",
     "yearPrices": [
       {
         "title": "Kuntosali",
@@ -115,7 +115,7 @@
       {
         "title": "Fitness*",
         "price": "56 €/kk",
-        "note": "Kuntosali + jumpata + Aerial Bungee + Cross Training"
+        "note": "Kuntosali + jumpat + Aerial Bungee + Cross Training"
       }
     ],
     "bonusTitle": "Etusi 105–184 €!",
@@ -131,8 +131,8 @@
       {
         "title": "Hieronta 3,5 h",
         "offer": "−25 %",
-        "price": "nyt 184 €",
-        "note": "Norm. 245 € · voidaan jakaa osiin"
+        "price": "Nyt 184 €",
+        "note": "Norm. 245 € · Voidaan jakaa osiin"
       },
       {
         "title": "Footbalance-pohjalliset",
@@ -143,19 +143,19 @@
       {
         "title": "Fysioterapia",
         "offer": "Kela 15 €",
-        "price": "max 4× / 2026",
+        "price": "Max 4× / 2026",
         "note": "Ei tarvita lääkärin lähetettä"
       },
       {
         "title": "Hieronta & kuppaus / kuumakivi",
         "offer": "−20 %",
-        "price": "tai faskiakäsittely −20 %",
+        "price": "Tai faskiakäsittely −20 %",
         "note": "Työkaluilla tai käsillä"
       },
       {
         "title": "Hoitosarja 3 × 60 min",
-        "offer": "erikoishinta",
-        "price": "vain 180 €",
+        "offer": "Erikoishinta",
+        "price": "Vain 180 €",
         "note": "Norm. 225 €"
       }
     ]
@@ -203,7 +203,7 @@
     "painonpudotusDuo": "315 €/hlö"
   },
   "ryhmaliikuntaInfo": {
-    "intro": "Jumpata pidetään 4:llä, Aerial Bungee 3:lla ja joogat 6:lla. Varaus & peruutus viimeistään edellisenä iltana klo 20 mennessä. Ilmoittaudu Nimenhuudossa tai lähetä nimi & sähköposti tekstiviestillä numeroon 040-1402849.",
+    "intro": "Jumpat pidetään 4:llä, Aerial Bungee 3:lla ja joogat 6:lla. Varaus & peruutus viimeistään edellisenä iltana klo 20 mennessä. Ilmoittaudu Nimenhuudossa tai lähetä nimi & sähköposti tekstiviestillä numeroon 040-1402849.",
     "classes": [
       "Hatha-jooga 75 ma 19.15–20.30 & Voima-jooga 60 ke 19.15–20.15",
       "Cross Training la 11.30–12.30 (2.10. alk.)",
@@ -212,6 +212,6 @@
       "Aerial Bungee 55 pe 18.45–19.40 – Fitness-kortilla mukaan",
       "Äänimaljarentoutus ti 17.30–18.30 (joka toinen tiistai)"
     ],
-    "outro": "Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen. Fitness sisältää kuntosalin 4–24 + jumpata + Aerial Bungee 55 + Cross Training + joogat. Ryhmäliikunta sisältää jumpata + Kangoo Jumps + joogat."
+    "outro": "Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen. Fitness sisältää kuntosalin 4–24 + jumpat + Aerial Bungee 55 + Cross Training + joogat. Ryhmäliikunta sisältää jumpat + Kangoo Jumps + joogat."
   }
 }

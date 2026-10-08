@@ -1,4 +1,4 @@
-import { readStoredJson, writeStoredJson } from "@/lib/storage";
+﻿import { readStoredJson, writeStoredJson } from "@/lib/storage";
 
 export type MembershipRow = {
   product: string;
@@ -109,7 +109,7 @@ export const defaultServicePrices: ServicePrices = {
 
 export const defaultRyhmaliikuntaInfo: RyhmaliikuntaInfo = {
   intro:
-    "Jumpata pidetään 4:llä, Aerial Bungee 3:lla ja joogat 6:lla. Varaus & peruutus viimeistään edellisenä iltana klo 20 mennessä. Ilmoittaudu Nimenhuudossa tai lähetä nimi & sähköposti tekstiviestillä numeroon 040-1402849.",
+    "Jumpat pidetään 4:llä, Aerial Bungee 3:lla ja joogat 6:lla. Varaus & peruutus viimeistään edellisenä iltana klo 20 mennessä. Ilmoittaudu Nimenhuudossa tai lähetä nimi & sähköposti tekstiviestillä numeroon 040-1402849.",
   classes: [
     "Hatha-jooga 75 ma 19.15–20.30 & Voima-jooga 60 ke 19.15–20.15",
     "Cross Training la 11.30–12.30 (2.10. alk.)",
@@ -119,7 +119,7 @@ export const defaultRyhmaliikuntaInfo: RyhmaliikuntaInfo = {
     "Äänimaljarentoutus ti 17.30–18.30 (joka toinen tiistai)",
   ],
   outro:
-    "Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen. Fitness sisältää kuntosalin 4–24 + jumpata + Aerial Bungee 55 + Cross Training + joogat. Ryhmäliikunta sisältää jumpata + Kangoo Jumps + joogat.",
+    "Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen. Fitness sisältää kuntosalin 4–24 + jumpat + Aerial Bungee 55 + Cross Training + joogat. Ryhmäliikunta sisältää jumpat + Kangoo Jumps + joogat.",
 };
 
 type StoredPrices = Omit<PricesData, "servicePrices" | "ryhmaliikuntaInfo"> & {

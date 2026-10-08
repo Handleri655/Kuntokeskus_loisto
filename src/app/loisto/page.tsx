@@ -18,7 +18,7 @@ export default function LoistoPage() {
       <PageHero
         eyebrow="Meistä"
         title="Hollolassa vuodesta 1992"
-        lead="Kuntosali · ryhmäliikunta · solarium · personal training · painonpudotus. Paikallinen kuntokeskus, jossa treenaat omalla tavallasi."
+        lead="Kuntosali · ryhmäliikunta · solarium / hierontatuoli · personal training · painonpudotus. Paikallinen kuntokeskus, jossa treenaat omalla tavallasi."
         image="/images/hero-gym.jpg"
         imageAlt="Kuntokeskus Loisto"
       />

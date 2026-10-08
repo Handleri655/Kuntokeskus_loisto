@@ -33,32 +33,36 @@ export default async function RyhmaliikuntaPage() {
       <HeroMotion
         className="relative isolate min-h-[52vh] overflow-hidden bg-ink text-white md:min-h-[60vh]"
         contentClassName="container-page relative flex min-h-[52vh] flex-col justify-end pb-10 pt-28 md:min-h-[60vh] md:pb-14"
+        veilClassName="hero-veil-strong"
         image={
           <Image
-            src="/images/group-fitness.jpg"
-            alt="Ryhmäliikuntatunti Kuntokeskus Loistossa"
+            src="/images/lavis.jpg"
+            alt="Lavis-lavatanssijumppa Kuntokeskus Loistossa"
             fill
             priority
-            className="object-cover object-[center_35%]"
+            quality={90}
+            className="object-cover object-[center_40%]"
             sizes="100vw"
           />
         }
       >
         <HeroLine>
-          <p className="eyebrow text-accent-bright">{autumn.eyebrow}</p>
+          <p className="eyebrow text-accent-bright drop-shadow-sm">
+            {autumn.eyebrow}
+          </p>
         </HeroLine>
         <HeroLine>
-          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.4rem)] font-semibold leading-[1.05] tracking-tight">
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.4rem)] font-semibold leading-[1.05] tracking-tight drop-shadow-md">
             {autumn.title}
           </h1>
         </HeroLine>
         <HeroLine>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white md:text-lg drop-shadow-sm">
             {autumn.lead}
           </p>
         </HeroLine>
         <HeroLine>
-          <p className="mt-4 text-sm font-semibold tracking-wide text-accent-bright md:text-base">
+          <p className="mt-4 text-sm font-semibold tracking-wide text-accent-bright md:text-base drop-shadow-sm">
             Ryhmäliikunta alk. {prices.headline.highlightRyhmaliikunta} · Fitness
             alk. {prices.headline.highlightFitness}
           </p>
@@ -185,6 +189,14 @@ export default async function RyhmaliikuntaPage() {
               Tyypillinen viikko. Tarkat päivät ja ilmoittautuminen ovat
               yllä Nimenhuudossa.
             </p>
+            <div className="mt-5">
+              <Link
+                href="/ryhmaliikunta/tulosta"
+                className="inline-flex rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white"
+              >
+                Tulosta A4-viikko-ohjelma
+              </Link>
+            </div>
           </Reveal>
           <div className="mt-8">
             <ScheduleTable days={autumn.days} />

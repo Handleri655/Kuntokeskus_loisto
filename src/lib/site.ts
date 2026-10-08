@@ -13,7 +13,7 @@ export const site = {
   address: "Keskuskatu 4, 15870 Hollola",
   mapsUrl:
     "https://maps.google.com/?q=Keskuskatu+4,+15870+Hollola,+Finland",
-  paymentMethods: ["Edenred", "E-passi", "Smartum"],
+  paymentMethods: ["Edenred", "E-passi"],
   bankAccount: "OP FI37 5311 0020 1134 71",
   jariSite: "https://www.tmijarik.fi",
   nimenhuutoUrl: "https://aerodiggarit.nimenhuuto.com",
@@ -68,7 +68,7 @@ export const servicesNav = [
   { href: "/aanimaljarentoutus", label: "Äänimaljarentoutus" },
   { href: "/hyvinvointi", label: "Hyvinvointi" },
   { href: "/painonpudotus", label: "Painonpudotus" },
-  { href: "/solarium", label: "Solarium" },
+  { href: "/solarium", label: "Solarium / hierontatuoli" },
 ] as const;
 
 /** @deprecated use servicesNav — kept for any leftover imports */
@@ -106,8 +106,8 @@ export const services = [
   },
   {
     href: "/solarium",
-    title: "Solarium ja hierontatuoli",
-    text: "Rusketusta ympäri vuoden ja hierontatuoli salilla – kysy käyttöä paikan päällä.",
+    title: "Solarium / hierontatuoli",
+    text: "Rusketusta ympäri vuoden ja hierontatuoli kuntokeskuksessa – kysy käyttöä paikan päällä.",
   },
   {
     href: "/aerial-bungee",

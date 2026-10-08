@@ -70,7 +70,7 @@ export function Header() {
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-3 md:h-[5.25rem] md:gap-4">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <Link
-            href="/koti"
+            href="/"
             className="group min-w-0 leading-tight"
             onClick={() => setOpen(false)}
           >

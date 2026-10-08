@@ -130,6 +130,23 @@ body {
   );
 }
 
+/* Kirkkaille taustakuville (esim. jumppatila) */
+.hero-veil-strong {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(28, 22, 18, 0.35) 0%,
+      rgba(28, 22, 18, 0.55) 42%,
+      rgba(28, 22, 18, 0.88) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(28, 22, 18, 0.45) 0%,
+      rgba(28, 22, 18, 0.12) 55%,
+      transparent 100%
+    );
+}
+
 .section-pad {
   padding-block: clamp(3.25rem, 6.5vw, 5.5rem);
 }
@@ -397,5 +414,191 @@ body {
   .animate-rise-delay-2,
   .animate-drift {
     animation: none !important;
+  }
+}
+
+/* A4 ryhmäliikunta print sheet */
+.print-sheet {
+  width: min(210mm, calc(100% - 2rem));
+  margin: 0 auto 2rem;
+  padding: 12mm 11mm 10mm;
+  box-sizing: border-box;
+}
+
+.print-sheet__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.print-sheet__brand {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.print-sheet__title {
+  font-family: var(--font-display), Georgia, serif;
+  margin-top: 0.15rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.print-sheet__meta {
+  text-align: right;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.print-sheet__lead {
+  margin: 0.55rem 0 0.7rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.print-sheet__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.55rem 0.85rem;
+}
+
+@media (min-width: 720px) {
+  .print-sheet__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.print-day {
+  break-inside: avoid;
+  border: 1px solid var(--line);
+  border-radius: 0.45rem;
+  overflow: hidden;
+}
+
+.print-day__name {
+  margin: 0;
+  padding: 0.28rem 0.45rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: color-mix(in oklab, var(--accent) 12%, white);
+  border-bottom: 1px solid var(--line);
+}
+
+.print-day__list {
+  margin: 0;
+  padding: 0.2rem 0;
+  list-style: none;
+}
+
+.print-class {
+  display: grid;
+  grid-template-columns: 4.6rem 1fr 2.4rem;
+  gap: 0.25rem 0.35rem;
+  padding: 0.22rem 0.4rem;
+  align-items: start;
+  font-size: 0.68rem;
+  line-height: 1.25;
+}
+
+.print-class + .print-class {
+  border-top: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+}
+
+.print-class__time {
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.print-class__body {
+  display: grid;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.print-class__name {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.print-class__note {
+  color: var(--muted);
+  font-size: 0.62rem;
+}
+
+.print-class__instructor {
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+
+.print-sheet__footer {
+  margin-top: 0.7rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .no-print,
+  .print-toolbar {
+    display: none !important;
+  }
+
+  .print-page {
+    background: white !important;
+    min-height: 0 !important;
+  }
+
+  .print-sheet {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none !important;
+  }
+
+  .print-sheet__grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .print-day {
+    border-color: #bbb;
+  }
+
+  .print-day__name {
+    background: #f1f1f1 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-class__time {
+    color: #c45a12 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

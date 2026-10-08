@@ -362,7 +362,7 @@ export function AdminEditor({
           <Card
             title="Etusivun kolme hintaa"
             description="Kolme nostoa etusivun tarjousosiossa."
-            appearsOn="/koti"
+            appearsOn="/"
           >
             <div className="grid gap-4 md:grid-cols-3">
               {prices.homeHighlights.map((item, index) => (

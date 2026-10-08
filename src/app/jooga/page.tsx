@@ -28,8 +28,9 @@ export default async function JoogaPage() {
         eyebrow="Jooga"
         title="Hatha & voima­jooga"
         lead="Lempeää palautumista ja vahvistavaa harjoittelua – jokaiselle sopivalla tavalla. Ohjaajana koulutettu joogaohjaaja Ulla."
-        image="/images/jooga.jpg"
+        image="/images/yoga.jpg"
         imageAlt="Joogaharjoittelua"
+        veilClassName="hero-veil-strong"
       />
 
       <section className="section-pad">
@@ -100,7 +101,7 @@ export default async function JoogaPage() {
           <Reveal delay={0.05}>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
               <Image
-                src="/images/yoga.jpg"
+                src="/images/jooga.jpg"
                 alt="Joogamatolla"
                 fill
                 className="object-cover"

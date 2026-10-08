@@ -159,6 +159,15 @@ export default function InfoPage() {
               <h2 className="font-display mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
                 Päivystys paikalla
               </h2>
+              <div className="mt-5 rounded-[1.15rem] border border-accent/25 bg-[rgba(224,122,40,0.14)] px-4 py-4 md:px-5 md:py-5">
+                <p className="font-display text-xl font-semibold tracking-tight text-ink md:text-2xl">
+                  Päivystys paikalla myös erikseen sovittaessa.
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">
+                  Sovi aika puhelimitse tai viestillä – autamme myös
+                  listattujen päivystysaikojen ulkopuolella.
+                </p>
+              </div>
               <ul className="mt-6 max-w-xl space-y-3">
                 {dutyHours.map((row) => (
                   <li
@@ -172,10 +181,7 @@ export default function InfoPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-sm text-muted">
-                Päivystys paikalla myös erikseen sovittaessa.
-              </p>
-              <div className="mt-6 rounded-[1.15rem] bg-[rgba(224,122,40,0.12)] px-4 py-4">
+              <div className="mt-6 rounded-[1.15rem] bg-[rgba(224,122,40,0.08)] px-4 py-4">
                 <p className="font-display text-lg font-semibold tracking-tight text-ink">
                   Avainkortilla treenaat {site.keycardHours} joka päivä.
                 </p>

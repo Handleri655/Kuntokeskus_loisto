@@ -56,14 +56,16 @@ export default async function PersonalTrainingPage() {
         contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/training.jpg"
-            alt="Personal Training -ohjausta Kuntokeskus Loistossa Hollolassa"
+            src="/images/jari-pt.jpg"
+            alt="Personal trainer Jari Kotkansalo Kuntokeskus Loistossa"
             fill
             priority
-            className="object-cover object-[center_35%]"
+            quality={90}
+            className="object-cover object-[center_18%]"
             sizes="100vw"
           />
         }
+        veilClassName="hero-veil-strong"
       >
         <HeroLine>
           <p className="eyebrow text-accent-bright">
@@ -100,15 +102,30 @@ export default async function PersonalTrainingPage() {
       </HeroMotion>
 
       <section className="section-pad">
-        <div className="container-page grid items-start gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+        <div className="container-page grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
           <Reveal>
-            <p className="eyebrow text-accent">Lähtötilanne</p>
+            <div className="relative aspect-[3/4] overflow-hidden rounded-[1.35rem]">
+              <Image
+                src="/images/jari-pt.jpg"
+                alt="Jari Kotkansalo – personal trainer Kuntokeskus Loistossa"
+                fill
+                quality={90}
+                className="object-cover object-[center_15%]"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <p className="eyebrow text-accent">Valmentaja</p>
             <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-[2.5rem]">
-              Aloita kuntotestillä
+              Jari Kotkansalo
             </h2>
+            <p className="mt-3 text-sm font-semibold tracking-wide text-ink-soft">
+              Työfysioterapeutti · Kuntohoitaja · Personal trainer
+            </p>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
               Selvitetään lähtötilanteesi ja tehdään harjoittelusta
-              tavoitteellista. Kuntotestin pohjalta voidaan laatia
+              tavoitteellista. Aloita kuntotestillä – sen pohjalta laaditaan
               henkilökohtainen harjoitteluohjelma.
             </p>
             <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
@@ -116,44 +133,41 @@ export default async function PersonalTrainingPage() {
               (step-askellus), lihaskuntotestit, liikkuvuustesti ja
               kehonkoostumusmittaus.
             </p>
-          </Reveal>
-
-          <Reveal delay={0.06}>
-            <HoverCard className="panel panel-pad h-full">
+            <HoverCard className="panel panel-pad mt-8 max-w-md">
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
                 Hinnat
               </p>
-              <div className="mt-6 space-y-5">
-                <div className="flex items-end justify-between gap-4 border-b border-[var(--line)] pb-4">
+              <div className="mt-5 space-y-4">
+                <div className="flex items-end justify-between gap-4 border-b border-[var(--line)] pb-3">
                   <div>
-                    <p className="font-display text-xl font-semibold tracking-tight">
+                    <p className="font-display text-lg font-semibold tracking-tight">
                       Kuntotesti
                     </p>
-                    <p className="mt-1 text-sm text-muted">
+                    <p className="mt-0.5 text-sm text-muted">
                       Suunnitellaan tavoitteidesi mukaan
                     </p>
                   </div>
-                  <p className="font-display shrink-0 text-3xl font-semibold tracking-tight">
+                  <p className="font-display shrink-0 text-2xl font-semibold tracking-tight">
                     {program.kuntotesti}
                   </p>
                 </div>
                 <div className="flex items-end justify-between gap-4">
                   <div>
-                    <p className="font-display text-xl font-semibold tracking-tight">
+                    <p className="font-display text-lg font-semibold tracking-tight">
                       Kehonkoostumus
                     </p>
-                    <p className="mt-1 text-sm text-muted">Mittaus erikseen</p>
+                    <p className="mt-0.5 text-sm text-muted">Mittaus erikseen</p>
                   </div>
-                  <p className="font-display shrink-0 text-3xl font-semibold tracking-tight">
+                  <p className="font-display shrink-0 text-2xl font-semibold tracking-tight">
                     {program.kehonkoostumus}
                   </p>
                 </div>
               </div>
               <MotionAnchor
                 href={site.phoneHref}
-                className="btn-primary mt-8 w-full text-center"
+                className="btn-primary mt-6 w-full text-center"
               >
-                Kysy kuntotestistä – soita
+                Varaa PT-tapaaminen
               </MotionAnchor>
             </HoverCard>
           </Reveal>

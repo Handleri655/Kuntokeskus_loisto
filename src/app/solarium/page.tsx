@@ -10,9 +10,9 @@ import { getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Solarium Hollola",
+  title: "Solarium / hierontatuoli Hollola",
   description:
-    "Solarium Kuntokeskus Loistossa Hollolassa – magneettikortilla tai ajanvarauksella. Ikäraja 18 vuotta. Katso ohjeet ja kysy solariumkorttia.",
+    "Solarium ja hierontatuoli Kuntokeskus Loistossa Hollolassa – magneettikortilla tai ajanvarauksella. Ikäraja 18 vuotta. Katso ohjeet ja kysy solariumkorttia.",
   alternates: { canonical: "/solarium" },
 };
 
@@ -79,6 +79,9 @@ export default async function SolariumPage() {
   const chairSolarium = prices.extras.find((item) =>
     /solarium/i.test(item.title),
   );
+  const chairMassage = prices.extras.find((item) =>
+    /hierontatuoli/i.test(item.title),
+  );
 
   return (
     <>
@@ -91,17 +94,21 @@ export default async function SolariumPage() {
             alt="Solarium Kuntokeskus Loistossa Hollolassa"
             fill
             priority
-            className="object-cover object-[center_35%]"
+            quality={92}
+            className="object-cover object-[center_45%]"
             sizes="100vw"
           />
         }
+        veilClassName="hero-veil-strong"
       >
         <HeroLine>
-          <p className="eyebrow text-accent-bright">Solarium · Hollola</p>
+          <p className="eyebrow text-accent-bright">
+            Solarium / hierontatuoli · Hollola
+          </p>
         </HeroLine>
         <HeroLine>
           <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.05rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight">
-            Solarium{" "}
+            Solarium / hierontatuoli{" "}
             <span className="text-accent-bright">Hollolassa</span>
           </h1>
         </HeroLine>
@@ -172,32 +179,6 @@ export default async function SolariumPage() {
         </div>
       </section>
 
-      <section className="section-pad pt-0">
-        <div className="container-page grid items-center gap-8 lg:grid-cols-[1fr_0.95fr] lg:gap-14">
-          <Reveal>
-            <p className="eyebrow text-accent">Hierontatuoli</p>
-            <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-[2.5rem]">
-              Hierontatuoli salilla
-            </h2>
-            <p className="mt-4 max-w-md leading-relaxed text-ink-soft">
-              {chairSolarium?.text ?? "Hierontatuoli kuntokeskuksessa."} Kysy
-              käyttöä paikan päällä.
-            </p>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <div className="relative aspect-[5/4] overflow-hidden rounded-[1.35rem] bg-white">
-              <Image
-                src="/images/hierontatuoli.jpg"
-                alt="Hierontatuoli Kuntokeskus Loistossa"
-                fill
-                className="object-contain p-4"
-                sizes="(max-width: 1024px) 100vw, 45vw"
-              />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       <section className="section-pad section-band border-y border-[var(--line)]">
         <div className="container-page grid items-center gap-10 lg:grid-cols-[1fr_0.95fr] lg:gap-12">
           <Reveal>
@@ -228,10 +209,11 @@ export default async function SolariumPage() {
           <Reveal delay={0.05}>
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.35rem]">
               <Image
-                src="/images/solarium.jpg"
+                src="/images/hero-solarium.jpg"
                 alt="Solariumtila Kuntokeskus Loistossa"
                 fill
-                className="object-cover"
+                quality={90}
+                className="object-cover object-[center_40%]"
                 sizes="(max-width: 1024px) 100vw, 45vw"
               />
             </div>
@@ -304,9 +286,37 @@ export default async function SolariumPage() {
         </div>
       </section>
 
+      <section className="section-pad">
+        <div className="container-page grid items-center gap-8 lg:grid-cols-[1fr_0.95fr] lg:gap-14">
+          <Reveal>
+            <p className="eyebrow text-accent">Hierontatuoli</p>
+            <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight md:text-[2.5rem]">
+              Hierontatuoli kuntokeskuksessa
+            </h2>
+            <p className="mt-4 max-w-md leading-relaxed text-ink-soft">
+              {chairMassage?.text ??
+                chairSolarium?.text ??
+                "Hierontatuoli kuntokeskuksessa."}{" "}
+              Kysy käyttöä paikan päällä.
+            </p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <div className="relative aspect-[5/4] overflow-hidden rounded-[1.35rem] bg-white">
+              <Image
+                src="/images/hierontatuoli.jpg"
+                alt="Hierontatuoli Kuntokeskus Loistossa"
+                fill
+                className="object-contain p-4"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <ContactCTA
         title="Haluatko aloittaa?"
-        text="Kysy solariumkortista tai varmista käyttöön liittyvät ohjeet. Autamme sinut alkuun."
+        text="Kysy solariumkortista, hierontatuolista tai varmista käyttöön liittyvät ohjeet. Autamme sinut alkuun."
         primaryLabel={`Soita ${site.phone}`}
         phoneSecondaryLabel="Kysy solariumkorttia"
       />

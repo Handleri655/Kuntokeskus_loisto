@@ -79,6 +79,13 @@ function ptDiscount(text: string): string | null {
   return match ? match[0].replace(/\s+/g, " ").trim() : null;
 }
 
+/** Capitalize the first letter of a phrase (and after . ! ? ·). */
+function capitalizePhrase(value: string): string {
+  return value.replace(/(^|[.!?·]\s+)(\p{Ll})/gu, (_, prefix: string, letter: string) => {
+    return `${prefix}${letter.toLocaleUpperCase("fi-FI")}`;
+  });
+}
+
 export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
   const ptBadge = ptDiscount(offers.ptText);
 
@@ -97,7 +104,7 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
               Uusi asiakas – treenaa puoleen hintaan
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-white/75">
-              {offers.trialNote}
+              {capitalizePhrase(offers.trialNote)}
             </p>
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               {offers.trialPrices.map((item, index) => (
@@ -136,7 +143,7 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
               Ihan kaikille – rajoitetun ajan
             </h2>
             <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
-              {offers.yearNote}
+              {capitalizePhrase(offers.yearNote)}
             </p>
             <div className="mt-8 grid gap-3 md:grid-cols-3">
               {offers.yearPrices.map((item) => (
@@ -192,9 +199,11 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
           </div>
           <div className="flex flex-1 flex-col px-6 py-8">
             <h2 className="font-display text-3xl font-semibold tracking-tight">
-              {offers.ptTitle}
+              {capitalizePhrase(offers.ptTitle)}
             </h2>
-            <p className="mt-4 leading-relaxed text-white/75">{offers.ptText}</p>
+            <p className="mt-4 leading-relaxed text-white/75">
+              {capitalizePhrase(offers.ptText)}
+            </p>
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-5">
                 <p className="text-sm font-semibold text-white/65">10 kertaa</p>
@@ -230,7 +239,7 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
                 Intensiivi 75
               </h2>
               <p className="mt-4 flex-1 leading-relaxed text-ink-soft">
-                {offers.aerialText}
+                {capitalizePhrase(offers.aerialText)}
               </p>
               <div className="mt-8">
                 <MotionLink href="/aerial-bungee" className="btn-primary">
@@ -266,18 +275,21 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
               <HoverCard key={item.title}>
                 <article className="flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-accent/20 bg-white shadow-sm">
                   <p className="bg-accent px-5 py-3 text-center text-lg font-bold tracking-wide text-white">
-                    {item.offer}
+                    {capitalizePhrase(item.offer)}
                   </p>
                   <div className="flex flex-1 flex-col px-5 py-6">
                     <h3 className="font-display text-xl font-semibold tracking-tight">
-                      {item.title}
+                      {capitalizePhrase(item.title)}
                     </h3>
                     <div className="mt-4">
-                      <DealPrice price={item.price} was={was ?? undefined} />
+                      <DealPrice
+                        price={capitalizePhrase(item.price)}
+                        was={was ?? undefined}
+                      />
                     </div>
                     {rest ? (
                       <p className="mt-3 text-sm leading-relaxed text-muted">
-                        {rest}
+                        {capitalizePhrase(rest)}
                       </p>
                     ) : null}
                   </div>

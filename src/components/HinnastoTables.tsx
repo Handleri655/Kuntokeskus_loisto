@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/Reveal";
+﻿import { Reveal } from "@/components/Reveal";
 import {
   parseMembershipPrice,
   type ParsedPriceGroup,
@@ -21,12 +21,12 @@ const categories: {
   {
     key: "ryhmaliikunta",
     title: "Ryhmäliikunta",
-    note: "Jumpata, Kangoo ja joogat kortilla.",
+    note: "Jumpat, Kangoo ja joogat kortilla.",
   },
   {
     key: "fitness",
     title: "Fitness",
-    note: "Kuntosali + jumpata + Aerial Bungee 55 + Cross Training.",
+    note: "Kuntosali + jumpat + Aerial Bungee 55 + Cross Training.",
   },
 ];
 

@@ -67,6 +67,7 @@ export default async function HyvinvointiPage() {
             sizes="100vw"
           />
         }
+        veilClassName="hero-veil-strong"
       >
         <HeroLine>
           <p className="eyebrow text-accent-bright">Hyvinvointi · Hollola</p>
@@ -89,7 +90,7 @@ export default async function HyvinvointiPage() {
               Varaa hoitoaika
             </MotionAnchor>
             <MotionAnchor href={site.jariSmsHref} className="btn-ghost">
-              Tekstaa
+              Laita viesti
             </MotionAnchor>
             <MotionLink href="#palvelut" className="btn-ghost">
               Katso palvelut
@@ -130,7 +131,7 @@ export default async function HyvinvointiPage() {
                       href={site.jariSmsHref}
                       className="inline-flex text-sm font-semibold text-ink-soft transition hover:text-accent"
                     >
-                      Tekstaa
+                      Laita viesti
                     </MotionAnchor>
                   </div>
                 </HoverCard>
@@ -160,6 +161,9 @@ export default async function HyvinvointiPage() {
                 tarjoukset
               </a>
               .
+            </p>
+            <p className="mt-3 max-w-xl text-sm font-semibold leading-relaxed text-ink">
+              Maksuvälineenä käy myös E-passi ja Edenred.
             </p>
           </Reveal>
 
@@ -271,10 +275,11 @@ export default async function HyvinvointiPage() {
 
       <ContactCTA
         title="Kaipaatko apua kehonhuoltoon?"
-        text="Tekstaa, soita tai lähetä sähköposti – kysy sopivasta palvelusta."
+        text="Laita viesti, soita tai lähetä sähköposti – kysy sopivasta palvelusta."
         primaryLabel={`Soita Jarille ${site.jariPhone}`}
         primaryHref={site.jariPhoneHref}
         showMessageOptions
+        smsLabel="Laita viesti"
         smsHref={site.jariSmsHref}
         hideInfoLink
       />

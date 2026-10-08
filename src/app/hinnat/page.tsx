@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
@@ -77,14 +77,15 @@ export default async function HinnatPage() {
         <div className="container-page">
           <Reveal>
             <p className="eyebrow text-accent">Hinnasto</p>
-            <h2 className="font-display mt-3 max-w-2xl text-3xl font-semibold tracking-tight md:text-[2.5rem]">
-              Valitse kortti
+            <h2 className="font-display mt-3 max-w-3xl text-3xl font-semibold tracking-tight md:text-[2.5rem]">
+              Valitse kortti – Kuntosali, ryhmäliikunta tai Fitness
+              (yhdistelmä)
             </h2>
             <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
               Normaalihinta ja alennettu hinta ovat omissa sarakkeissaan.
               Alennus on sama opiskelijalle, eläkeläiselle ja työttömälle.
               Fitness sisältää kuntosalin {site.keycardHours}, Aerial Bungee
-              55, Cross Trainingin ja kaikki jumpata.
+              55, Cross Trainingin ja kaikki jumpat.
             </p>
           </Reveal>
 
@@ -110,7 +111,7 @@ export default async function HinnatPage() {
               ...extras,
               {
                 title: "Maksutavat",
-                text: `Pankki- ja luottokortit, käteinen, Smartum, Edenred, E-passi. Tilille: ${site.bankAccount}`,
+                text: `Pankki- ja luottokortit, käteinen, Edenred, E-passi. Tilille: ${site.bankAccount}`,
               },
             ].map((item) => (
               <StaggerItem key={item.title} hover>
@@ -155,7 +156,7 @@ export default async function HinnatPage() {
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                 Fitness-kortti sisältää kuntosalin {site.keycardHours}, Aerial
-                Bungee 55, Cross Trainingin ja kaikki jumpata.
+                Bungee 55, Cross Trainingin ja kaikki jumpat.
               </li>
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
@@ -164,7 +165,7 @@ export default async function HinnatPage() {
               </li>
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                Maksutavat: pankki- ja luottokortit, käteinen, Smartum, Edenred,
+                Maksutavat: pankki- ja luottokortit, käteinen, Edenred,
                 E-passi.
               </li>
             </ul>
