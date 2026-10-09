@@ -65,6 +65,37 @@ export function ItemBox({
   );
 }
 
+export function Checkbox({
+  label,
+  checked,
+  onChange,
+  hint,
+}: {
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  hint?: string;
+}) {
+  return (
+    <label className="flex cursor-pointer items-start gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="mt-0.5 h-4 w-4 shrink-0 rounded border-[var(--line)] text-accent focus:ring-accent/30"
+      />
+      <span>
+        <span className="font-semibold text-ink">{label}</span>
+        {hint ? (
+          <span className="mt-0.5 block text-xs leading-snug text-muted">
+            {hint}
+          </span>
+        ) : null}
+      </span>
+    </label>
+  );
+}
+
 export function Card({
   title,
   description,

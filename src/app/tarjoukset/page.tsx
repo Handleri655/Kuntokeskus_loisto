@@ -38,19 +38,30 @@ export default async function TarjouksetPage() {
   const { offers, personalTraining, membershipRows } = prices;
   const flyerImageSrc = flyerSrc(flyer);
   const ptDiscount = offers.ptText.match(/−\s*\d+\s*%/)?.[0]?.replace(/\s+/g, " ");
+  const { visibility } = offers;
 
   const jumps = [
-    { href: "#tutustuminen", label: offers.trialBadge },
-    { href: "#vuosietu", label: "Vuoden etu" },
-    {
-      href: "#pt",
-      label: ptDiscount
-        ? `PT ${ptDiscount}`
-        : `PT ${personalTraining.pt10Offer}`,
-    },
-    { href: "#aerial", label: "Aerial" },
-    { href: "#hyvinvointi", label: "Hoidot" },
-  ];
+    visibility.trial
+      ? { href: "#tutustuminen", label: offers.trialBadge || offers.trialEyebrow }
+      : null,
+    visibility.year
+      ? { href: "#vuosietu", label: offers.jumpYear || offers.yearBadge }
+      : null,
+    visibility.pt
+      ? {
+          href: "#pt",
+          label: ptDiscount
+            ? `PT ${ptDiscount}`
+            : `PT ${personalTraining.pt10Offer}`,
+        }
+      : null,
+    visibility.aerial
+      ? { href: "#aerial", label: offers.jumpAerial }
+      : null,
+    visibility.treatments
+      ? { href: "#hyvinvointi", label: offers.jumpTreatments }
+      : null,
+  ].filter((item): item is { href: string; label: string } => Boolean(item));
 
   return (
     <>

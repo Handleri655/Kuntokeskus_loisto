@@ -11,6 +11,8 @@ export type PriceItem = {
   title: string;
   price: string;
   note?: string;
+  /** Piilotettu tarjoukset-sivulta (säilytetään hallinnassa) */
+  hidden?: boolean;
 };
 
 export type ExtraItem = {
@@ -23,6 +25,46 @@ export type TreatmentItem = {
   offer: string;
   price: string;
   note: string;
+  /** Piilotettu tarjoukset-sivulta (säilytetään hallinnassa) */
+  hidden?: boolean;
+};
+
+export type OfferSectionKey =
+  | "trial"
+  | "year"
+  | "pt"
+  | "aerial"
+  | "treatments";
+
+export type OfferVisibility = Record<OfferSectionKey, boolean>;
+
+export type OffersData = {
+  trialBadge: string;
+  trialNote: string;
+  trialEyebrow: string;
+  trialHeading: string;
+  trialPrices: PriceItem[];
+  ptTitle: string;
+  ptText: string;
+  ptEyebrow: string;
+  yearBadge: string;
+  yearNote: string;
+  yearHeading: string;
+  yearPrices: PriceItem[];
+  bonusTitle: string;
+  bonuses: string[];
+  aerialBadge: string;
+  aerialText: string;
+  aerialEyebrow: string;
+  aerialHeading: string;
+  treatmentsEyebrow: string;
+  treatmentsHeading: string;
+  treatmentsLead: string;
+  jumpYear: string;
+  jumpAerial: string;
+  jumpTreatments: string;
+  treatments: TreatmentItem[];
+  visibility: OfferVisibility;
 };
 
 export type ServicePrices = {
@@ -49,21 +91,7 @@ export type PricesData = {
   };
   membershipRows: MembershipRow[];
   extras: ExtraItem[];
-  offers: {
-    trialBadge: string;
-    trialNote: string;
-    trialPrices: PriceItem[];
-    ptTitle: string;
-    ptText: string;
-    yearBadge: string;
-    yearNote: string;
-    yearPrices: PriceItem[];
-    bonusTitle: string;
-    bonuses: string[];
-    aerialBadge: string;
-    aerialText: string;
-    treatments: TreatmentItem[];
-  };
+  offers: OffersData;
   personalTraining: {
     ohjelma1: string;
     ohjelma2: string;
@@ -126,15 +154,119 @@ export const defaultRyhmaliikuntaInfo: RyhmaliikuntaInfo = {
     "Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen. Fitness sisältää kuntosalin 4–24 + jumpat + Aerial Bungee 55 + Cross Training + joogat. Ryhmäliikunta sisältää jumpat + Kangoo Jumps + joogat.",
 };
 
-type StoredPrices = Omit<PricesData, "servicePrices" | "ryhmaliikuntaInfo"> & {
+export const defaultOfferVisibility: OfferVisibility = {
+  trial: true,
+  year: true,
+  pt: true,
+  aerial: true,
+  treatments: true,
+};
+
+export const defaultOfferCopy = {
+  trialEyebrow: "Tutustumistreenit",
+  trialHeading: "Uusi asiakas – treenaa puoleen hintaan",
+  ptEyebrow: "Personal Training",
+  yearHeading: "Ihan kaikille – rajoitetun ajan",
+  aerialEyebrow: "Aerial Bungee",
+  aerialHeading: "Intensiivi 75",
+  treatmentsEyebrow: "Hyvinvointi",
+  treatmentsHeading: "Superedulliset hoitosarjat",
+  treatmentsLead:
+    "Hieronta, Footbalance, fysioterapia, kuppaus, kuumakivi ja faskiakäsittely – edut voimassa rajoitetusti.",
+  jumpYear: "Vuoden etu",
+  jumpAerial: "Aerial",
+  jumpTreatments: "Hoidot",
+} as const;
+
+type StoredOffers = Partial<Omit<OffersData, "visibility" | "treatments" | "trialPrices" | "yearPrices" | "bonuses">> & {
+  trialPrices?: PriceItem[] | null;
+  yearPrices?: PriceItem[] | null;
+  treatments?: TreatmentItem[] | null;
+  bonuses?: string[] | null;
+  visibility?: Partial<OfferVisibility> | null;
+};
+
+type StoredPrices = Omit<
+  PricesData,
+  "servicePrices" | "ryhmaliikuntaInfo" | "offers"
+> & {
   servicePrices?: Partial<ServicePrices> | null;
   ryhmaliikuntaInfo?: Partial<RyhmaliikuntaInfo> | null;
+  offers?: StoredOffers | null;
 };
+
+function normalizePriceItems(items: PriceItem[] | null | undefined): PriceItem[] {
+  if (!Array.isArray(items)) return [];
+  return items.map((item) => ({
+    title: item.title ?? "",
+    price: item.price ?? "",
+    note: item.note,
+    hidden: Boolean(item.hidden),
+  }));
+}
+
+function normalizeTreatments(
+  items: TreatmentItem[] | null | undefined,
+): TreatmentItem[] {
+  if (!Array.isArray(items)) return [];
+  return items.map((item) => ({
+    title: item.title ?? "",
+    offer: item.offer ?? "",
+    price: item.price ?? "",
+    note: item.note ?? "",
+    hidden: Boolean(item.hidden),
+  }));
+}
+
+export function normalizeOffers(offers: StoredOffers | null | undefined): OffersData {
+  const src = offers ?? {};
+  const visibility = {
+    ...defaultOfferVisibility,
+    ...(src.visibility ?? {}),
+  };
+  return {
+    trialBadge: src.trialBadge ?? "",
+    trialNote: src.trialNote ?? "",
+    trialEyebrow: src.trialEyebrow ?? defaultOfferCopy.trialEyebrow,
+    trialHeading: src.trialHeading ?? defaultOfferCopy.trialHeading,
+    trialPrices: normalizePriceItems(src.trialPrices),
+    ptTitle: src.ptTitle ?? "",
+    ptText: src.ptText ?? "",
+    ptEyebrow: src.ptEyebrow ?? defaultOfferCopy.ptEyebrow,
+    yearBadge: src.yearBadge ?? "",
+    yearNote: src.yearNote ?? "",
+    yearHeading: src.yearHeading ?? defaultOfferCopy.yearHeading,
+    yearPrices: normalizePriceItems(src.yearPrices),
+    bonusTitle: src.bonusTitle ?? "",
+    bonuses: Array.isArray(src.bonuses) ? src.bonuses.filter(Boolean) : [],
+    aerialBadge: src.aerialBadge ?? "",
+    aerialText: src.aerialText ?? "",
+    aerialEyebrow: src.aerialEyebrow ?? defaultOfferCopy.aerialEyebrow,
+    aerialHeading: src.aerialHeading ?? defaultOfferCopy.aerialHeading,
+    treatmentsEyebrow:
+      src.treatmentsEyebrow ?? defaultOfferCopy.treatmentsEyebrow,
+    treatmentsHeading:
+      src.treatmentsHeading ?? defaultOfferCopy.treatmentsHeading,
+    treatmentsLead: src.treatmentsLead ?? defaultOfferCopy.treatmentsLead,
+    jumpYear: src.jumpYear ?? defaultOfferCopy.jumpYear,
+    jumpAerial: src.jumpAerial ?? defaultOfferCopy.jumpAerial,
+    jumpTreatments: src.jumpTreatments ?? defaultOfferCopy.jumpTreatments,
+    treatments: normalizeTreatments(src.treatments),
+    visibility: {
+      trial: visibility.trial !== false,
+      year: visibility.year !== false,
+      pt: visibility.pt !== false,
+      aerial: visibility.aerial !== false,
+      treatments: visibility.treatments !== false,
+    },
+  };
+}
 
 export function normalizePrices(data: StoredPrices): PricesData {
   const info = data.ryhmaliikuntaInfo ?? {};
   return {
     ...data,
+    offers: normalizeOffers(data.offers),
     servicePrices: {
       ...defaultServicePrices,
       ...(data.servicePrices ?? {}),
@@ -162,7 +294,7 @@ export async function getPrices(): Promise<PricesData> {
 export async function savePrices(data: PricesData): Promise<PricesData> {
   const program = getGymProgramPrices(data.personalTraining);
   const normalized = normalizePrices(data);
-  const { servicePrices, ryhmaliikuntaInfo } = normalized;
+  const { servicePrices, ryhmaliikuntaInfo, offers } = normalized;
   const extras = data.extras.map((item) => {
     if (/ohjelmat/i.test(item.title)) {
       return {
@@ -181,6 +313,7 @@ export async function savePrices(data: PricesData): Promise<PricesData> {
 
   const next: PricesData = {
     ...data,
+    offers,
     extras,
     servicePrices,
     ryhmaliikuntaInfo,
@@ -192,6 +325,11 @@ export async function savePrices(data: PricesData): Promise<PricesData> {
     updatedAt: new Date().toISOString(),
   };
   return writeStoredJson(STORAGE_KEY, SEED_FILE, next);
+}
+
+/** Visible cards for a price/treatment list (hidden stays in CMS). */
+export function visibleItems<T extends { hidden?: boolean }>(items: T[]): T[] {
+  return items.filter((item) => !item.hidden);
 }
 
 export function isPricesData(value: unknown): value is PricesData {

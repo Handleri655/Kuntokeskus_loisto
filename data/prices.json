@@ -83,39 +83,49 @@
   "offers": {
     "trialBadge": "1 kk −50 %",
     "trialNote": "Avainkortti 11 €. Treenaat klo 04–24 joka päivä.",
+    "trialEyebrow": "Tutustumistreenit",
+    "trialHeading": "Uusi asiakas – treenaa puoleen hintaan",
     "trialPrices": [
       {
         "title": "Kuntosali",
-        "price": "24,5 €"
+        "price": "24,5 €",
+        "hidden": false
       },
       {
         "title": "Ryhmäliikunta",
-        "price": "31 €"
+        "price": "31 €",
+        "hidden": false
       },
       {
         "title": "Fitness (yhdistelmä)",
-        "price": "40 €"
+        "price": "40 €",
+        "hidden": false
       }
     ],
     "ptTitle": "Intensiivi-painonpudotus & kunnonkohotus",
     "ptText": "−25 %. Tavoite 2–6 kg/kk. PT×10 nyt 450 € (norm. 600 €).",
+    "ptEyebrow": "Personal Training",
     "yearBadge": "Vuoden kovin superetu",
     "yearNote": "6–12 kk treenikorteilla. Fitness sisältää kuntosalin, kaikki jumpat + Aerial Bungee + Cross Training.",
+    "yearHeading": "Ihan kaikille – rajoitetun ajan",
     "yearPrices": [
       {
         "title": "Kuntosali",
         "price": "33 €/kk",
-        "note": "6–12 kk kortti"
+        "note": "alk. 12 kk kortti",
+        "hidden": false
       },
       {
         "title": "Ryhmäliikunta",
-        "price": "43 €/kk",
-        "note": "6–12 kk kortti"
+        "price": "43€",
+        "note": "alk. 12 kk kortti",
+        "hidden": false
       },
       {
         "title": "Fitness*",
         "price": "56 €/kk",
-        "note": "Kuntosali + jumpat + Aerial Bungee + Cross Training"
+        "note": "Kuntosali + jumpat + Aerial Bungee + Cross Training",
+        "hidden": false
       }
     ],
     "bonusTitle": "Etusi 105–184 €!",
@@ -127,36 +137,56 @@
     ],
     "aerialBadge": "−50 % 10.9. asti",
     "aerialText": "Alkeet, turvallisuus ja säädöt – pakollinen ennen Aerial Bungee -perustunteja.",
+    "aerialEyebrow": "Aerial Bungee",
+    "aerialHeading": "Intensiivi 75",
+    "treatmentsEyebrow": "Hyvinvointi",
+    "treatmentsHeading": "Superedulliset hoitosarjat",
+    "treatmentsLead": "Hieronta, Footbalance, fysioterapia, kuppaus, kuumakivi ja faskiakäsittely – edut voimassa rajoitetusti.",
+    "jumpYear": "Vuoden etu",
+    "jumpAerial": "Aerial",
+    "jumpTreatments": "Hoidot",
+    "visibility": {
+      "trial": true,
+      "year": true,
+      "pt": true,
+      "aerial": true,
+      "treatments": true
+    },
     "treatments": [
       {
         "title": "Hieronta 3,5 h",
         "offer": "−25 %",
         "price": "Nyt 184 €",
-        "note": "Norm. 245 € · Voidaan jakaa osiin"
+        "note": "Norm. 245 € · Voidaan jakaa osiin",
+        "hidden": false
       },
       {
         "title": "Footbalance-pohjalliset",
         "offer": "−15 %",
         "price": "Medical & Sport",
-        "note": "Yksilölliset pohjalliset"
+        "note": "Yksilölliset pohjalliset",
+        "hidden": false
       },
       {
         "title": "Fysioterapia",
         "offer": "Kela 15 €",
         "price": "Max 4× / 2026",
-        "note": "Ei tarvita lääkärin lähetettä"
+        "note": "Ei tarvita lääkärin lähetettä",
+        "hidden": false
       },
       {
         "title": "Hieronta & kuppaus / kuumakivi tai faskiakäsittely",
         "offer": "−20 %",
         "price": "−20 %",
-        "note": "Työkaluilla tai käsillä"
+        "note": "Työkaluilla tai käsillä",
+        "hidden": false
       },
       {
         "title": "Hoitosarja 3 × 60 min",
         "offer": "Erikoishinta",
         "price": "Vain 180 €",
-        "note": "Norm. 225 €"
+        "note": "Norm. 225 €",
+        "hidden": false
       }
     ]
   },
