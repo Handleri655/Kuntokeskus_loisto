@@ -2,7 +2,14 @@
 
 import { FlyerImageEditor } from "@/components/admin/FlyerImageEditor";
 import { Card, Checkbox, Field, ItemBox, TextArea } from "@/components/admin/fields";
-import type { OffersData, PriceItem, TreatmentItem } from "@/lib/prices";
+import {
+  createEmptyCustomSection,
+  type CustomOfferCard,
+  type CustomOfferSection,
+  type OffersData,
+  type PriceItem,
+  type TreatmentItem,
+} from "@/lib/prices";
 
 type Props = {
   offers: OffersData;
@@ -74,6 +81,37 @@ function ItemToolbar({
   );
 }
 
+function SectionMetaFields({
+  titleLabel,
+  title,
+  onTitleChange,
+  description,
+  onDescriptionChange,
+}: {
+  titleLabel?: string;
+  title: string;
+  onTitleChange: (value: string) => void;
+  description: string;
+  onDescriptionChange: (value: string) => void;
+}) {
+  return (
+    <div className="grid gap-4 rounded-xl border border-dashed border-accent/30 bg-[rgba(224,122,40,0.04)] p-4 md:grid-cols-2">
+      <Field
+        label={titleLabel ?? "Osion nimi hallinnassa / sivulla"}
+        value={title}
+        onChange={onTitleChange}
+      />
+      <TextArea
+        label="Osion kuvaus"
+        hint="Näkyy hallinnan kortin otsikon alla. Voit muokata vapaasti."
+        value={description}
+        rows={2}
+        onChange={onDescriptionChange}
+      />
+    </div>
+  );
+}
+
 export function OffersEditor({ offers, onChange }: Props) {
   function patch(partial: Partial<OffersData>) {
     onChange({ ...offers, ...partial });
@@ -103,11 +141,52 @@ export function OffersEditor({ offers, onChange }: Props) {
     patch({ treatments });
   }
 
+  function updateCustom(index: number, next: CustomOfferSection) {
+    const customSections = [...offers.customSections];
+    customSections[index] = next;
+    patch({ customSections });
+  }
+
+  function updateCustomCard(
+    sectionIndex: number,
+    cardIndex: number,
+    next: CustomOfferCard,
+  ) {
+    const section = offers.customSections[sectionIndex];
+    const cards = [...section.cards];
+    cards[cardIndex] = next;
+    updateCustom(sectionIndex, { ...section, cards });
+  }
+
   return (
     <div className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-accent/25 bg-[rgba(224,122,40,0.06)] px-5 py-4">
+        <div>
+          <p className="text-sm font-semibold text-ink">Omat tarjousosiot</p>
+          <p className="mt-0.5 text-sm text-muted">
+            Lisää kokonaan uusi osio tarjoukset-sivulle (otsikko, teksti ja
+            kortit).
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() =>
+            patch({
+              customSections: [
+                ...offers.customSections,
+                createEmptyCustomSection(),
+              ],
+            })
+          }
+          className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent/90"
+        >
+          + Lisää uusi tarjousosio
+        </button>
+      </div>
+
       <Card
-        title="Tutustumistreenit"
-        description="1 kk -tarjous uusille asiakkaille. Voit lisätä, piilottaa tai poistaa hintakortteja."
+        title={offers.trialEyebrow || "Tutustumistreenit"}
+        description={offers.trialSectionDescription}
         appearsOn="/tarjoukset"
         actions={
           <CardActions
@@ -127,12 +206,15 @@ export function OffersEditor({ offers, onChange }: Props) {
           checked={offers.visibility.trial}
           onChange={(value) => setVisibility("trial", value)}
         />
+        <SectionMetaFields
+          title={offers.trialEyebrow}
+          onTitleChange={(value) => patch({ trialEyebrow: value })}
+          description={offers.trialSectionDescription}
+          onDescriptionChange={(value) =>
+            patch({ trialSectionDescription: value })
+          }
+        />
         <div className="grid gap-4 md:grid-cols-2">
-          <Field
-            label="Osion yläotsikko"
-            value={offers.trialEyebrow}
-            onChange={(value) => patch({ trialEyebrow: value })}
-          />
           <Field
             label="Tarjousmerkki / hyppylinkki"
             hint="Esim. 1 kk −50 %"
@@ -176,10 +258,18 @@ export function OffersEditor({ offers, onChange }: Props) {
                 }
               />
               <Field
-                label="Hinta"
+                label="Tarjoushinta"
                 value={item.price}
                 onChange={(value) =>
                   updateTrial(index, { ...item, price: value })
+                }
+              />
+              <Field
+                label="Normaalihinta (yliviivattu)"
+                hint="Esim. 49 €. Jätä tyhjäksi, jos et halua yliviivausta."
+                value={item.was || ""}
+                onChange={(value) =>
+                  updateTrial(index, { ...item, was: value })
                 }
               />
             </ItemBox>
@@ -188,8 +278,8 @@ export function OffersEditor({ offers, onChange }: Props) {
       </Card>
 
       <Card
-        title="Vuoden superetu"
-        description="6–12 kk kuukausihinnat ja kaupan päälle -edut."
+        title={offers.yearBadge || "Vuoden superetu"}
+        description={offers.yearSectionDescription}
         appearsOn="/tarjoukset"
         actions={
           <CardActions
@@ -214,12 +304,15 @@ export function OffersEditor({ offers, onChange }: Props) {
           checked={offers.visibility.year}
           onChange={(value) => setVisibility("year", value)}
         />
+        <SectionMetaFields
+          title={offers.yearBadge}
+          onTitleChange={(value) => patch({ yearBadge: value })}
+          description={offers.yearSectionDescription}
+          onDescriptionChange={(value) =>
+            patch({ yearSectionDescription: value })
+          }
+        />
         <div className="grid gap-4 md:grid-cols-2">
-          <Field
-            label="Osion yläotsikko"
-            value={offers.yearBadge}
-            onChange={(value) => patch({ yearBadge: value })}
-          />
           <Field
             label="Hyppylinkin teksti"
             hint="Esim. Vuoden etu"
@@ -238,7 +331,7 @@ export function OffersEditor({ offers, onChange }: Props) {
           />
         </div>
         <TextArea
-          label="Kuvausteksti"
+          label="Kuvausteksti sivulla"
           value={offers.yearNote}
           onChange={(value) => patch({ yearNote: value })}
         />
@@ -301,20 +394,23 @@ export function OffersEditor({ offers, onChange }: Props) {
       </Card>
 
       <Card
-        title="PT-kampanja"
-        description="Personal Training -osio. Tarjoushinnat muokataan PT-hinnat -välilehdellä."
+        title={offers.ptEyebrow || "PT-kampanja"}
+        description={offers.ptSectionDescription}
         appearsOn="/tarjoukset"
       >
         <VisibilityToggle
           checked={offers.visibility.pt}
           onChange={(value) => setVisibility("pt", value)}
         />
+        <SectionMetaFields
+          title={offers.ptEyebrow}
+          onTitleChange={(value) => patch({ ptEyebrow: value })}
+          description={offers.ptSectionDescription}
+          onDescriptionChange={(value) =>
+            patch({ ptSectionDescription: value })
+          }
+        />
         <div className="grid gap-4 md:grid-cols-2">
-          <Field
-            label="Osion yläotsikko"
-            value={offers.ptEyebrow}
-            onChange={(value) => patch({ ptEyebrow: value })}
-          />
           <Field
             label="Otsikko"
             value={offers.ptTitle}
@@ -329,17 +425,24 @@ export function OffersEditor({ offers, onChange }: Props) {
         />
       </Card>
 
-      <Card title="Aerial Bungee -tarjous" appearsOn="/tarjoukset">
+      <Card
+        title={offers.aerialEyebrow || "Aerial Bungee"}
+        description={offers.aerialSectionDescription}
+        appearsOn="/tarjoukset"
+      >
         <VisibilityToggle
           checked={offers.visibility.aerial}
           onChange={(value) => setVisibility("aerial", value)}
         />
+        <SectionMetaFields
+          title={offers.aerialEyebrow}
+          onTitleChange={(value) => patch({ aerialEyebrow: value })}
+          description={offers.aerialSectionDescription}
+          onDescriptionChange={(value) =>
+            patch({ aerialSectionDescription: value })
+          }
+        />
         <div className="grid gap-4 md:grid-cols-2">
-          <Field
-            label="Osion yläotsikko"
-            value={offers.aerialEyebrow}
-            onChange={(value) => patch({ aerialEyebrow: value })}
-          />
           <Field
             label="Hyppylinkin teksti"
             value={offers.jumpAerial}
@@ -365,8 +468,8 @@ export function OffersEditor({ offers, onChange }: Props) {
       </Card>
 
       <Card
-        title="Hoitosarjat"
-        description="Hyvinvointitarjoukset. Lisää uusia kortteja tai piilota / poista vanhoja."
+        title={offers.treatmentsEyebrow || "Hoitosarjat"}
+        description={offers.treatmentsSectionDescription}
         appearsOn="/tarjoukset"
         actions={
           <CardActions
@@ -392,12 +495,15 @@ export function OffersEditor({ offers, onChange }: Props) {
           checked={offers.visibility.treatments}
           onChange={(value) => setVisibility("treatments", value)}
         />
+        <SectionMetaFields
+          title={offers.treatmentsEyebrow}
+          onTitleChange={(value) => patch({ treatmentsEyebrow: value })}
+          description={offers.treatmentsSectionDescription}
+          onDescriptionChange={(value) =>
+            patch({ treatmentsSectionDescription: value })
+          }
+        />
         <div className="grid gap-4 md:grid-cols-2">
-          <Field
-            label="Osion yläotsikko"
-            value={offers.treatmentsEyebrow}
-            onChange={(value) => patch({ treatmentsEyebrow: value })}
-          />
           <Field
             label="Hyppylinkin teksti"
             value={offers.jumpTreatments}
@@ -410,7 +516,7 @@ export function OffersEditor({ offers, onChange }: Props) {
           />
         </div>
         <TextArea
-          label="Kuvausteksti"
+          label="Kuvausteksti sivulla"
           value={offers.treatmentsLead}
           onChange={(value) => patch({ treatmentsLead: value })}
         />
@@ -467,6 +573,181 @@ export function OffersEditor({ offers, onChange }: Props) {
           ))}
         </div>
       </Card>
+
+      {offers.customSections.map((section, sectionIndex) => (
+        <Card
+          key={section.id}
+          title={section.eyebrow || "Oma tarjousosio"}
+          description={section.description}
+          appearsOn="/tarjoukset"
+          tone="accent"
+          actions={
+            <div className="flex flex-wrap gap-2">
+              <CardActions
+                addLabel="+ Lisää kortti"
+                onAdd={() =>
+                  updateCustom(sectionIndex, {
+                    ...section,
+                    cards: [
+                      ...section.cards,
+                      {
+                        title: "Uusi kortti",
+                        offer: "Tarjous",
+                        price: "",
+                        note: "",
+                        hidden: false,
+                      },
+                    ],
+                  })
+                }
+              />
+              <button
+                type="button"
+                onClick={() =>
+                  patch({
+                    customSections: offers.customSections.filter(
+                      (_, i) => i !== sectionIndex,
+                    ),
+                  })
+                }
+                className="rounded-full border border-signal/40 px-3 py-1.5 text-xs font-semibold text-signal transition hover:bg-[rgba(212,84,42,0.08)]"
+              >
+                Poista osio
+              </button>
+            </div>
+          }
+        >
+          <VisibilityToggle
+            checked={!section.hidden}
+            onChange={(visible) =>
+              updateCustom(sectionIndex, { ...section, hidden: !visible })
+            }
+          />
+          <SectionMetaFields
+            title={section.eyebrow}
+            onTitleChange={(value) =>
+              updateCustom(sectionIndex, { ...section, eyebrow: value })
+            }
+            description={section.description}
+            onDescriptionChange={(value) =>
+              updateCustom(sectionIndex, { ...section, description: value })
+            }
+          />
+          <div className="grid gap-4 md:grid-cols-2">
+            <Field
+              label="Pääotsikko"
+              value={section.heading}
+              onChange={(value) =>
+                updateCustom(sectionIndex, { ...section, heading: value })
+              }
+            />
+            <Field
+              label="Tarjousmerkki"
+              value={section.badge}
+              onChange={(value) =>
+                updateCustom(sectionIndex, { ...section, badge: value })
+              }
+            />
+            <Field
+              label="Hyppylinkin teksti"
+              value={section.jumpLabel}
+              onChange={(value) =>
+                updateCustom(sectionIndex, { ...section, jumpLabel: value })
+              }
+            />
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-semibold text-ink">Ulkoasu</span>
+              <select
+                value={section.tone}
+                onChange={(e) =>
+                  updateCustom(sectionIndex, {
+                    ...section,
+                    tone: e.target.value === "dark" ? "dark" : "light",
+                  })
+                }
+                className="rounded-xl border border-[var(--line)] bg-white px-3 py-2.5 text-[0.95rem] outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+              >
+                <option value="light">Vaalea</option>
+                <option value="dark">Tumma</option>
+              </select>
+            </label>
+          </div>
+          <TextArea
+            label="Kuvausteksti sivulla"
+            value={section.lead}
+            onChange={(value) =>
+              updateCustom(sectionIndex, { ...section, lead: value })
+            }
+          />
+          <div className="space-y-4">
+            {section.cards.map((card, cardIndex) => (
+              <ItemBox
+                key={`${section.id}-card-${cardIndex}`}
+                className={`md:grid-cols-2 ${card.hidden ? "opacity-60" : ""}`}
+              >
+                <div className="md:col-span-2">
+                  <ItemToolbar
+                    hidden={Boolean(card.hidden)}
+                    onHiddenChange={(hidden) =>
+                      updateCustomCard(sectionIndex, cardIndex, {
+                        ...card,
+                        hidden,
+                      })
+                    }
+                    onRemove={() =>
+                      updateCustom(sectionIndex, {
+                        ...section,
+                        cards: section.cards.filter((_, i) => i !== cardIndex),
+                      })
+                    }
+                    canRemove={section.cards.length > 1}
+                  />
+                </div>
+                <Field
+                  label="Otsikko"
+                  value={card.title}
+                  onChange={(value) =>
+                    updateCustomCard(sectionIndex, cardIndex, {
+                      ...card,
+                      title: value,
+                    })
+                  }
+                />
+                <Field
+                  label="Tarjousmerkintä"
+                  value={card.offer}
+                  onChange={(value) =>
+                    updateCustomCard(sectionIndex, cardIndex, {
+                      ...card,
+                      offer: value,
+                    })
+                  }
+                />
+                <Field
+                  label="Hinta"
+                  value={card.price}
+                  onChange={(value) =>
+                    updateCustomCard(sectionIndex, cardIndex, {
+                      ...card,
+                      price: value,
+                    })
+                  }
+                />
+                <Field
+                  label="Huomautus"
+                  value={card.note}
+                  onChange={(value) =>
+                    updateCustomCard(sectionIndex, cardIndex, {
+                      ...card,
+                      note: value,
+                    })
+                  }
+                />
+              </ItemBox>
+            ))}
+          </div>
+        </Card>
+      ))}
 
       <FlyerImageEditor />
     </div>

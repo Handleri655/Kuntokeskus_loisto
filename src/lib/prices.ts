@@ -11,6 +11,8 @@ export type PriceItem = {
   title: string;
   price: string;
   note?: string;
+  /** Yliviivattu vertailuhinta (esim. 49 €). Tyhjä = ei näytetä. */
+  was?: string;
   /** Piilotettu tarjoukset-sivulta (säilytetään hallinnassa) */
   hidden?: boolean;
 };
@@ -38,18 +40,44 @@ export type OfferSectionKey =
 
 export type OfferVisibility = Record<OfferSectionKey, boolean>;
 
+export type CustomOfferCard = {
+  title: string;
+  offer: string;
+  price: string;
+  note: string;
+  hidden?: boolean;
+};
+
+export type CustomOfferSection = {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  lead: string;
+  badge: string;
+  jumpLabel: string;
+  /** Hallinnan kortin lyhyt kuvaus */
+  description: string;
+  tone: "dark" | "light";
+  hidden?: boolean;
+  cards: CustomOfferCard[];
+};
+
 export type OffersData = {
   trialBadge: string;
   trialNote: string;
   trialEyebrow: string;
   trialHeading: string;
+  /** Hallinnan osion lyhyt kuvaus (muokattava) */
+  trialSectionDescription: string;
   trialPrices: PriceItem[];
   ptTitle: string;
   ptText: string;
   ptEyebrow: string;
+  ptSectionDescription: string;
   yearBadge: string;
   yearNote: string;
   yearHeading: string;
+  yearSectionDescription: string;
   yearPrices: PriceItem[];
   bonusTitle: string;
   bonuses: string[];
@@ -57,15 +85,46 @@ export type OffersData = {
   aerialText: string;
   aerialEyebrow: string;
   aerialHeading: string;
+  aerialSectionDescription: string;
   treatmentsEyebrow: string;
   treatmentsHeading: string;
   treatmentsLead: string;
+  treatmentsSectionDescription: string;
   jumpYear: string;
   jumpAerial: string;
   jumpTreatments: string;
   treatments: TreatmentItem[];
   visibility: OfferVisibility;
+  /** Vapaasti lisättävät uudet tarjousosiot */
+  customSections: CustomOfferSection[];
 };
+
+export function newOfferSectionId() {
+  return `osio-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+}
+
+export function createEmptyCustomSection(): CustomOfferSection {
+  return {
+    id: newOfferSectionId(),
+    eyebrow: "Uusi tarjous",
+    heading: "Kirjoita otsikko",
+    lead: "",
+    badge: "",
+    jumpLabel: "Uusi",
+    description: "Oma tarjousosio tarjoukset-sivulla.",
+    tone: "light",
+    hidden: false,
+    cards: [
+      {
+        title: "Uusi kortti",
+        offer: "Tarjous",
+        price: "",
+        note: "",
+        hidden: false,
+      },
+    ],
+  };
+}
 
 export type ServicePrices = {
   aerialIntensivi: string;
@@ -165,25 +224,42 @@ export const defaultOfferVisibility: OfferVisibility = {
 export const defaultOfferCopy = {
   trialEyebrow: "Tutustumistreenit",
   trialHeading: "Uusi asiakas – treenaa puoleen hintaan",
+  trialSectionDescription: "1 kk -tarjous uusille asiakkaille.",
   ptEyebrow: "Personal Training",
+  ptSectionDescription:
+    "Personal Training -osio. Tarjoushinnat muokataan PT-hinnat -välilehdellä.",
   yearHeading: "Ihan kaikille – rajoitetun ajan",
+  yearSectionDescription: "6–12 kk kuukausihinnat ja kaupan päälle -edut.",
   aerialEyebrow: "Aerial Bungee",
   aerialHeading: "Intensiivi 75",
+  aerialSectionDescription: "Aerial Bungee -tarjous tarjoukset-sivulla.",
   treatmentsEyebrow: "Hyvinvointi",
   treatmentsHeading: "Superedulliset hoitosarjat",
   treatmentsLead:
     "Hieronta, Footbalance, fysioterapia, kuppaus, kuumakivi ja faskiakäsittely – edut voimassa rajoitetusti.",
+  treatmentsSectionDescription: "Hyvinvointitarjoukset.",
   jumpYear: "Vuoden etu",
   jumpAerial: "Aerial",
   jumpTreatments: "Hoidot",
 } as const;
 
-type StoredOffers = Partial<Omit<OffersData, "visibility" | "treatments" | "trialPrices" | "yearPrices" | "bonuses">> & {
+type StoredOffers = Partial<
+  Omit<
+    OffersData,
+    | "visibility"
+    | "treatments"
+    | "trialPrices"
+    | "yearPrices"
+    | "bonuses"
+    | "customSections"
+  >
+> & {
   trialPrices?: PriceItem[] | null;
   yearPrices?: PriceItem[] | null;
   treatments?: TreatmentItem[] | null;
   bonuses?: string[] | null;
   visibility?: Partial<OfferVisibility> | null;
+  customSections?: CustomOfferSection[] | null;
 };
 
 type StoredPrices = Omit<
@@ -201,6 +277,7 @@ function normalizePriceItems(items: PriceItem[] | null | undefined): PriceItem[]
     title: item.title ?? "",
     price: item.price ?? "",
     note: item.note,
+    was: typeof item.was === "string" ? item.was : undefined,
     hidden: Boolean(item.hidden),
   }));
 }
@@ -218,6 +295,45 @@ function normalizeTreatments(
   }));
 }
 
+function normalizeCustomCards(
+  items: CustomOfferCard[] | null | undefined,
+): CustomOfferCard[] {
+  if (!Array.isArray(items)) return [];
+  return items.map((item) => ({
+    title: item.title ?? "",
+    offer: item.offer ?? "",
+    price: item.price ?? "",
+    note: item.note ?? "",
+    hidden: Boolean(item.hidden),
+  }));
+}
+
+function normalizeCustomSections(
+  items: CustomOfferSection[] | null | undefined,
+): CustomOfferSection[] {
+  if (!Array.isArray(items)) return [];
+  return items.map((item, index) => ({
+    id: item.id || `osio-${index + 1}`,
+    eyebrow: item.eyebrow ?? "Tarjous",
+    heading: item.heading ?? "",
+    lead: item.lead ?? "",
+    badge: item.badge ?? "",
+    jumpLabel: item.jumpLabel ?? item.eyebrow ?? "Tarjous",
+    description: item.description ?? "",
+    tone: item.tone === "dark" ? "dark" : "light",
+    hidden: Boolean(item.hidden),
+    cards: normalizeCustomCards(item.cards),
+  }));
+}
+
+function defaultTrialWasPrice(title: string): string | undefined {
+  const t = title.toLowerCase();
+  if (t.includes("fitness")) return "80 €";
+  if (t.includes("ryhmä")) return "62 €";
+  if (t.includes("kuntosali") || t.includes("sali")) return "49 €";
+  return undefined;
+}
+
 export function normalizeOffers(offers: StoredOffers | null | undefined): OffersData {
   const src = offers ?? {};
   const visibility = {
@@ -229,13 +345,25 @@ export function normalizeOffers(offers: StoredOffers | null | undefined): Offers
     trialNote: src.trialNote ?? "",
     trialEyebrow: src.trialEyebrow ?? defaultOfferCopy.trialEyebrow,
     trialHeading: src.trialHeading ?? defaultOfferCopy.trialHeading,
-    trialPrices: normalizePriceItems(src.trialPrices),
+    trialSectionDescription:
+      src.trialSectionDescription ?? defaultOfferCopy.trialSectionDescription,
+    trialPrices: normalizePriceItems(src.trialPrices).map((item) => ({
+      ...item,
+      was:
+        typeof item.was === "string"
+          ? item.was
+          : (defaultTrialWasPrice(item.title) ?? ""),
+    })),
     ptTitle: src.ptTitle ?? "",
     ptText: src.ptText ?? "",
     ptEyebrow: src.ptEyebrow ?? defaultOfferCopy.ptEyebrow,
+    ptSectionDescription:
+      src.ptSectionDescription ?? defaultOfferCopy.ptSectionDescription,
     yearBadge: src.yearBadge ?? "",
     yearNote: src.yearNote ?? "",
     yearHeading: src.yearHeading ?? defaultOfferCopy.yearHeading,
+    yearSectionDescription:
+      src.yearSectionDescription ?? defaultOfferCopy.yearSectionDescription,
     yearPrices: normalizePriceItems(src.yearPrices),
     bonusTitle: src.bonusTitle ?? "",
     bonuses: Array.isArray(src.bonuses) ? src.bonuses.filter(Boolean) : [],
@@ -243,11 +371,16 @@ export function normalizeOffers(offers: StoredOffers | null | undefined): Offers
     aerialText: src.aerialText ?? "",
     aerialEyebrow: src.aerialEyebrow ?? defaultOfferCopy.aerialEyebrow,
     aerialHeading: src.aerialHeading ?? defaultOfferCopy.aerialHeading,
+    aerialSectionDescription:
+      src.aerialSectionDescription ?? defaultOfferCopy.aerialSectionDescription,
     treatmentsEyebrow:
       src.treatmentsEyebrow ?? defaultOfferCopy.treatmentsEyebrow,
     treatmentsHeading:
       src.treatmentsHeading ?? defaultOfferCopy.treatmentsHeading,
     treatmentsLead: src.treatmentsLead ?? defaultOfferCopy.treatmentsLead,
+    treatmentsSectionDescription:
+      src.treatmentsSectionDescription ??
+      defaultOfferCopy.treatmentsSectionDescription,
     jumpYear: src.jumpYear ?? defaultOfferCopy.jumpYear,
     jumpAerial: src.jumpAerial ?? defaultOfferCopy.jumpAerial,
     jumpTreatments: src.jumpTreatments ?? defaultOfferCopy.jumpTreatments,
@@ -259,6 +392,7 @@ export function normalizeOffers(offers: StoredOffers | null | undefined): Offers
       aerial: visibility.aerial !== false,
       treatments: visibility.treatments !== false,
     },
+    customSections: normalizeCustomSections(src.customSections),
   };
 }
 

@@ -85,29 +85,35 @@
     "trialNote": "Avainkortti 11 €. Treenaat klo 04–24 joka päivä.",
     "trialEyebrow": "Tutustumistreenit",
     "trialHeading": "Uusi asiakas – treenaa puoleen hintaan",
+    "trialSectionDescription": "1 kk -tarjous uusille asiakkaille.",
     "trialPrices": [
       {
         "title": "Kuntosali",
         "price": "24,5 €",
+        "was": "49 €",
         "hidden": false
       },
       {
         "title": "Ryhmäliikunta",
         "price": "31 €",
+        "was": "62 €",
         "hidden": false
       },
       {
         "title": "Fitness (yhdistelmä)",
         "price": "40 €",
+        "was": "80 €",
         "hidden": false
       }
     ],
     "ptTitle": "Intensiivi-painonpudotus & kunnonkohotus",
     "ptText": "−25 %. Tavoite 2–6 kg/kk. PT×10 nyt 450 € (norm. 600 €).",
     "ptEyebrow": "Personal Training",
+    "ptSectionDescription": "Personal Training -osio. Tarjoushinnat muokataan PT-hinnat -välilehdellä.",
     "yearBadge": "Vuoden kovin superetu",
     "yearNote": "6–12 kk treenikorteilla. Fitness sisältää kuntosalin, kaikki jumpat + Aerial Bungee + Cross Training.",
     "yearHeading": "Ihan kaikille – rajoitetun ajan",
+    "yearSectionDescription": "6–12 kk kuukausihinnat ja kaupan päälle -edut.",
     "yearPrices": [
       {
         "title": "Kuntosali",
@@ -139,9 +145,11 @@
     "aerialText": "Alkeet, turvallisuus ja säädöt – pakollinen ennen Aerial Bungee -perustunteja.",
     "aerialEyebrow": "Aerial Bungee",
     "aerialHeading": "Intensiivi 75",
+    "aerialSectionDescription": "Aerial Bungee -tarjous tarjoukset-sivulla.",
     "treatmentsEyebrow": "Hyvinvointi",
     "treatmentsHeading": "Superedulliset hoitosarjat",
     "treatmentsLead": "Hieronta, Footbalance, fysioterapia, kuppaus, kuumakivi ja faskiakäsittely – edut voimassa rajoitetusti.",
+    "treatmentsSectionDescription": "Hyvinvointitarjoukset.",
     "jumpYear": "Vuoden etu",
     "jumpAerial": "Aerial",
     "jumpTreatments": "Hoidot",
@@ -152,6 +160,7 @@
       "aerial": true,
       "treatments": true
     },
+    "customSections": [],
     "treatments": [
       {
         "title": "Hieronta 3,5 h",

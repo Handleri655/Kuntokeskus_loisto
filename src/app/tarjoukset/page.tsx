@@ -61,6 +61,12 @@ export default async function TarjouksetPage() {
     visibility.treatments
       ? { href: "#hyvinvointi", label: offers.jumpTreatments }
       : null,
+    ...offers.customSections
+      .filter((section) => !section.hidden)
+      .map((section) => ({
+        href: `#${section.id}`,
+        label: section.jumpLabel || section.eyebrow || "Tarjous",
+      })),
   ].filter((item): item is { href: string; label: string } => Boolean(item));
 
   return (

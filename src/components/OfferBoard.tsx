@@ -155,7 +155,10 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
                       <div className="mt-3">
                         <DealPrice
                           price={item.price}
-                          was={trialWasForTitle(item.title, trialWas)}
+                          was={
+                            item.was?.trim() ||
+                            trialWasForTitle(item.title, trialWas)
+                          }
                           light
                         />
                       </div>
@@ -392,6 +395,124 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
           </div>
         </section>
       ) : null}
+
+      {offers.customSections
+        .filter((section) => !section.hidden)
+        .map((section) => {
+          const cards = visibleItems(section.cards);
+          const dark = section.tone === "dark";
+          return (
+            <section
+              key={section.id}
+              id={section.id}
+              className="scroll-mt-32"
+            >
+              <HoverCard
+                className={`overflow-hidden rounded-[1.6rem] border shadow-sm ${
+                  dark
+                    ? "border-white/10 bg-[linear-gradient(150deg,#12151a_0%,#171b22_48%,#1a1710_130%)] text-white"
+                    : "border-accent/25 bg-white"
+                }`}
+              >
+                <div
+                  className={`flex flex-wrap items-center justify-between gap-3 border-b px-6 py-4 md:px-10 ${
+                    dark
+                      ? "border-white/10 bg-[rgba(224,122,40,0.16)]"
+                      : "border-accent/15 bg-[rgba(224,122,40,0.08)]"
+                  }`}
+                >
+                  <p
+                    className={`text-sm font-semibold uppercase tracking-[0.16em] ${
+                      dark ? "text-accent-bright" : "text-accent"
+                    }`}
+                  >
+                    {section.eyebrow}
+                  </p>
+                  {section.badge ? (
+                    <OfferBadge tone={dark ? "accent" : "signal"}>
+                      {section.badge}
+                    </OfferBadge>
+                  ) : null}
+                </div>
+                <div className="px-6 py-8 md:px-10 md:py-10">
+                  <h2 className="font-display max-w-3xl text-3xl font-semibold tracking-tight md:text-[2.5rem]">
+                    {section.heading}
+                  </h2>
+                  {section.lead ? (
+                    <p
+                      className={`mt-4 max-w-2xl leading-relaxed ${
+                        dark ? "text-white/75" : "text-ink-soft"
+                      }`}
+                    >
+                      {capitalizePhrase(section.lead)}
+                    </p>
+                  ) : null}
+                  {cards.length > 0 ? (
+                    <div
+                      className={`mt-8 grid gap-4 ${
+                        cards.length >= 3
+                          ? "md:grid-cols-3"
+                          : cards.length === 2
+                            ? "md:grid-cols-2"
+                            : ""
+                      }`}
+                    >
+                      {cards.map((item) => {
+                        const { was, rest } = normalFromNote(item.note);
+                        return (
+                          <div
+                            key={`${section.id}-${item.title}`}
+                            className={`overflow-hidden rounded-2xl border ${
+                              dark
+                                ? "border-white/10 bg-white/5"
+                                : "border-accent/20 bg-mist/40"
+                            }`}
+                          >
+                            {item.offer ? (
+                              <p className="bg-accent px-4 py-2.5 text-center text-sm font-bold tracking-wide text-white">
+                                {capitalizePhrase(item.offer)}
+                              </p>
+                            ) : null}
+                            <div className="px-5 py-5">
+                              <p
+                                className={`text-sm font-semibold ${
+                                  dark ? "text-white/65" : "text-muted"
+                                }`}
+                              >
+                                {capitalizePhrase(item.title)}
+                              </p>
+                              <div className="mt-3">
+                                <DealPrice
+                                  price={capitalizePhrase(item.price)}
+                                  was={was ?? undefined}
+                                  light={dark}
+                                />
+                              </div>
+                              {rest ? (
+                                <p
+                                  className={`mt-3 text-sm leading-relaxed ${
+                                    dark ? "text-white/55" : "text-muted"
+                                  }`}
+                                >
+                                  {capitalizePhrase(rest)}
+                                </p>
+                              ) : null}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                  <div className="mt-8">
+                    <MotionAnchor href={site.phoneHref} className="btn-accent">
+                      Kysy tarjouksesta
+                    </MotionAnchor>
+                  </div>
+                </div>
+              </HoverCard>
+            </section>
+          );
+        })}
     </div>
   );
 }
