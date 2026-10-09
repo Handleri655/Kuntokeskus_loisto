@@ -109,14 +109,18 @@ export const defaultServicePrices: ServicePrices = {
 
 export const defaultRyhmaliikuntaInfo: RyhmaliikuntaInfo = {
   intro:
-    "Jumpat pidetään 4:llä, Aerial Bungee 3:lla ja joogat 6:lla. Varaus & peruutus viimeistään edellisenä iltana klo 20 mennessä. Ilmoittaudu Nimenhuudossa tai lähetä nimi & sähköposti tekstiviestillä numeroon 040-1402849.",
+    "Tunnit pidetään 4:llä, Aerial Bungee 3:lla ja joogat 6:lla. Varaus & peruutus viimeistään edellisenä iltana klo 20 mennessä. Ilmoittaudu Nimenhuudossa tai lähetä nimi & sähköposti tekstiviestillä numeroon 040-1402849.",
   classes: [
-    "Hatha-jooga 75 ma 19.15–20.30 & Voima-jooga 60 ke 19.15–20.15",
-    "Cross Training la 11.30–12.30 (2.10. alk.)",
-    "HIIT+Core 45 & Kahvakuula 45 pe 16.45–17.30 / 17.40–18.25",
+    "Hatha-jooga 75 ma 19.15–20.30",
+    "Äänimaljarentoutus 60 ti 17.30–18.30 (joka 2. ti)",
+    "Aerial Bungee 55 ti 19.45–20.40 – Fitness-kortilla mukaan",
+    "Retro-jumppa ke 16.45–18.00",
     "Aerial Bungee intensiivi 75 to 19.15–20.30 – 32 €",
-    "Aerial Bungee 55 pe 18.45–19.40 – Fitness-kortilla mukaan",
-    "Äänimaljarentoutus ti 17.30–18.30 (joka toinen tiistai)",
+    "Step + RVP pe 16.45–17.30",
+    "Kangoo Jumps + Core 45 pe 17.40–18.25",
+    "Cross Training 60 pe 18.45–19.45",
+    "HIIT + Core 45 la 11.30–12.15",
+    "Kahvakuula 45 la 12.25–13.15",
   ],
   outro:
     "Ohjaajat: Jari Kotkansalo, Ulla Paaso, Eija Liikonen. Fitness sisältää kuntosalin 4–24 + jumpat + Aerial Bungee 55 + Cross Training + joogat. Ryhmäliikunta sisältää jumpat + Kangoo Jumps + joogat.",

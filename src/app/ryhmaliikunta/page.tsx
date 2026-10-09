@@ -36,8 +36,8 @@ export default async function RyhmaliikuntaPage() {
         veilClassName="hero-veil-strong"
         image={
           <Image
-            src="/images/lavis.jpg"
-            alt="Lavis-lavatanssijumppa Kuntokeskus Loistossa"
+            src="/images/kuntosali-08.jpg"
+            alt="Ryhmäliikuntatila Kuntokeskus Loistossa"
             fill
             priority
             quality={90}

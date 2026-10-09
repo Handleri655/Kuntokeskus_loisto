@@ -40,12 +40,17 @@ function DealPrice({
   was?: string;
   light?: boolean;
 }) {
+  const longPrice = price.length > 12;
   return (
-    <div>
+    <div className="min-w-0">
       <p
-        className={`font-display font-semibold leading-none tracking-tight ${
+        className={`font-display font-semibold tracking-tight break-words ${
           light ? "text-accent-bright" : "text-ink"
-        } text-[clamp(2.15rem,5vw,3.4rem)]`}
+        } ${
+          longPrice
+            ? "text-[clamp(1.35rem,3.5vw,2rem)] leading-snug"
+            : "text-[clamp(2.15rem,5vw,3.4rem)] leading-none"
+        }`}
       >
         {price}
       </p>
@@ -273,12 +278,12 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
             const { was, rest } = normalFromNote(item.note);
             return (
               <HoverCard key={item.title}>
-                <article className="flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-accent/20 bg-white shadow-sm">
+                <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-[1.35rem] border border-accent/20 bg-white shadow-sm">
                   <p className="bg-accent px-5 py-3 text-center text-lg font-bold tracking-wide text-white">
                     {capitalizePhrase(item.offer)}
                   </p>
-                  <div className="flex flex-1 flex-col px-5 py-6">
-                    <h3 className="font-display text-xl font-semibold tracking-tight">
+                  <div className="flex min-w-0 flex-1 flex-col px-5 py-6">
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-balance break-words">
                       {capitalizePhrase(item.title)}
                     </h3>
                     <div className="mt-4">

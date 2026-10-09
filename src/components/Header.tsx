@@ -29,15 +29,26 @@ export function Header() {
 
   const solid = scrolled || open;
   const servicesActive = servicesNav.some((item) => pathname === item.href);
-  const offersItem = nav.find((item) => item.href === "/tarjoukset");
-  const primaryNav = nav.filter((item) => item.href !== "/tarjoukset");
-  const offersActive = pathname === "/tarjoukset";
-  const offersClass = offersActive
-    ? "bg-accent-bright text-ink"
-    : "bg-accent text-white hover:bg-accent-bright hover:text-ink";
+
+  /** Links before the Palvelut dropdown */
+  const navBeforeServices = nav.slice(0, 3);
+  /** Links after the Palvelut dropdown */
+  const navAfterServices = nav.slice(3);
+
+  const isOffers = (href: string) => href === "/tarjoukset";
 
   const linkClass = (href: string) => {
     const active = pathname === href;
+    if (isOffers(href)) {
+      if (solid) {
+        return active
+          ? "border-2 border-accent bg-[rgba(224,122,40,0.12)] text-accent"
+          : "border-2 border-accent text-accent hover:bg-[rgba(224,122,40,0.1)]";
+      }
+      return active
+        ? "border-2 border-accent-bright bg-[rgba(224,122,40,0.2)] text-accent-bright"
+        : "border-2 border-accent-bright text-accent-bright hover:bg-[rgba(224,122,40,0.18)]";
+    }
     if (solid) {
       return active
         ? "nav-active"
@@ -68,39 +79,28 @@ export function Header() {
       }`}
     >
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-3 md:h-[5.25rem] md:gap-4">
-        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-          <Link
-            href="/"
-            className="group min-w-0 leading-tight"
-            onClick={() => setOpen(false)}
+        <Link
+          href="/"
+          className="group min-w-0 leading-tight"
+          onClick={() => setOpen(false)}
+        >
+          <div className="font-display text-[1.05rem] font-semibold tracking-tight sm:text-[1.15rem] md:text-[1.35rem]">
+            <span className="hidden sm:inline">Kuntokeskus </span>
+            <span className={solid ? "text-accent" : "text-accent-bright"}>
+              Loisto
+            </span>
+          </div>
+          <div
+            className={`hidden text-[0.78rem] sm:block ${
+              solid ? "text-muted" : "text-white/70"
+            }`}
           >
-            <div className="font-display text-[1.05rem] font-semibold tracking-tight sm:text-[1.15rem] md:text-[1.35rem]">
-              <span className="hidden sm:inline">Kuntokeskus </span>
-              <span className={solid ? "text-accent" : "text-accent-bright"}>
-                Loisto
-              </span>
-            </div>
-            <div
-              className={`hidden text-[0.78rem] sm:block ${
-                solid ? "text-muted" : "text-white/70"
-              }`}
-            >
-              Hollola
-            </div>
-          </Link>
-          {offersItem ? (
-            <Link
-              href={offersItem.href}
-              onClick={() => setOpen(false)}
-              className={`shrink-0 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold shadow-sm transition sm:px-3.5 ${offersClass}`}
-            >
-              {offersItem.label}
-            </Link>
-          ) : null}
-        </div>
+            Hollola
+          </div>
+        </Link>
 
         <nav className="hidden items-center gap-0.5 lg:flex">
-          {primaryNav.slice(0, 2).map((item) => (
+          {navBeforeServices.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -147,7 +147,7 @@ export function Header() {
             </div>
           </div>
 
-          {primaryNav.slice(2).map((item) => (
+          {navAfterServices.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -207,14 +207,24 @@ export function Header() {
         } overflow-hidden border-t border-[var(--line)] bg-[rgba(244,239,230,0.98)] transition-all duration-500`}
       >
         <div className="container-page flex max-h-[calc(100dvh-4.5rem)] flex-col gap-1 overflow-y-auto py-6 text-ink">
-          {primaryNav.slice(0, 2).map((item) => (
+          {navBeforeServices.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className={`rounded-xl px-3 py-3 font-medium transition hover:bg-mist hover:text-ink ${
-                pathname === item.href ? "bg-mist text-ink" : "text-ink-soft"
-              }`}
+              className={
+                isOffers(item.href)
+                  ? `rounded-full border-2 border-accent px-3 py-3 font-semibold text-accent transition hover:bg-[rgba(224,122,40,0.1)] ${
+                      pathname === item.href
+                        ? "bg-[rgba(224,122,40,0.12)]"
+                        : ""
+                    }`
+                  : `rounded-xl px-3 py-3 font-medium transition hover:bg-mist hover:text-ink ${
+                      pathname === item.href
+                        ? "bg-mist text-ink"
+                        : "text-ink-soft"
+                    }`
+              }
             >
               {item.label}
             </Link>
@@ -246,7 +256,7 @@ export function Header() {
               ))
             : null}
 
-          {primaryNav.slice(2).map((item) => (
+          {navAfterServices.map((item) => (
             <Link
               key={item.href}
               href={item.href}

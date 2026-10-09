@@ -59,15 +59,16 @@ export default async function HyvinvointiPage() {
         contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/hero-hyvinvointi.jpg"
-            alt="Hieronta ja hyvinvointipalvelut Kuntokeskus Loistossa"
+            src="/images/hyvinvointi-hero.jpg"
+            alt="Rauhallinen hierontahuone ja hyvinvointipalvelut Kuntokeskus Loistossa"
             fill
             priority
-            className="object-cover object-[center_35%]"
+            quality={90}
+            className="object-cover object-[center_45%]"
             sizes="100vw"
           />
         }
-        veilClassName="hero-veil-strong"
+        veilClassName="hero-veil"
       >
         <HeroLine>
           <p className="eyebrow text-accent-bright">Hyvinvointi · Hollola</p>
@@ -189,14 +190,14 @@ export default async function HyvinvointiPage() {
           >
             {treatments.map((item) => (
               <StaggerItem key={item.title} hover>
-                <HoverCard className="panel panel-pad h-full">
+                <HoverCard className="panel panel-pad h-full min-w-0">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
                     {item.offer}
                   </p>
-                  <h3 className="font-display mt-2 text-xl font-semibold tracking-tight">
+                  <h3 className="font-display mt-2 text-xl font-semibold tracking-tight text-balance">
                     {item.title}
                   </h3>
-                  <p className="font-display mt-3 text-2xl font-semibold tracking-tight">
+                  <p className="font-display mt-3 text-2xl font-semibold tracking-tight break-words leading-snug">
                     {item.price}
                   </p>
                   <p className="mt-2 text-sm text-muted">{item.note}</p>

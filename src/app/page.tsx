@@ -245,8 +245,8 @@ export default async function HomePage() {
 
       <section className="relative min-h-[48vh] overflow-hidden bg-ink text-white md:min-h-[54vh]">
         <Image
-          src="/images/lavis.jpg"
-          alt="Lavis-lavatanssijumppa Kuntokeskus Loistossa"
+          src="/images/kuntosali-08.jpg"
+          alt="Ryhmäliikuntaa Kuntokeskus Loistossa"
           fill
           quality={90}
           className="object-cover object-[center_40%]"

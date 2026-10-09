@@ -56,12 +56,12 @@ export default async function PersonalTrainingPage() {
         contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/jari-pt.jpg"
-            alt="Personal trainer Jari Kotkansalo Kuntokeskus Loistossa"
+            src="/images/kuntosali-13.jpg"
+            alt="Personal Training -ohjausta Kuntokeskus Loistossa Hollolassa"
             fill
             priority
             quality={90}
-            className="object-cover object-[center_18%]"
+            className="object-cover object-[center_40%]"
             sizes="100vw"
           />
         }

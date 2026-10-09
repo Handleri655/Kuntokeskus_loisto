@@ -78,7 +78,7 @@ export default async function HinnatPage() {
           <Reveal>
             <p className="eyebrow text-accent">Hinnasto</p>
             <h2 className="font-display mt-3 max-w-3xl text-3xl font-semibold tracking-tight md:text-[2.5rem]">
-              Valitse kortti – Kuntosali, ryhmäliikunta tai Fitness
+              Valitse kortti – Kuntosali, Ryhmäliikunta tai Fitness
               (yhdistelmä)
             </h2>
             <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">

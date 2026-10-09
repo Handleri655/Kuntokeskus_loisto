@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
 
 type FlyerLightboxProps = {
   src: string;
@@ -9,7 +10,12 @@ type FlyerLightboxProps = {
 
 export function FlyerLightbox({ src, alt }: FlyerLightboxProps) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const titleId = useId();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -27,6 +33,42 @@ export function FlyerLightbox({ src, alt }: FlyerLightboxProps) {
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
+
+  const dialog =
+    open && mounted
+      ? createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-ink/90 p-2 backdrop-blur-sm sm:p-4 md:p-6"
+            onClick={() => setOpen(false)}
+          >
+            <p id={titleId} className="sr-only">
+              {alt}
+            </p>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="absolute right-3 top-3 z-10 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/25 md:right-6 md:top-6"
+            >
+              Sulje
+            </button>
+            <div
+              className="flex max-h-[min(96vh,1400px)] max-w-[min(96vw,900px)] items-center justify-center"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <img
+                src={src}
+                alt={alt}
+                className="max-h-[min(96vh,1400px)] max-w-full cursor-zoom-out rounded-lg object-contain shadow-2xl"
+                onClick={() => setOpen(false)}
+              />
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
 
   return (
     <>
@@ -48,33 +90,7 @@ export function FlyerLightbox({ src, alt }: FlyerLightboxProps) {
           Avaa suureksi
         </span>
       </button>
-
-      {open ? (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby={titleId}
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-ink/85 p-3 backdrop-blur-sm md:p-6"
-          onClick={() => setOpen(false)}
-        >
-          <p id={titleId} className="sr-only">
-            {alt}
-          </p>
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            className="absolute right-4 top-4 z-10 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/25 md:right-6 md:top-6"
-          >
-            Sulje
-          </button>
-          <img
-            src={src}
-            alt={alt}
-            className="max-h-[min(94vh,1200px)] max-w-full cursor-zoom-out rounded-lg object-contain shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          />
-        </div>
-      ) : null}
+      {dialog}
     </>
   );
 }
