@@ -84,10 +84,11 @@ export default async function PainonpudotusPage() {
         contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/kuntosali-10.jpg"
-            alt="Painonpudotusohjelma ja harjoittelu Kuntokeskus Loistossa"
+            src="/images/painonpudotus-hero.jpg"
+            alt="Valmentaja ohjaa painonpudotustreeniä Kuntokeskus Loistossa"
             fill
             priority
+            quality={90}
             className="object-cover object-[center_40%]"
             sizes="100vw"
           />
