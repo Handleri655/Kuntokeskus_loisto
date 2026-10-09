@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Cross Training",
   description:
-    "Cross Training -tunnit Kuntokeskus Loistossa – voimaa, kestävyyttä ja vartalon hallintaa. Lauantaisin alk. klo 11.30.",
+    "Cross Training -tunnit Kuntokeskus Loistossa – voimaa, kestävyyttä ja vartalon hallintaa. Perjantaisin klo 18.45.",
 };
 
 export const dynamic = "force-dynamic";
@@ -22,7 +22,7 @@ export default async function CrossTrainingPage() {
       <PageHero
         eyebrow="Cross Training"
         title="Tehokasta kierto­harjoittelua"
-        lead="Lauantaisin alk. klo 11.30–12.30 (2.10.26 alk.). Muista varata paikka."
+        lead="Perjantaisin klo 18.45–19.45 (6×-kurssi). Muista varata paikka."
         image="/images/training.jpg"
         imageAlt="Cross Training -treeni"
         veilClassName="hero-veil-strong"
@@ -36,7 +36,7 @@ export default async function CrossTrainingPage() {
                 Tunnit & hinta
               </p>
               <ul className="mt-5 space-y-3 text-white/85">
-                <li>Lauantai klo 11.30–12.30</li>
+                <li>Perjantai klo 18.45–19.45</li>
                 <li>Kertamaksu {servicePrices.crossKerta}</li>
                 <li>6× kurssi {servicePrices.cross6x}</li>
                 <li>

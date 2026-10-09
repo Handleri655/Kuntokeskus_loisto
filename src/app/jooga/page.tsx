@@ -59,20 +59,19 @@ export default async function JoogaPage() {
           <Reveal delay={0.06}>
             <HoverCard className="panel panel-pad">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-                Keskiviikko
+                Viikko-ohjelma
               </p>
               <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight">
-                Voima-jooga
+                Hatha-jooga maanantaisin
               </h2>
               <p className="mt-2 text-sm font-semibold text-ink">
-                Ke klo 19.15–20.15
+                Nykyinen ohjelma 12.10.2026 alk.
               </p>
               <div className="prose-loisto mt-4">
                 <p>
-                  Erittäin voimakasta ja vahvistavaa joogaa, jossa on mahdollista
-                  kehittää lihasvoimaa, tasapainoa, aerobista kuntoa ja
-                  joustavuutta. Teemme voimajoogan 1-sarjan asanoita tarvittaessa
-                  sovellettuina – jokainen voi valita sopivan version.
+                  Viikko-ohjelmassa on lempeä hatha-jooga maanantaisin.
+                  Keskiviikon Retro-jumppa (Ulla P.) löytyy{" "}
+                  <a href="/ryhmaliikunta">ryhmäliikunnan viikko-ohjelmasta</a>.
                 </p>
               </div>
             </HoverCard>
@@ -90,8 +89,7 @@ export default async function JoogaPage() {
               </p>
               <p>
                 Varaa paikka: {site.phone} – ilmoita koko nimi ja
-                puhelinnumerosi. Muistathan varata paikan myös keskiviikon
-                voima-jooga-tunnille.
+                puhelinnumerosi.
               </p>
               <p className="text-sm text-muted">
                 Nähdään :) Terkuin Ulla – joogaohjaaja

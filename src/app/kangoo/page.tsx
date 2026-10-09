@@ -251,10 +251,10 @@ export default async function KangooPage() {
                   Viikko-ohjelma
                 </p>
                 <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight">
-                  Kangoo Jumps + Core + venyttely 40
+                  Kangoo Jumps + Core
                 </h3>
                 <p className="mt-3 text-lg text-ink-soft">
-                  Tiistaisin klo 20.20–21.00
+                  Perjantaisin klo 17.40–18.25
                 </p>
                 <p className="mt-2 text-sm text-muted">
                   Intervallitunti · ohjaaja Jari

@@ -73,7 +73,7 @@ const faq = [
   },
   {
     q: "Voinko aloittaa tasolta 1?",
-    a: "Kyllä. Taso 1 on lähtökohta: perusteet, turvallisuus ja säädöt. Intensiivikurssi (75 min) käydään ennen pe Aerial Bungee 55 -tuntia.",
+    a: "Kyllä. Taso 1 on lähtökohta: perusteet, turvallisuus ja säädöt. Intensiivikurssi (75 min) käydään ennen ti Aerial Bungee 55 -tuntia.",
   },
 ] as const;
 
@@ -276,8 +276,8 @@ export default async function AerialBungeePage() {
                   Torstaisin klo 19.15–20.30
                 </p>
                 <p className="mt-2 text-sm text-muted">
-                  Alkeet · turvallisuus · säädöt. Käytävä ennen pe Aerial Bungee
-                  55 -tuntia. Välillä myös pe:sin.
+                  Alkeet · turvallisuus · säädöt. Käytävä ennen ti Aerial Bungee
+                  55 -tuntia.
                 </p>
                 <p className="font-display mt-8 text-4xl font-semibold tracking-tight md:text-5xl">
                   {servicePrices.aerialIntensivi}
@@ -293,9 +293,9 @@ export default async function AerialBungeePage() {
                 <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight">
                   Aerial Bungee 55
                 </h3>
-                <p className="mt-3 text-ink-soft">Pe 18.45–19.40</p>
+                <p className="mt-3 text-ink-soft">Ti 19.45–20.40</p>
                 <p className="mt-2 text-sm text-muted">
-                  Alkeet / keskitaso. Fitness-kortilla tai määräkortilla.
+                  Normi · alkeet / keskitaso. Fitness-kortilla tai määräkortilla.
                 </p>
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
                   <div>
