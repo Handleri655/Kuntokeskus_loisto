@@ -88,7 +88,7 @@ export default async function AerialBungeePage() {
         image={
           <Image
             src="/images/aerial-bungee-hero.jpg"
-            alt="Aerial Bungee -harjoittelua Kuntokeskus Loistossa Hollolassa"
+            alt="Aerial Bungee -tila Kuntokeskus Loistossa Hollolassa"
             fill
             priority
             quality={90}

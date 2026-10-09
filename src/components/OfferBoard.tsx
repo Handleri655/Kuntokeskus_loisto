@@ -1,7 +1,7 @@
 import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor, MotionLink } from "@/components/MotionPress";
+import { visibleItems } from "@/lib/offers-client";
 import type { PricesData } from "@/lib/prices";
-import { visibleItems } from "@/lib/prices";
 import { site } from "@/lib/site";
 
 type OfferBoardProps = {

@@ -59,12 +59,12 @@ export default async function HyvinvointiPage() {
         contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/hyvinvointi-hero.jpg"
-            alt="Rauhallinen hierontahuone ja hyvinvointipalvelut Kuntokeskus Loistossa"
+            src="/images/hyvinvointi-hero-v2.jpg"
+            alt="Hyvinvointia ja palautumista – jooga auringonlaskussa"
             fill
             priority
             quality={90}
-            className="object-cover object-[center_45%]"
+            className="object-cover object-[center_40%]"
             sizes="100vw"
           />
         }

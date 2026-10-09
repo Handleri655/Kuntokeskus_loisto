@@ -36,12 +36,12 @@ export default async function RyhmaliikuntaPage() {
         veilClassName="hero-veil-strong"
         image={
           <Image
-            src="/images/kuntosali-08.jpg"
-            alt="Ryhmäliikuntatila Kuntokeskus Loistossa"
+            src="/images/ryhmaliikunta-hero.jpg"
+            alt="Ryhmäliikuntasali varusteineen Kuntokeskus Loistossa"
             fill
             priority
             quality={90}
-            className="object-cover object-[center_40%]"
+            className="object-cover object-[center_45%]"
             sizes="100vw"
           />
         }

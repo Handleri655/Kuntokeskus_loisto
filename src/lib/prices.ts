@@ -99,33 +99,6 @@ export type OffersData = {
   customSections: CustomOfferSection[];
 };
 
-export function newOfferSectionId() {
-  return `osio-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
-}
-
-export function createEmptyCustomSection(): CustomOfferSection {
-  return {
-    id: newOfferSectionId(),
-    eyebrow: "Uusi tarjous",
-    heading: "Kirjoita otsikko",
-    lead: "",
-    badge: "",
-    jumpLabel: "Uusi",
-    description: "Oma tarjousosio tarjoukset-sivulla.",
-    tone: "light",
-    hidden: false,
-    cards: [
-      {
-        title: "Uusi kortti",
-        offer: "Tarjous",
-        price: "",
-        note: "",
-        hidden: false,
-      },
-    ],
-  };
-}
-
 export type ServicePrices = {
   aerialIntensivi: string;
   aerial5x: string;
@@ -461,10 +434,7 @@ export async function savePrices(data: PricesData): Promise<PricesData> {
   return writeStoredJson(STORAGE_KEY, SEED_FILE, next);
 }
 
-/** Visible cards for a price/treatment list (hidden stays in CMS). */
-export function visibleItems<T extends { hidden?: boolean }>(items: T[]): T[] {
-  return items.filter((item) => !item.hidden);
-}
+export { visibleItems } from "@/lib/offers-client";
 
 export function isPricesData(value: unknown): value is PricesData {
   if (!value || typeof value !== "object") return false;

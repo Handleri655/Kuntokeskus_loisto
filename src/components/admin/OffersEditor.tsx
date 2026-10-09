@@ -6,10 +6,8 @@ import {
   createEmptyCustomSection,
   type CustomOfferCard,
   type CustomOfferSection,
-  type OffersData,
-  type PriceItem,
-  type TreatmentItem,
-} from "@/lib/prices";
+} from "@/lib/offers-client";
+import type { OffersData, PriceItem, TreatmentItem } from "@/lib/prices";
 
 type Props = {
   offers: OffersData;
