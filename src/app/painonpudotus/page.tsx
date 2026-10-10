@@ -65,7 +65,7 @@ export default async function PainonpudotusPage() {
       title: "PT intensiivi 5×",
       sessions: "5 tapaamista",
       price: `nyt ${servicePrices.painonpudotusIntensiivi}`,
-      old: `${pt.pt10Offer} (−20 %)`,
+      old: "420 € (−20 %)",
       text: `Tai duo-tarjous −30 % nyt ${servicePrices.painonpudotusDuo}. Sis. 5× PT (tai 4× + ryhmäliikunta-kortti 8×) + materiaalit, mittaus & kunto-ohjelmat 3 kpl.`,
     },
     {

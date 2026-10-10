@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Jooga",
   description:
-    "Hatha-jooga ja voima-jooga Kuntokeskus Loistossa – ohjaajana Ulla.",
+    "Hatha-jooga Kuntokeskus Loistossa – ohjaajana Ulla.",
 };
 
 export const dynamic = "force-dynamic";
@@ -26,7 +26,7 @@ export default async function JoogaPage() {
     <>
       <PageHero
         eyebrow="Jooga"
-        title="Hatha & voima­jooga"
+        title="Hatha-jooga"
         lead="Lempeää palautumista ja vahvistavaa harjoittelua – jokaiselle sopivalla tavalla. Ohjaajana koulutettu joogaohjaaja Ulla."
         image="/images/yoga.jpg"
         imageAlt="Joogaharjoittelua"

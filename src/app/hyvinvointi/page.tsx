@@ -33,7 +33,7 @@ const services = [
   },
   {
     title: "Fysioterapia & faskiakäsittely",
-    text: "Työfysioterapeutin faskiakäsittelyä raudoilla tai käsin. Kela 15 € / hoito.",
+    text: "Työfysioterapeutin / kuntohoitajan faskiakäsittelyä raudoilla tai käsin. Kela 15 € / hoito.",
   },
   {
     title: "Footbalance-pohjalliset",
