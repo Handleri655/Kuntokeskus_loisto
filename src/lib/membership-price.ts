@@ -101,6 +101,34 @@ function formatPriceGroup(group: ParsedPriceGroup | null): string {
   return group.primary;
 }
 
+/**
+ * Drop a parenthetical "discount" that only repeats the same total and monthly
+ * price. That happens when a broken euro sign made "129 € tai 43 €/kk" get
+ * saved back as a fake reduced price.
+ */
+export function sanitizeMembershipCell(raw: string): string {
+  const parsed = parseMembershipPrice(raw);
+  if (parsed.empty || !parsed.regular) return raw.trim();
+  const reduced = parsed.reduced;
+  if (!reduced) return formatPriceGroup(parsed.regular);
+
+  const sameTotal =
+    euroAmount(parsed.regular.primary) === euroAmount(reduced.primary);
+  const sameMonthly =
+    euroAmount(parsed.regular.monthly ?? "") ===
+    euroAmount(reduced.monthly ?? "");
+  if (
+    parsed.regular.monthly &&
+    reduced.monthly &&
+    sameTotal &&
+    sameMonthly
+  ) {
+    return formatPriceGroup(parsed.regular);
+  }
+
+  return raw.trim();
+}
+
 function reducedForParens(reduced: string): string {
   const parsed = parseMembershipPrice(reduced);
   const group = parsed.regular;

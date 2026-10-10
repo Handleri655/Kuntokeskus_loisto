@@ -1,4 +1,5 @@
-﻿import { readStoredJson, writeStoredJson } from "@/lib/storage";
+﻿import { sanitizeMembershipCell } from "@/lib/membership-price";
+import { readStoredJson, writeStoredJson } from "@/lib/storage";
 
 export type MembershipRow = {
   product: string;
@@ -373,6 +374,12 @@ export function normalizePrices(data: StoredPrices): PricesData {
   const info = data.ryhmaliikuntaInfo ?? {};
   return {
     ...data,
+    membershipRows: data.membershipRows.map((row) => ({
+      ...row,
+      kuntosali: sanitizeMembershipCell(row.kuntosali),
+      ryhmaliikunta: sanitizeMembershipCell(row.ryhmaliikunta),
+      fitness: sanitizeMembershipCell(row.fitness),
+    })),
     offers: normalizeOffers(data.offers),
     servicePrices: {
       ...defaultServicePrices,

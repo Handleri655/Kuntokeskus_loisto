@@ -1,6 +1,7 @@
 import { Redis } from "@upstash/redis";
 import { promises as fs } from "fs";
 import path from "path";
+import { repairJson } from "@/lib/repair-text";
 
 function getRedis() {
   const url = process.env.UPSTASH_REDIS_REST_URL;
@@ -43,14 +44,20 @@ export async function readStoredJson<T>(
 
   if (redis) {
     const value = await redis.get<T>(key);
-    if (value != null) return value;
+    if (value != null) {
+      const repaired = repairJson(value);
+      if (JSON.stringify(repaired) !== JSON.stringify(value)) {
+        await redis.set(key, repaired);
+      }
+      return repaired;
+    }
 
-    const seed = await readFileJson<T>(seedFilePath);
+    const seed = repairJson(await readFileJson<T>(seedFilePath));
     await redis.set(key, seed);
     return seed;
   }
 
-  return readFileJson<T>(seedFilePath);
+  return repairJson(await readFileJson<T>(seedFilePath));
 }
 
 export async function writeStoredJson<T>(
