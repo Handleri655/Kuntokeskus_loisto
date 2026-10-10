@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactCTA } from "@/components/ContactCTA";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
-import { HinnastoTables, ReducedPriceSection } from "@/components/HinnastoTables";
+import { HinnastoTables } from "@/components/HinnastoTables";
 import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor } from "@/components/MotionPress";
 import { Reveal } from "@/components/Reveal";
@@ -66,9 +66,6 @@ export default async function HinnatPage() {
             <MotionAnchor href="#kortit" className="btn-accent">
               Tutustu kortteihin
             </MotionAnchor>
-            <MotionAnchor href="#alennetut" className="btn-ghost">
-              Opiskelija, eläkeläinen, työtön
-            </MotionAnchor>
           </div>
         </HeroLine>
       </HeroMotion>
@@ -92,8 +89,6 @@ export default async function HinnatPage() {
           <HinnastoTables rows={membershipRows} />
         </div>
       </section>
-
-      <ReducedPriceSection rows={membershipRows} />
 
       <section className="section-pad section-band border-y border-[var(--line)]">
         <div className="container-page">
@@ -144,14 +139,7 @@ export default async function HinnatPage() {
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                 Opiskelija, eläkeläinen ja työtön: sama alennettu hinta, omassa
-                sarakkeessaan ja{" "}
-                <a
-                  href="#alennetut"
-                  className="font-semibold text-ink underline decoration-[var(--line)] underline-offset-4 hover:decoration-accent"
-                >
-                  alennettujen hintojen taulukossa
-                </a>
-                .
+                sarakkeessaan.
               </li>
               <li className="flex gap-3">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />

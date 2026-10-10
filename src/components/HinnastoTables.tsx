@@ -1,5 +1,4 @@
-﻿import { Reveal } from "@/components/Reveal";
-import {
+﻿import {
   parseMembershipPrice,
   type ParsedPriceGroup,
 } from "@/lib/membership-price";
@@ -37,90 +36,6 @@ export function HinnastoTables({ rows }: { rows: MembershipRow[] }) {
         <CategoryTable key={category.key} category={category} rows={rows} />
       ))}
     </div>
-  );
-}
-
-export function ReducedPriceSection({ rows }: { rows: MembershipRow[] }) {
-  const reducedRows = rows.filter((row) =>
-    categories.some((category) => parseMembershipPrice(row[category.key]).reduced),
-  );
-
-  return (
-    <section
-      id="alennetut"
-      className="border-t border-[var(--line)] bg-mist/50 section-pad scroll-mt-28"
-    >
-      <div className="container-page">
-        <Reveal>
-          <p className="eyebrow text-accent">Alennetut hinnat</p>
-          <h2 className="font-display mt-3 max-w-3xl text-3xl font-semibold tracking-tight md:text-[2.5rem]">
-            Opiskelija, eläkeläinen ja työtön
-          </h2>
-          <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
-            Sama alennettu hinta kaikille kolmelle. Taulukossa näkyvät vain ne
-            kortit, joissa alennus on voimassa.
-          </p>
-        </Reveal>
-
-        <div className="panel mt-10 overflow-hidden">
-          <div className="hidden gap-4 border-b border-[var(--line)] bg-[linear-gradient(90deg,rgba(224,122,40,0.12),transparent)] px-5 py-4 md:grid md:grid-cols-[minmax(7.5rem,0.7fr)_repeat(3,1fr)] md:px-7">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
-              Kortti
-            </p>
-            {categories.map((category) => (
-              <p
-                key={category.key}
-                className="text-xs font-bold uppercase tracking-[0.14em] text-accent"
-              >
-                {category.title}
-              </p>
-            ))}
-          </div>
-          <ul className="divide-y divide-[var(--line)]">
-            {reducedRows.map((row) => (
-              <li
-                key={`reduced-${row.product}`}
-                className="px-4 py-4 md:grid md:grid-cols-[minmax(7.5rem,0.7fr)_repeat(3,1fr)] md:items-start md:gap-4 md:px-7 md:py-6"
-              >
-                <p className="font-display text-lg font-semibold tracking-tight">
-                  {row.product}
-                </p>
-                <ul className="mt-3 divide-y divide-[var(--line)] md:hidden">
-                  {categories.map((category) => {
-                    const parsed = parseMembershipPrice(row[category.key]);
-                    if (!parsed.reduced) return null;
-                    return (
-                      <li
-                        key={`${row.product}-${category.key}-m`}
-                        className="flex items-start justify-between gap-3 py-2.5 first:pt-0 last:pb-0"
-                      >
-                        <p className="pt-0.5 text-sm font-semibold text-ink">
-                          {category.title}
-                        </p>
-                        <div className="text-right">
-                          <PriceLines group={parsed.reduced} strong align="end" />
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-                {categories.map((category) => {
-                  const parsed = parseMembershipPrice(row[category.key]);
-                  return (
-                    <div
-                      key={`${row.product}-${category.key}`}
-                      className="hidden md:block"
-                    >
-                      <ReducedCell group={parsed.reduced} />
-                    </div>
-                  );
-                })}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -298,35 +213,20 @@ function PriceBlock({
   );
 }
 
-function ReducedCell({ group }: { group: ParsedPriceGroup | null }) {
-  if (!group) {
-    return <p className="font-medium text-muted">—</p>;
-  }
-
-  return (
-    <div className="rounded-xl bg-[rgba(224,122,40,0.1)] px-3 py-3 ring-1 ring-accent/15 md:bg-transparent md:px-0 md:py-0 md:ring-0">
-      <PriceLines group={group} strong />
-    </div>
-  );
-}
-
 function PriceLines({
   group,
   strong = false,
   compact = false,
-  align = "start",
 }: {
   group: ParsedPriceGroup;
   strong?: boolean;
   compact?: boolean;
-  align?: "start" | "end";
 }) {
   const monthly = group.monthly;
-  const alignClass = align === "end" ? "text-right" : "";
 
   if (monthly) {
     return (
-      <div className={`mt-1 md:mt-0 ${alignClass}`}>
+      <div className="mt-1 md:mt-0">
         <p
           className={`font-display font-semibold tracking-tight text-accent ${
             compact
@@ -346,7 +246,7 @@ function PriceLines({
   }
 
   return (
-    <div className={`mt-1 md:mt-0 ${alignClass}`}>
+    <div className="mt-1 md:mt-0">
       <p
         className={`font-display font-semibold tracking-tight ${
           compact
