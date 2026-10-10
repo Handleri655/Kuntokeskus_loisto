@@ -139,7 +139,7 @@
       "1 kk treenit",
       "Kehonkoostumusmittaus",
       "3× solarium / hierontatuolihoidot",
-      "Personal Training 45 min - kunto-ohjelma"
+      "Personal Training 45 min – alkukartoitus"
     ],
     "aerialBadge": "−50 % 10.9. asti",
     "aerialText": "Alkeet, turvallisuus ja säädöt – pakollinen ennen Aerial Bungee -perustunteja.",
@@ -178,7 +178,7 @@
       },
       {
         "title": "Fysioterapia",
-        "offer": "Kela-korvaus 15€ / hoito",
+        "offer": "Kela 15 €",
         "price": "Max 4× / 2026",
         "note": "Ei tarvita lääkärin lähetettä",
         "hidden": false

@@ -224,7 +224,7 @@ export default async function KuntosaliPage() {
           </Stagger>
 
           <Reveal delay={0.05}>
-            <HoverCard className="panel mt-8 overflow-x-auto">
+            <HoverCard className="panel mt-8 overflow-hidden">
               <div className="border-b border-[var(--line)] px-5 py-4">
                 <h3 className="font-display text-xl font-semibold tracking-tight">
                   Kuntosali-hinnasto
@@ -233,7 +233,7 @@ export default async function KuntosaliPage() {
                   Sama taulukko kuin Hinnat-sivulla (kuntosali-sarake).
                 </p>
               </div>
-              <table className="data-table min-w-[420px] w-full text-left">
+              <table className="data-table w-full text-left">
                 <thead>
                   <tr>
                     <th>Tuote</th>
