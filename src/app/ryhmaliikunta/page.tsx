@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: "Ryhmäliikunta Hollola",
   description:
     "Kuntokeskus Loiston ryhmäliikunta – Aerial Bungee, jooga, Kangoo ja paljon muuta. Ilmoittaudu tunneille Nimenhuudossa.",
+  alternates: { canonical: "/ryhmaliikunta" },
 };
 
 export const dynamic = "force-dynamic";

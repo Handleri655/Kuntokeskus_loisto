@@ -5,9 +5,10 @@ import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Henkilökuva – Jari Kotkansalo",
+  title: "Jari Kotkansalo",
   description:
-    "Jari Kotkansalo – työfysioterapeutti, kuntohoitaja, personal trainer ja ryhmäliikuntaohjaaja Kuntokeskus Loistossa.",
+    "Jari Kotkansalo – työfysioterapeutti, kuntohoitaja, personal trainer ja ryhmäliikuntaohjaaja Kuntokeskus Loistossa Hollolassa.",
+  alternates: { canonical: "/jari" },
 };
 
 export default function JariPage() {

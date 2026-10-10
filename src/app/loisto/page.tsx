@@ -7,9 +7,10 @@ import { HoverCard } from "@/components/HoverCard";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Meistä",
+  title: "Meistä – kuntosali Hollola",
   description:
     "Kuntokeskus Loisto on palvellut Hollolassa vuodesta 1992. Tutustu saliin, palveluihin ja Jari Kotkansalon osaamiseen.",
+  alternates: { canonical: "/loisto" },
 };
 
 export default function LoistoPage() {

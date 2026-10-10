@@ -8,9 +8,10 @@ import { findGymPrice, getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Jooga",
+  title: "Hatha-jooga Hollola",
   description:
-    "Hatha-jooga Kuntokeskus Loistossa – ohjaajana Ulla.",
+    "Hatha-jooga Kuntokeskus Loistossa Hollolassa. Ohjaajana Ulla.",
+  alternates: { canonical: "/jooga" },
 };
 
 export const dynamic = "force-dynamic";

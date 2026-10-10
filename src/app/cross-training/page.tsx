@@ -7,9 +7,10 @@ import { getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Cross Training",
+  title: "Cross Training Hollola",
   description:
-    "Cross Training -tunnit Kuntokeskus Loistossa – voimaa, kestävyyttä ja vartalon hallintaa. Perjantaisin klo 18.45.",
+    "Cross Training -tunnit Kuntokeskus Loistossa Hollolassa – voimaa, kestävyyttä ja vartalon hallintaa. Perjantaisin klo 18.45.",
+  alternates: { canonical: "/cross-training" },
 };
 
 export const dynamic = "force-dynamic";

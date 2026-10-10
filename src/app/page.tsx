@@ -15,7 +15,9 @@ import { googleReviews, services, site, whyLoisto } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Kuntosali Hollola | Kuntokeskus Loisto",
+  title: {
+    absolute: "Kuntosali Hollola | Kuntokeskus Loisto",
+  },
   description:
     "Kuntokeskus Loisto tarjoaa kuntosalin, ryhmäliikuntaa, Aerial Bungeeta, Cross Trainingia ja Personal Trainingia Hollolassa. Avainkortilla sali klo 04–24. Ei liittymismaksuja.",
   alternates: { canonical: "/" },

@@ -8,9 +8,10 @@ import { getSchedules } from "@/lib/schedules";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Kesän ryhmäliikunta",
+  title: "Kesän ryhmäliikunta Hollola",
   description:
-    "Kuntokeskus Loiston kesän ryhmäliikunta – Aerial Bungee, Kangoo ja jumpat.",
+    "Kuntokeskus Loiston kesän ryhmäliikunta Hollolassa – Aerial Bungee, Kangoo ja jumpat.",
+  alternates: { canonical: "/ryhmaliikunta/kesa" },
 };
 
 export const dynamic = "force-dynamic";

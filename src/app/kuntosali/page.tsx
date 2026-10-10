@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Kuntosali Hollola",
   description:
     "Kuntosali Hollolassa – Kuntokeskus Loisto. Laadukkaat laitteet, avainkortilla treeni klo 04–24, laiteopastus ja yksilölliset ohjelmat. Ei liittymismaksuja.",
+  alternates: { canonical: "/kuntosali" },
 };
 
 export const dynamic = "force-dynamic";

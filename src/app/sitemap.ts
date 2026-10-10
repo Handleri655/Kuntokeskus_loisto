@@ -18,7 +18,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [...paths].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,
-    changeFrequency: path === "/" ? "weekly" : "monthly",
-    priority: path === "/" ? 1 : 0.7,
+    changeFrequency: path === "/" || path === "/tarjoukset" ? "weekly" : "monthly",
+    priority: priorityFor(path),
   }));
+}
+
+function priorityFor(path: string) {
+  if (path === "/") return 1;
+  if (
+    path === "/kuntosali" ||
+    path === "/hinnat" ||
+    path === "/tarjoukset" ||
+    path === "/ryhmaliikunta" ||
+    path === "/info"
+  ) {
+    return 0.9;
+  }
+  return 0.7;
 }
