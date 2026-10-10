@@ -8,7 +8,6 @@ import { FlyerLightbox } from "@/components/FlyerLightbox";
 import { OfferBoard } from "@/components/OfferBoard";
 import { Reveal } from "@/components/Reveal";
 import { flyerSrc, getFlyer } from "@/lib/flyer";
-import { membershipCellParts } from "@/lib/membership-price";
 import { getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
@@ -21,21 +20,9 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-function trialWasPrices(
-  rows: Awaited<ReturnType<typeof getPrices>>["membershipRows"],
-): string[] {
-  const month = rows.find((row) => /^1\s*kk$/i.test(row.product));
-  if (!month) return [];
-  return [
-    membershipCellParts(month.kuntosali).regular,
-    membershipCellParts(month.ryhmaliikunta).regular,
-    membershipCellParts(month.fitness).regular,
-  ];
-}
-
 export default async function TarjouksetPage() {
   const [prices, flyer] = await Promise.all([getPrices(), getFlyer()]);
-  const { offers, personalTraining, membershipRows } = prices;
+  const { offers, personalTraining } = prices;
   const flyerImageSrc = flyerSrc(flyer);
   const ptDiscount = offers.ptText.match(/−\s*\d+\s*%/)?.[0]?.replace(/\s+/g, " ");
   const { visibility } = offers;
@@ -115,11 +102,7 @@ export default async function TarjouksetPage() {
         </HeroLine>
       </HeroMotion>
 
-      <OfferBoard
-        offers={offers}
-        pt={personalTraining}
-        trialWas={trialWasPrices(membershipRows)}
-      />
+      <OfferBoard offers={offers} pt={personalTraining} />
 
       <section
         id="lehti"

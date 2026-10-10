@@ -7,8 +7,6 @@ import { site } from "@/lib/site";
 type OfferBoardProps = {
   offers: PricesData["offers"];
   pt: PricesData["personalTraining"];
-  /** [kuntosali, ryhmäliikunta, fitness] 1 kk normal prices */
-  trialWas: string[];
 };
 
 function OfferBadge({
@@ -100,15 +98,7 @@ function capitalizePhrase(value: string): string {
   );
 }
 
-function trialWasForTitle(title: string, trialWas: string[]): string | undefined {
-  const t = title.toLowerCase();
-  if (t.includes("fitness")) return trialWas[2];
-  if (t.includes("ryhmä")) return trialWas[1];
-  if (t.includes("kuntosali") || t.includes("sali")) return trialWas[0];
-  return undefined;
-}
-
-export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
+export function OfferBoard({ offers, pt }: OfferBoardProps) {
   const ptBadge = ptDiscount(offers.ptText);
   const { visibility } = offers;
   const trialPrices = visibleItems(offers.trialPrices);
@@ -159,10 +149,7 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
                       <div className="mt-3">
                         <DealPrice
                           price={item.price}
-                          was={
-                            item.was?.trim() ||
-                            trialWasForTitle(item.title, trialWas)
-                          }
+                          was={item.was?.trim() || undefined}
                           light
                         />
                       </div>
