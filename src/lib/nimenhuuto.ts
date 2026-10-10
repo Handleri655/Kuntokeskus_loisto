@@ -29,7 +29,7 @@ const CLASS_HINTS: { pattern: RegExp; name: string }[] = [
   { pattern: /voima[\s-]*jooga/i, name: "Voima-jooga 60" },
   { pattern: /äänimalja|aanimalja/i, name: "Äänimaljarentoutus" },
   { pattern: /kangoo/i, name: "Kangoo Jumps + Core 45" },
-  { pattern: /step.*rvp|step-askellus/i, name: "Step-askellus + RVP 40" },
+  { pattern: /step.*rvp|step-askellus/i, name: "Step-askellus + RVP 45" },
   { pattern: /\blavis\b/i, name: "Lavis-kuntotanssi" },
   { pattern: /circuit|k-sali/i, name: "Kuntosali – kiertoharjoittelu" },
   { pattern: /\btbc\b/i, name: "TBC-kuntopiiri" },
