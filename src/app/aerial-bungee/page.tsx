@@ -87,12 +87,12 @@ export default async function AerialBungeePage() {
         contentClassName="container-page relative flex min-h-[54vh] flex-col justify-end pb-10 pt-28 md:min-h-[62vh] md:pb-14"
         image={
           <Image
-            src="/images/aerial-bungee-hero.jpg"
-            alt="Aerial Bungee -tila Kuntokeskus Loistossa Hollolassa"
+            src="/images/bungee-kuva-2.jpg"
+            alt="Aerial Bungee -harjoitus, jossa osallistujat roikkuvat valjaissa"
             fill
             priority
             quality={90}
-            className="object-cover object-[center_45%]"
+            className="object-cover object-[center_42%]"
             sizes="100vw"
           />
         }
@@ -145,8 +145,8 @@ export default async function AerialBungeePage() {
           <Reveal delay={0.06}>
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.35rem] md:aspect-[5/4]">
               <Image
-                src="/images/kuntosali-08.jpg"
-                alt="Treenitila Aerial Bungee -tunneille Loistossa"
+                src="/images/aerial-bungee-hero.jpg"
+                alt="Aerial Bungee -tuntihuone Kuntokeskus Loistossa"
                 fill
                 quality={90}
                 className="object-cover object-center"
