@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactCTA } from "@/components/ContactCTA";
+import { GroupClassCarousel } from "@/components/GroupClassCarousel";
 import { HeroLine, HeroMotion } from "@/components/HeroMotion";
 import { HoverCard } from "@/components/HoverCard";
 import { MotionAnchor, MotionLink } from "@/components/MotionPress";
@@ -131,6 +132,8 @@ export default async function RyhmaliikuntaPage() {
           </Reveal>
         </div>
       </section>
+
+      <GroupClassCarousel />
 
       <section
         id="tulevat-tunnit"

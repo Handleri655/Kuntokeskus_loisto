@@ -60,15 +60,15 @@ export const nav = [
 
 /** Services dropdown */
 export const servicesNav = [
+  { href: "/solarium", label: "Solarium / hierontatuoli" },
+  { href: "/personal-training", label: "Personal Training" },
+  { href: "/painonpudotus", label: "Painonpudotus" },
+  { href: "/hyvinvointi", label: "Hyvinvointi" },
   { href: "/aerial-bungee", label: "Aerial Bungee" },
   { href: "/cross-training", label: "Cross Training" },
   { href: "/kangoo", label: "Kangoo Power / Jumps" },
-  { href: "/personal-training", label: "Personal Training" },
   { href: "/jooga", label: "Jooga" },
   { href: "/aanimaljarentoutus", label: "Äänimaljarentoutus" },
-  { href: "/hyvinvointi", label: "Hyvinvointi" },
-  { href: "/painonpudotus", label: "Painonpudotus" },
-  { href: "/solarium", label: "Solarium / hierontatuoli" },
 ] as const;
 
 /** @deprecated use servicesNav — kept for any leftover imports */
