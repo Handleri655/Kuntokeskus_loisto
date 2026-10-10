@@ -11,8 +11,19 @@ export function repairMojibake(value: string, depth = 0): string {
   }
 }
 
+/** Jumpata → Jumpat / jumpata → jumpat, keeping the original capital letter. */
+export function replaceJumpata(value: string): string {
+  return value.replace(/jumpata/gi, (match) =>
+    match[0] === "J" ? "Jumpat" : "jumpat",
+  );
+}
+
+export function cleanStoredText(value: string): string {
+  return replaceJumpata(repairMojibake(value));
+}
+
 export function repairJson<T>(value: T): T {
-  if (typeof value === "string") return repairMojibake(value) as T;
+  if (typeof value === "string") return cleanStoredText(value) as T;
   if (Array.isArray(value)) return value.map((item) => repairJson(item)) as T;
   if (value && typeof value === "object") {
     const next: Record<string, unknown> = {};
