@@ -37,21 +37,25 @@ function DealPrice({
   price,
   was,
   light,
+  emphasis,
 }: {
   price: string;
   was?: string;
   light?: boolean;
+  emphasis?: boolean;
 }) {
   const longPrice = price.length > 12;
   return (
     <div className="min-w-0">
       <p
         className={`font-display font-semibold tracking-tight break-words ${
-          light ? "text-accent-bright" : "text-ink"
+          emphasis ? "text-accent" : light ? "text-accent-bright" : "text-ink"
         } ${
           longPrice
             ? "text-[clamp(1.35rem,3.5vw,2rem)] leading-snug"
-            : "text-[clamp(2.15rem,5vw,3.4rem)] leading-none"
+            : emphasis
+              ? "text-[clamp(2.6rem,6vw,4rem)] leading-none"
+              : "text-[clamp(2.15rem,5vw,3.4rem)] leading-none"
         }`}
       >
         {price}
@@ -178,21 +182,23 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
 
       {visibility.year ? (
         <section id="vuosietu" className="scroll-mt-32">
-          <div className="overflow-hidden rounded-[1.6rem] border border-accent/25 bg-[linear-gradient(180deg,rgba(224,122,40,0.1),rgba(255,255,255,0.92))]">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-accent/15 px-6 py-4 md:px-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
+          <div className="overflow-hidden rounded-[1.75rem] border-2 border-accent bg-ink text-white shadow-[0_28px_70px_-24px_rgba(213,107,31,0.9)]">
+            <div className="flex flex-wrap items-center justify-between gap-3 bg-accent px-6 py-5 md:px-10 md:py-6">
+              <p className="font-display text-[clamp(1.7rem,4vw,2.6rem)] font-semibold leading-none tracking-tight text-white">
                 {offers.yearBadge}
               </p>
               {offers.bonusTitle ? (
-                <OfferBadge tone="light">{offers.bonusTitle}</OfferBadge>
+                <span className="inline-flex rounded-full bg-white px-4 py-2 text-sm font-bold text-accent md:text-base">
+                  {offers.bonusTitle}
+                </span>
               ) : null}
             </div>
-            <div className="px-6 py-8 md:px-10 md:py-10">
-              <h2 className="font-display max-w-3xl text-3xl font-semibold tracking-tight md:text-[2.75rem]">
+            <div className="bg-[radial-gradient(ellipse_80%_60%_at_100%_0%,rgba(232,135,56,0.28),transparent_55%)] px-6 py-8 md:px-10 md:py-10">
+              <h2 className="font-display max-w-3xl text-3xl font-semibold tracking-tight text-white md:text-5xl">
                 {offers.yearHeading}
               </h2>
               {offers.yearNote ? (
-                <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+                <p className="mt-4 max-w-2xl text-lg leading-relaxed text-white/75">
                   {capitalizePhrase(offers.yearNote)}
                 </p>
               ) : null}
@@ -209,16 +215,16 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
                   {yearPrices.map((item) => (
                     <HoverCard
                       key={item.title}
-                      className="rounded-2xl border border-accent/20 bg-white px-5 py-6 shadow-sm"
+                      className="rounded-2xl border border-accent/30 bg-white px-5 py-6 shadow-[0_16px_30px_-20px_rgba(213,107,31,0.8)]"
                     >
-                      <p className="text-sm font-semibold text-muted">
+                      <p className="text-sm font-bold uppercase tracking-[0.12em] text-accent">
                         {item.title}
                       </p>
                       <div className="mt-3">
-                        <DealPrice price={item.price} />
+                        <DealPrice price={item.price} emphasis />
                       </div>
                       {item.note ? (
-                        <p className="mt-3 text-sm leading-relaxed text-muted">
+                        <p className="mt-3 text-sm font-medium leading-relaxed text-ink-soft">
                           {item.note}
                         </p>
                       ) : null}
@@ -231,10 +237,10 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
                   {offers.bonuses.map((item) => (
                     <div
                       key={item}
-                      className="flex items-start gap-3 rounded-2xl border border-accent/15 bg-white/80 px-4 py-4"
+                      className="flex items-start gap-3 rounded-2xl border border-accent/40 bg-white/10 px-4 py-4"
                     >
-                      <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent" />
-                      <p className="font-semibold leading-snug text-ink">
+                      <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-accent-bright" />
+                      <p className="font-semibold leading-snug text-white">
                         {item}
                       </p>
                     </div>
@@ -247,7 +253,7 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
                 </MotionAnchor>
                 <MotionLink
                   href="/hinnat"
-                  className="inline-flex items-center justify-center rounded-full border border-[var(--line)] bg-white px-6 py-3.5 text-sm font-semibold text-ink transition hover:bg-mist"
+                  className="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/20"
                 >
                   Vertaa hinnastoon
                 </MotionLink>
