@@ -1,4 +1,3 @@
-﻿import { Reveal } from "@/components/Reveal";
 import {
   parseMembershipPrice,
   type ParsedPriceGroup,
@@ -32,76 +31,28 @@ const categories: {
 
 export function HinnastoTables({ rows }: { rows: MembershipRow[] }) {
   return (
-    <div className="mt-10 grid gap-8">
-      {categories.map((category) => (
-        <CategoryTable key={category.key} category={category} rows={rows} />
-      ))}
-    </div>
-  );
-}
+    <div className="mt-8 md:mt-10">
+      <nav
+        aria-label="Hinnaston kategoriat"
+        className="mb-5 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"
+      >
+        {categories.map((category) => (
+          <a
+            key={category.key}
+            href={`#hinta-${category.key}`}
+            className="min-h-11 shrink-0 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-white"
+          >
+            {category.title}
+          </a>
+        ))}
+      </nav>
 
-export function ReducedPriceSection({ rows }: { rows: MembershipRow[] }) {
-  const reducedRows = rows.filter((row) =>
-    categories.some((category) => parseMembershipPrice(row[category.key]).reduced),
-  );
-
-  return (
-    <section
-      id="alennetut"
-      className="border-t border-[var(--line)] bg-mist/50 section-pad scroll-mt-28"
-    >
-      <div className="container-page">
-        <Reveal>
-          <p className="eyebrow text-accent">Alennetut hinnat</p>
-          <h2 className="font-display mt-3 max-w-3xl text-3xl font-semibold tracking-tight md:text-[2.5rem]">
-            Opiskelija, eläkeläinen ja työtön
-          </h2>
-          <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
-            Sama alennettu hinta kaikille kolmelle. Taulukossa näkyvät vain ne
-            kortit, joissa alennus on voimassa.
-          </p>
-        </Reveal>
-
-        <div className="panel mt-10 overflow-hidden">
-          <div className="hidden gap-4 border-b border-[var(--line)] bg-[linear-gradient(90deg,rgba(224,122,40,0.12),transparent)] px-5 py-4 md:grid md:grid-cols-[minmax(7.5rem,0.7fr)_repeat(3,1fr)] md:px-7">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
-              Kortti
-            </p>
-            {categories.map((category) => (
-              <p
-                key={category.key}
-                className="text-xs font-bold uppercase tracking-[0.14em] text-accent"
-              >
-                {category.title}
-              </p>
-            ))}
-          </div>
-          <ul className="divide-y divide-[var(--line)]">
-            {reducedRows.map((row) => (
-              <li
-                key={`reduced-${row.product}`}
-                className="grid gap-4 px-5 py-5 md:grid-cols-[minmax(7.5rem,0.7fr)_repeat(3,1fr)] md:items-start md:px-7 md:py-6"
-              >
-                <p className="font-display text-lg font-semibold tracking-tight">
-                  {row.product}
-                </p>
-                {categories.map((category) => {
-                  const parsed = parseMembershipPrice(row[category.key]);
-                  return (
-                    <div key={`${row.product}-${category.key}`}>
-                      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted md:hidden">
-                        {category.title}
-                      </p>
-                      <ReducedCell group={parsed.reduced} />
-                    </div>
-                  );
-                })}
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="grid gap-5 md:gap-8">
+        {categories.map((category) => (
+          <CategoryTable key={category.key} category={category} rows={rows} />
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -114,17 +65,19 @@ function CategoryTable({
 }) {
   return (
     <div
-      className={`panel overflow-hidden ${
+      id={`hinta-${category.key}`}
+      className={`scroll-mt-28 overflow-hidden rounded-2xl border border-[var(--line)] bg-white shadow-sm ${
         category.key === "fitness" ? "ring-1 ring-accent/25" : ""
       }`}
     >
-      <div className="border-b border-[var(--line)] bg-[linear-gradient(90deg,rgba(224,122,40,0.12),transparent)] px-5 py-5 md:px-7">
+      <div className="border-b border-[var(--line)] bg-[linear-gradient(90deg,rgba(224,122,40,0.14),transparent)] px-4 py-4 md:px-7 md:py-5">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
           {category.title}
         </p>
-        <p className="mt-2 text-sm text-muted">{category.note}</p>
+        <p className="mt-1.5 text-sm leading-snug text-muted">{category.note}</p>
       </div>
-      <div className="hidden gap-4 border-b border-[var(--line)] px-5 py-3 md:grid md:grid-cols-[minmax(7.5rem,0.7fr)_1fr_1.2fr] md:px-7">
+
+      <div className="hidden gap-4 border-b border-[var(--line)] px-7 py-3 md:grid md:grid-cols-[minmax(7.5rem,0.7fr)_1fr_1.2fr]">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
           Kortti
         </p>
@@ -135,40 +88,93 @@ function CategoryTable({
           Opiskelija, eläkeläinen ja työtön
         </p>
       </div>
+
       <ul className="divide-y divide-[var(--line)]">
         {rows.map((row) => {
           const parsed = parseMembershipPrice(row[category.key]);
           const isBestValue = row.product === "12 kk" && !parsed.empty;
+          const hasReduced = Boolean(parsed.reduced);
+          const monthly = parsed.regular?.monthly ?? null;
 
           return (
             <li
               key={`${category.key}-${row.product}`}
-              className={`grid gap-3 px-5 py-5 md:grid-cols-[minmax(7.5rem,0.7fr)_1fr_1.2fr] md:items-start md:px-7 md:py-6 ${
-                isBestValue ? "bg-[rgba(224,122,40,0.06)]" : ""
-              }`}
+              className={isBestValue ? "bg-[rgba(224,122,40,0.06)]" : undefined}
             >
-              <div>
-                <p className="font-display text-lg font-semibold tracking-tight">
-                  {row.product}
-                </p>
-                {isBestValue ? (
-                  <p className="mt-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-accent">
-                    Edullisin €/kk
+              {/* Mobile card */}
+              <div className="px-4 py-4 md:hidden">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-display text-lg font-semibold tracking-tight">
+                      {row.product}
+                    </p>
+                    {isBestValue ? (
+                      <p className="mt-1 inline-flex rounded-full bg-accent/15 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-accent">
+                        Edullisin €/kk
+                      </p>
+                    ) : null}
+                  </div>
+                  {monthly && !hasReduced ? (
+                    <p className="font-display shrink-0 text-[1.7rem] font-semibold leading-none tracking-tight text-accent">
+                      {monthly}
+                    </p>
+                  ) : null}
+                </div>
+
+                {parsed.empty ? (
+                  <p className="mt-3 font-medium text-muted">—</p>
+                ) : hasReduced ? (
+                  <div className="mt-3 grid grid-cols-2 gap-2">
+                    <PriceCard
+                      label="Normaali"
+                      group={parsed.regular}
+                      tone="plain"
+                    />
+                    <PriceCard
+                      label="Alennettu"
+                      group={parsed.reduced}
+                      tone="accent"
+                    />
+                  </div>
+                ) : monthly && parsed.regular ? (
+                  <p className="mt-2 text-sm text-muted">
+                    Kokonaishinta {parsed.regular.primary}
+                  </p>
+                ) : parsed.regular ? (
+                  <p className="mt-3 font-display text-xl font-semibold tracking-tight text-ink">
+                    {parsed.regular.primary}
                   </p>
                 ) : null}
               </div>
-              <PriceBlock
-                label="Normaalihinta"
-                group={parsed.regular}
-                empty={parsed.empty}
-              />
-              <div className={parsed.reduced ? undefined : "hidden md:block"}>
-                <PriceBlock
-                  label="Opiskelija, eläkeläinen ja työtön"
-                  group={parsed.reduced}
-                  empty={parsed.empty}
-                  reduced
-                />
+
+              {/* Desktop row */}
+              <div className="hidden gap-3 px-7 py-6 md:grid md:grid-cols-[minmax(7.5rem,0.7fr)_1fr_1.2fr] md:items-start">
+                <div>
+                  <p className="font-display text-lg font-semibold tracking-tight">
+                    {row.product}
+                  </p>
+                  {isBestValue ? (
+                    <p className="mt-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-accent">
+                      Edullisin €/kk
+                    </p>
+                  ) : null}
+                </div>
+                <div>
+                  {parsed.empty || !parsed.regular ? (
+                    <p className="font-medium text-muted">—</p>
+                  ) : (
+                    <PriceLines group={parsed.regular} />
+                  )}
+                </div>
+                <div>
+                  {parsed.reduced ? (
+                    <div className="rounded-xl bg-[rgba(224,122,40,0.1)] px-4 py-3 ring-1 ring-accent/15">
+                      <PriceLines group={parsed.reduced} strong />
+                    </div>
+                  ) : (
+                    <p className="font-medium text-muted">—</p>
+                  )}
+                </div>
               </div>
             </li>
           );
@@ -178,55 +184,35 @@ function CategoryTable({
   );
 }
 
-function PriceBlock({
+function PriceCard({
   label,
   group,
-  empty,
-  reduced = false,
+  tone,
 }: {
   label: string;
   group: ParsedPriceGroup | null;
-  empty: boolean;
-  reduced?: boolean;
+  tone: "plain" | "accent";
 }) {
-  const hasPrice = Boolean(group);
-
   return (
     <div
-      className={`rounded-xl px-3 py-3 md:px-4 ${
-        reduced && hasPrice
-          ? "bg-[rgba(224,122,40,0.1)] ring-1 ring-accent/15"
-          : reduced
-            ? "bg-transparent"
-            : "bg-white/60 md:bg-transparent"
+      className={`rounded-xl px-3 py-3 ${
+        tone === "accent"
+          ? "bg-[rgba(224,122,40,0.12)] ring-1 ring-accent/20"
+          : "bg-mist/80"
       }`}
     >
       <p
-        className={`text-[0.65rem] font-bold uppercase tracking-[0.12em] md:hidden ${
-          reduced && hasPrice ? "text-accent" : "text-muted"
+        className={`text-[0.65rem] font-bold uppercase tracking-[0.12em] ${
+          tone === "accent" ? "text-accent" : "text-muted"
         }`}
       >
         {label}
       </p>
-      {empty || !group ? (
-        <p className={`font-medium text-muted ${reduced ? "mt-1 md:mt-0" : "mt-1 md:mt-0"}`}>
-          —
-        </p>
+      {group ? (
+        <PriceLines group={group} strong={tone === "accent"} />
       ) : (
-        <PriceLines group={group} strong={reduced} />
+        <p className="mt-1 font-medium text-muted">—</p>
       )}
-    </div>
-  );
-}
-
-function ReducedCell({ group }: { group: ParsedPriceGroup | null }) {
-  if (!group) {
-    return <p className="font-medium text-muted">—</p>;
-  }
-
-  return (
-    <div className="rounded-xl bg-[rgba(224,122,40,0.1)] px-3 py-3 ring-1 ring-accent/15 md:bg-transparent md:px-0 md:py-0 md:ring-0">
-      <PriceLines group={group} strong />
     </div>
   );
 }
@@ -238,8 +224,23 @@ function PriceLines({
   group: ParsedPriceGroup;
   strong?: boolean;
 }) {
+  const monthly = group.monthly;
+
+  if (monthly) {
+    return (
+      <div className="mt-1">
+        <p className="font-display text-xl font-semibold leading-none tracking-tight text-accent md:text-2xl">
+          {monthly}
+        </p>
+        <p className="mt-1 text-xs leading-snug text-muted md:text-sm">
+          Kokonaishinta {group.primary}
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="mt-1 md:mt-0">
+    <div className="mt-1">
       <p
         className={`font-display font-semibold tracking-tight ${
           strong ? "text-xl text-ink md:text-2xl" : "text-lg text-ink md:text-xl"
@@ -247,9 +248,6 @@ function PriceLines({
       >
         {group.primary}
       </p>
-      {group.monthly ? (
-        <p className="mt-0.5 text-sm font-semibold text-accent">{group.monthly}</p>
-      ) : null}
     </div>
   );
 }

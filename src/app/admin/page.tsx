@@ -16,7 +16,7 @@ export default async function AdminPage() {
   const authed = await isAdminAuthenticated();
 
   return (
-    <div className="bg-paper pt-24 pb-8 md:pt-28">
+    <div className="bg-paper pt-20 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pt-28 md:pb-10">
       <div className="container-page max-w-[1120px]">
         {authed ? (
           <AdminEditor
@@ -24,7 +24,7 @@ export default async function AdminPage() {
             storageMode={getStorageMode()}
           />
         ) : (
-          <div className="py-10">
+          <div className="py-8 md:py-10">
             <AdminLogin />
           </div>
         )}

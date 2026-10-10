@@ -106,12 +106,12 @@ export function FlyerImageEditor() {
               if (file) void upload(file);
             }}
           />
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
             <button
               type="button"
               disabled={busy}
               onClick={() => inputRef.current?.click()}
-              className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
+              className="min-h-12 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white disabled:opacity-60 sm:min-h-0 sm:py-2.5"
             >
               {busy ? "Tallennetaan…" : "Vaihda kuva"}
             </button>
@@ -120,7 +120,7 @@ export function FlyerImageEditor() {
                 type="button"
                 disabled={busy}
                 onClick={() => void restore()}
-                className="rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
+                className="min-h-12 rounded-full border border-[var(--line)] bg-white px-5 py-3 text-sm font-semibold disabled:opacity-60 sm:min-h-0 sm:py-2.5"
               >
                 Palauta alkuperäinen
               </button>

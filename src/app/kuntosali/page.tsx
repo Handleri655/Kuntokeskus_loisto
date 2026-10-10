@@ -8,6 +8,7 @@ import { MotionAnchor, MotionLink } from "@/components/MotionPress";
 import { Reveal } from "@/components/Reveal";
 import { Stagger, StaggerItem } from "@/components/Stagger";
 import { gymGallery, gymHeroSlides } from "@/lib/gym-photos";
+import { parseMembershipPrice } from "@/lib/membership-price";
 import { findGymPrice, getGymProgramPrices, getPrices } from "@/lib/prices";
 import { site } from "@/lib/site";
 
@@ -240,12 +241,31 @@ export default async function KuntosaliPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {prices.membershipRows.map((row) => (
-                    <tr key={row.product}>
-                      <td className="font-semibold text-ink">{row.product}</td>
-                      <td>{row.kuntosali}</td>
-                    </tr>
-                  ))}
+                  {prices.membershipRows.map((row) => {
+                    const parsed = parseMembershipPrice(row.kuntosali);
+                    const group = parsed.regular;
+                    return (
+                      <tr key={row.product}>
+                        <td className="font-semibold text-ink">{row.product}</td>
+                        <td>
+                          {parsed.empty || !group ? (
+                            "—"
+                          ) : group.monthly ? (
+                            <span>
+                              <span className="font-semibold text-accent">
+                                {group.monthly}
+                              </span>
+                              <span className="mt-0.5 block text-sm text-muted">
+                                Kokonaishinta {group.primary}
+                              </span>
+                            </span>
+                          ) : (
+                            group.primary
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </HoverCard>

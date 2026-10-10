@@ -31,7 +31,17 @@ const STORAGE_KEY = "loisto:schedules";
 const SEED_FILE = "data/schedules.json";
 
 export async function getSchedules(): Promise<SchedulesData> {
-  return readStoredJson<SchedulesData>(STORAGE_KEY, SEED_FILE);
+  const data = await readStoredJson<SchedulesData>(STORAGE_KEY, SEED_FILE);
+  return {
+    ...data,
+    autumn: {
+      ...data.autumn,
+      title: "16 tuntia treeniä viikossa",
+      lead: (data.autumn.lead ?? "")
+        .replace(/15\s*h\/vko/gi, "16 h/vko")
+        .replace(/15\s*tuntia/gi, "16 tuntia"),
+    },
+  };
 }
 
 export async function saveSchedules(

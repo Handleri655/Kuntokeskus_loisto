@@ -1,3 +1,6 @@
+const fieldControlClass =
+  "w-full min-h-12 rounded-xl border border-[var(--line)] bg-white px-3.5 py-3 text-base outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20 md:min-h-0 md:py-2.5 md:text-[0.95rem]";
+
 export function Field({
   label,
   value,
@@ -16,7 +19,7 @@ export function Field({
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-xl border border-[var(--line)] bg-white px-3 py-2.5 text-[0.95rem] outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+        className={fieldControlClass}
       />
     </label>
   );
@@ -43,7 +46,7 @@ export function TextArea({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={rows}
-        className="rounded-xl border border-[var(--line)] bg-white px-3 py-2.5 text-[0.95rem] outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+        className={`${fieldControlClass} min-h-[6.5rem] resize-y`}
       />
     </label>
   );
@@ -58,7 +61,7 @@ export function ItemBox({
 }) {
   return (
     <div
-      className={`grid gap-3 rounded-xl border border-[var(--line)] bg-white p-4 ${className}`}
+      className={`grid gap-3 rounded-xl border border-[var(--line)] bg-white p-3.5 sm:p-4 ${className}`}
     >
       {children}
     </div>
@@ -77,12 +80,12 @@ export function Checkbox({
   hint?: string;
 }) {
   return (
-    <label className="flex cursor-pointer items-start gap-3 text-sm">
+    <label className="flex min-h-11 cursor-pointer items-start gap-3 rounded-xl py-1 text-sm">
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-0.5 h-4 w-4 shrink-0 rounded border-[var(--line)] text-accent focus:ring-accent/30"
+        className="mt-1 h-5 w-5 shrink-0 rounded border-[var(--line)] text-accent focus:ring-accent/30"
       />
       <span>
         <span className="font-semibold text-ink">{label}</span>
@@ -114,27 +117,27 @@ export function Card({
   const accent = tone === "accent";
   return (
     <section
-      className={`scroll-mt-56 overflow-hidden rounded-2xl border shadow-sm md:scroll-mt-48 ${
+      className={`scroll-mt-36 overflow-hidden rounded-2xl border shadow-sm md:scroll-mt-48 ${
         accent
           ? "border-accent/35 bg-[rgba(224,122,40,0.04)]"
           : "border-[var(--line)] bg-white"
       }`}
     >
       <div
-        className={`flex flex-wrap items-start justify-between gap-3 border-b px-5 py-4 ${
+        className={`flex flex-col gap-3 border-b px-4 py-4 sm:px-5 md:flex-row md:flex-wrap md:items-start md:justify-between ${
           accent
             ? "border-accent/20 bg-[rgba(224,122,40,0.08)]"
             : "border-[var(--line)]"
         }`}
       >
-        <div>
+        <div className="min-w-0">
           {appearsOn ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-accent sm:text-xs">
               Näkyy: {appearsOn}
             </p>
           ) : null}
           <h2
-            className={`font-display text-xl font-semibold tracking-tight ${
+            className={`font-display text-lg font-semibold tracking-tight sm:text-xl ${
               appearsOn ? "mt-1" : ""
             }`}
           >
@@ -146,9 +149,13 @@ export function Card({
             </p>
           ) : null}
         </div>
-        {actions}
+        {actions ? (
+          <div className="flex w-full flex-wrap gap-2 md:w-auto md:justify-end">
+            {actions}
+          </div>
+        ) : null}
       </div>
-      <div className="space-y-4 p-5">{children}</div>
+      <div className="space-y-4 p-4 sm:p-5">{children}</div>
     </section>
   );
 }

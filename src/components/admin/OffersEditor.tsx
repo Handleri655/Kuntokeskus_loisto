@@ -42,7 +42,7 @@ function CardActions({
     <button
       type="button"
       onClick={onAdd}
-      className="rounded-full border border-accent/40 bg-[rgba(224,122,40,0.08)] px-3 py-1.5 text-xs font-semibold text-accent transition hover:bg-[rgba(224,122,40,0.16)]"
+      className="min-h-11 w-full rounded-full border border-accent/40 bg-[rgba(224,122,40,0.08)] px-4 py-2.5 text-sm font-semibold text-accent transition hover:bg-[rgba(224,122,40,0.16)] md:min-h-0 md:w-auto md:px-3 md:py-1.5 md:text-xs"
     >
       {addLabel}
     </button>
@@ -71,7 +71,7 @@ function ItemToolbar({
         type="button"
         onClick={onRemove}
         disabled={!canRemove}
-        className="rounded-full border border-signal/30 px-3 py-1 text-xs font-semibold text-signal transition hover:bg-[rgba(212,84,42,0.08)] disabled:cursor-not-allowed disabled:opacity-40"
+        className="min-h-10 rounded-full border border-signal/30 px-3 py-2 text-xs font-semibold text-signal transition hover:bg-[rgba(212,84,42,0.08)] disabled:cursor-not-allowed disabled:opacity-40"
       >
         Poista kortti
       </button>
@@ -158,8 +158,8 @@ export function OffersEditor({ offers, onChange }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-accent/25 bg-[rgba(224,122,40,0.06)] px-5 py-4">
-        <div>
+      <div className="flex flex-col gap-3 rounded-2xl border border-accent/25 bg-[rgba(224,122,40,0.06)] px-4 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-5">
+        <div className="min-w-0">
           <p className="text-sm font-semibold text-ink">Omat tarjousosiot</p>
           <p className="mt-0.5 text-sm text-muted">
             Lisää kokonaan uusi osio tarjoukset-sivulle (otsikko, teksti ja
@@ -176,7 +176,7 @@ export function OffersEditor({ offers, onChange }: Props) {
               ],
             })
           }
-          className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent/90"
+          className="min-h-12 w-full rounded-full bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent/90 sm:w-auto sm:min-h-0 sm:py-2"
         >
           + Lisää uusi tarjousosio
         </button>
@@ -608,7 +608,7 @@ export function OffersEditor({ offers, onChange }: Props) {
                     ),
                   })
                 }
-                className="rounded-full border border-signal/40 px-3 py-1.5 text-xs font-semibold text-signal transition hover:bg-[rgba(212,84,42,0.08)]"
+                className="min-h-11 w-full rounded-full border border-signal/40 px-3 py-2.5 text-sm font-semibold text-signal transition hover:bg-[rgba(212,84,42,0.08)] md:min-h-0 md:w-auto md:py-1.5 md:text-xs"
               >
                 Poista osio
               </button>
@@ -663,7 +663,7 @@ export function OffersEditor({ offers, onChange }: Props) {
                     tone: e.target.value === "dark" ? "dark" : "light",
                   })
                 }
-                className="rounded-xl border border-[var(--line)] bg-white px-3 py-2.5 text-[0.95rem] outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+                className="min-h-12 w-full rounded-xl border border-[var(--line)] bg-white px-3.5 py-3 text-base outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20 md:min-h-0 md:py-2.5 md:text-[0.95rem]"
               >
                 <option value="light">Vaalea</option>
                 <option value="dark">Tumma</option>

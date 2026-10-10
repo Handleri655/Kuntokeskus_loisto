@@ -171,24 +171,29 @@ export function AdminEditor({
     window.location.reload();
   }
 
+  const activeTabLabel = tabs.find((item) => item.id === tab)?.label ?? "";
+
   return (
-    <div className="pb-10">
-      <div className="sticky top-[4.5rem] z-40 -mx-1 mb-6 border-b border-[var(--line)] bg-[rgba(251,252,253,0.94)] px-1 py-4 backdrop-blur-xl md:top-[5.25rem]">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+    <div className="pb-4 md:pb-10">
+      <div className="sticky top-[4.5rem] z-40 -mx-1 mb-4 border-b border-[var(--line)] bg-[rgba(251,252,253,0.97)] px-1 py-3 backdrop-blur-xl sm:mb-6 sm:py-4 md:top-[5.25rem]">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <h1 className="font-display text-xl font-semibold tracking-tight sm:text-2xl md:text-3xl">
               Hallinta
             </h1>
-            <p className="mt-1 text-sm text-muted">
-              Viimeksi tallennettu {updatedLabel}
+            <p className="mt-0.5 text-xs text-muted sm:mt-1 sm:text-sm">
+              <span className="sm:hidden">{activeTabLabel}</span>
+              <span className="hidden sm:inline">
+                Viimeksi tallennettu {updatedLabel}
+              </span>
               {dirty ? (
-                <span className="ml-2 font-semibold text-accent">
-                  · tallentamattomia muutoksia
+                <span className="ml-1.5 font-semibold text-accent sm:ml-2">
+                  · tallentamaton
                 </span>
               ) : null}
             </p>
             <p
-              className={`mt-2 inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+              className={`mt-2 hidden rounded-full px-3 py-1 text-xs font-semibold sm:inline-flex ${
                 storageMode === "cloud"
                   ? "bg-emerald-50 text-emerald-800"
                   : "bg-[#ffe8c8] text-[#8a5a00]"
@@ -199,7 +204,7 @@ export function AdminEditor({
                 : "Paikallinen tallennus – lisää Upstash tuotantoon"}
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="hidden flex-wrap justify-end gap-2 md:flex">
             <button
               type="button"
               onClick={save}
@@ -218,29 +223,72 @@ export function AdminEditor({
               Kirjaudu ulos
             </button>
           </div>
+          <button
+            type="button"
+            onClick={logout}
+            className="shrink-0 rounded-full border border-[var(--line)] bg-white px-3 py-2 text-xs font-semibold md:hidden"
+          >
+            Ulos
+          </button>
         </div>
 
         {status || error ? (
-          <div className="mt-3">
+          <div className="mt-3 hidden md:block">
             <Feedback status={status} error={error} />
           </div>
         ) : null}
 
-        <div className="mt-4 flex gap-1 overflow-x-auto pb-1">
+        <div
+          className="-mx-1 mt-3 flex gap-1.5 overflow-x-auto px-1 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory sm:mt-4 [&::-webkit-scrollbar]:hidden"
+          role="tablist"
+          aria-label="Hallinnan osiot"
+        >
           {tabs.map((item) => (
             <button
               key={item.id}
               type="button"
+              role="tab"
+              aria-selected={tab === item.id}
               onClick={() => setTab(item.id)}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
+              className={`min-h-11 shrink-0 snap-start rounded-full px-4 py-2.5 text-sm font-semibold transition ${
                 tab === item.id
-                  ? "bg-ink text-white"
-                  : "text-ink-soft hover:bg-white"
+                  ? "bg-ink text-white shadow-sm"
+                  : "bg-white text-ink-soft ring-1 ring-[var(--line)]"
               }`}
             >
               {item.label}
             </button>
           ))}
+        </div>
+      </div>
+
+      {/* Mobile sticky save bar */}
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--line)] bg-[rgba(251,252,253,0.97)] px-3 py-3 backdrop-blur-xl md:hidden pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        {status || error ? (
+          <div className="mb-2">
+            <Feedback status={status} error={error} />
+          </div>
+        ) : null}
+        <div className="flex items-center gap-2">
+          {dirty ? (
+            <p className="min-w-0 flex-1 text-xs font-semibold text-accent">
+              Tallentamattomia muutoksia
+            </p>
+          ) : (
+            <p className="min-w-0 flex-1 truncate text-xs text-muted">
+              {justSaved ? "Tallennettu" : `Tallennettu ${updatedLabel}`}
+            </p>
+          )}
+          <button
+            type="button"
+            onClick={save}
+            disabled={saving}
+            className={`min-h-12 min-w-[8.5rem] rounded-full px-5 text-sm font-semibold text-white disabled:opacity-60 ${
+              justSaved ? "bg-emerald-600" : "bg-accent"
+            }`}
+          >
+            {saving ? "Tallennetaan…" : justSaved ? "Tallennettu" : "Tallenna"}
+          </button>
         </div>
       </div>
 

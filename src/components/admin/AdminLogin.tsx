@@ -51,7 +51,7 @@ export function AdminLogin() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="rounded-xl border border-[var(--line)] bg-white px-3 py-2.5 outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+              className="min-h-12 w-full rounded-xl border border-[var(--line)] bg-white px-3.5 py-3 text-base outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
               autoComplete="current-password"
               required
             />
@@ -60,7 +60,7 @@ export function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
+            className="min-h-12 w-full rounded-full bg-ink px-5 py-3 text-base font-semibold text-white disabled:opacity-60"
           >
             {loading ? "Kirjaudutaan…" : "Kirjaudu"}
           </button>
