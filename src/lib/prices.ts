@@ -365,7 +365,9 @@ export function normalizeOffers(offers: StoredOffers | null | undefined): Offers
       src.yearSectionDescription ?? defaultOfferCopy.yearSectionDescription,
     yearPrices: normalizePriceItems(src.yearPrices),
     bonusTitle: src.bonusTitle ?? "",
-    bonuses: Array.isArray(src.bonuses) ? src.bonuses.filter(Boolean) : [],
+    bonuses: (Array.isArray(src.bonuses) ? src.bonuses.filter(Boolean) : []).map(
+      (item) => item.replace(/alkukartoitus/gi, "kunto-ohjelma"),
+    ),
     aerialBadge: src.aerialBadge ?? "",
     aerialText: src.aerialText ?? "",
     aerialEyebrow: src.aerialEyebrow ?? defaultOfferCopy.aerialEyebrow,

@@ -54,7 +54,7 @@ function DealPrice({
           longPrice
             ? "text-[clamp(1.35rem,3.5vw,2rem)] leading-snug"
             : emphasis
-              ? "text-[clamp(2.6rem,6vw,4rem)] leading-none"
+              ? "text-[clamp(1.85rem,2.6vw,2.7rem)] leading-none whitespace-nowrap"
               : "text-[clamp(2.15rem,5vw,3.4rem)] leading-none"
         }`}
       >
@@ -202,14 +202,16 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
                   {capitalizePhrase(offers.yearNote)}
                 </p>
               ) : null}
-              {yearPrices.length > 0 ? (
+              {yearPrices.length > 0 || offers.bonuses.length > 0 ? (
                 <div
                   className={`mt-8 grid gap-3 ${
-                    yearPrices.length >= 3
-                      ? "md:grid-cols-3"
-                      : yearPrices.length === 2
-                        ? "md:grid-cols-2"
-                        : ""
+                    offers.bonuses.length > 0
+                      ? "lg:grid-cols-4"
+                      : yearPrices.length >= 3
+                        ? "md:grid-cols-3"
+                        : yearPrices.length === 2
+                          ? "md:grid-cols-2"
+                          : ""
                   }`}
                 >
                   {yearPrices.map((item) => (
@@ -230,21 +232,24 @@ export function OfferBoard({ offers, pt, trialWas }: OfferBoardProps) {
                       ) : null}
                     </HoverCard>
                   ))}
-                </div>
-              ) : null}
-              {offers.bonuses.length > 0 ? (
-                <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                  {offers.bonuses.map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-start gap-3 rounded-2xl border border-accent/40 bg-white/10 px-4 py-4"
-                    >
-                      <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-accent-bright" />
-                      <p className="font-semibold leading-snug text-white">
-                        {item}
+                  {offers.bonuses.length > 0 ? (
+                    <div className="flex h-full flex-col rounded-2xl border border-accent/30 bg-white px-5 py-6 shadow-[0_16px_30px_-20px_rgba(213,107,31,0.8)]">
+                      <p className="text-sm font-bold uppercase tracking-[0.12em] text-accent">
+                        Kaupan päälle
                       </p>
+                      <ul className="mt-4 space-y-3">
+                        {offers.bonuses.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-2.5 font-semibold leading-snug text-ink"
+                          >
+                            <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  ))}
+                  ) : null}
                 </div>
               ) : null}
               <div className="mt-8 flex flex-wrap gap-3">
