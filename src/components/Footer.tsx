@@ -68,6 +68,12 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {site.legalName}
           </p>
+          <a
+            href="https://sivux.fi"
+            className="transition hover:text-white/70"
+          >
+            powered by sivux.fi
+          </a>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <p>Treenaa kovaa Hollolassa.</p>
             <Link
