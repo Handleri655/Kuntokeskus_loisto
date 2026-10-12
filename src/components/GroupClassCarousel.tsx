@@ -8,8 +8,8 @@ const classes = [
   {
     href: "/aerial-bungee",
     label: "Aerial Bungee",
-    image: "/images/aerial-bungee-hero.jpg",
-    position: "center 28%",
+    image: "/images/bungee-kuva-2.jpg",
+    position: "center 34%",
   },
   {
     href: "/cross-training",

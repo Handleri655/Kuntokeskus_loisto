@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteShell } from "@/components/SiteShell";
@@ -66,6 +67,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col text-[16.5px] antialiased md:text-[17px]">
         <JsonLd />
         <SiteShell>{children}</SiteShell>
+        <Analytics />
       </body>
     </html>
   );
