@@ -271,9 +271,6 @@ export default async function HomePage() {
               <MotionLink href="/ryhmaliikunta" className="btn-accent">
                 Viikko-ohjelma
               </MotionLink>
-              <MotionLink href="/ryhmaliikunta/kesa" className="btn-ghost">
-                Kesäohjelma
-              </MotionLink>
             </div>
           </Reveal>
         </div>

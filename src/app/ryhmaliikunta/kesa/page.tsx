@@ -1,77 +1,10 @@
 ﻿import type { Metadata } from "next";
-import Link from "next/link";
-import { ContactCTA } from "@/components/ContactCTA";
-import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/Reveal";
-import { ScheduleTable } from "@/components/ScheduleTable";
-import { getSchedules } from "@/lib/schedules";
-import { site } from "@/lib/site";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Kesän ryhmäliikunta Hollola",
-  description:
-    "Kuntokeskus Loiston kesän ryhmäliikunta Hollolassa – Aerial Bungee, Kangoo ja jumpat.",
-  alternates: { canonical: "/ryhmaliikunta/kesa" },
+  robots: { index: false, follow: false },
 };
 
-export const dynamic = "force-dynamic";
-
-export default async function KesaRyhmaliikuntaPage() {
-  const { summer } = await getSchedules();
-
-  return (
-    <>
-      <PageHero
-        eyebrow={summer.eyebrow}
-        title={summer.title}
-        lead={summer.lead}
-        image="/images/group-fitness.jpg"
-        imageAlt="Ryhmäliikuntaa Kuntokeskus Loistossa"
-        veilClassName="hero-veil-strong"
-      />
-
-      <section className="section-pad">
-        <div className="container-page prose-loisto max-w-3xl">
-          <Reveal>
-            <p>
-              Jumpat pidetään 4:llä & Aerial Bungee -tunnit 3:lla. Ohjaajat:
-              Jari Kotkansalo, Sari Hätönen. Varaus & peruutus viimeistään
-              edellisenä iltana klo 20 mennessä – lähetä koko nimi &
-              sähköposti tekstiviestillä {site.phone}.
-            </p>
-            <p>
-              Fitness-kortti sis. kuntosalin + kaikki jumpat + Aerial Bungee 50
-              & Cross Training -tunnin. Ryhmäliikunta-kortti sis. kaikki jumpat
-              + Kangoo Jumpsin. Maksuvälineenä käy liikuntaraha, pankkikortti,
-              käteinen – myös Edenred ja E-passi.
-            </p>
-            <Link
-              href="/ryhmaliikunta"
-              className="mt-2 inline-flex rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white no-underline"
-            >
-              Syksyn ohjelma →
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="border-t border-[var(--line)] bg-mist/40 section-pad">
-        <div className="container-page">
-          <Reveal>
-            <h2 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
-              {summer.scheduleTitle}
-            </h2>
-            {summer.scheduleNote ? (
-              <p className="mt-3 max-w-2xl text-muted">{summer.scheduleNote}</p>
-            ) : null}
-          </Reveal>
-          <div className="mt-8">
-            <ScheduleTable days={summer.days} />
-          </div>
-        </div>
-      </section>
-
-      <ContactCTA />
-    </>
-  );
+export default function KesaRyhmaliikuntaPage() {
+  notFound();
 }

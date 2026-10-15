@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/uusi-ryhm-liikunta",
-        destination: "/ryhmaliikunta/kesa",
+        destination: "/ryhmaliikunta",
         permanent: true,
       },
       {

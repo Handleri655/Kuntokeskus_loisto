@@ -274,14 +274,7 @@ export default async function KangooPage() {
                   Tiistaisin klo 18.10–18.55
                 </p>
                 <p className="mt-2 text-sm text-muted">
-                  Tarkista voimassaolo{" "}
-                  <a
-                    href="/ryhmaliikunta/kesa"
-                    className="font-semibold text-ink underline decoration-[var(--line)] underline-offset-4 hover:decoration-accent"
-                  >
-                    kesäohjelmasta
-                  </a>
-                  .
+                  Intervallitunti · ohjaaja Jari
                 </p>
               </HoverCard>
             </Reveal>

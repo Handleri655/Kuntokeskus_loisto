@@ -5,7 +5,15 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin", "/api/", "/ryhmaliikunta/tulosta"],
+      disallow: [
+        "/admin",
+        "/api/",
+        "/jari",
+        "/henkil-esittely",
+        "/ryhmaliikunta/kesa",
+        "/uusi-ryhm-liikunta",
+        "/ryhmaliikunta/tulosta",
+      ],
     },
     sitemap: "https://kuntokeskusloisto.fi/sitemap.xml",
   };
